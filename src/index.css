@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Graduate", ui-serif, Georgia, serif;
+  --font-sans: "Archivo Variable", "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-bg: #fff6e9;
+  --color-surface: #ffffff;
+  --color-sunken: #f6ead6;
+  --color-ink: #141a33;
+  --color-muted: #5d6480;
+  --color-line: #e6d7bf;
+  --color-dot: #ecdcc3;
+  --color-accent: #ff4f1a;
+  --color-accent-ink: #ffffff;
+  --color-gold: #ffc23d;
+
+  --color-t-green: #19a862;
+  --color-t-yellow: #f2b42a;
+  --color-t-orange: #ff8a2b;
+  --color-t-red: #e2434b;
+  --color-t-gray: #9aa1b8;
+  --color-t-empty: #efe3cf;
+
+  --shadow-chunky: 0 4px 0 0 var(--color-ink);
+  --shadow-chunky-sm: 0 3px 0 0 var(--color-ink);
+}
+
+/* Dark mode follows the system setting. Tailwind utilities read these variables, so one override covers everything. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0d1124;
+    --color-surface: #171d3a;
+    --color-sunken: #121734;
+    --color-ink: #f6f1e7;
+    --color-muted: #a5abc6;
+    --color-line: #2b3360;
+    --color-dot: #1a2044;
+    --color-accent: #ff6a3d;
+    --color-t-gray: #444d75;
+    --color-t-empty: #1a2044;
+    --shadow-chunky: 0 4px 0 0 #05070f;
+    --shadow-chunky-sm: 0 3px 0 0 #05070f;
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--color-bg);
+  background-image: radial-gradient(var(--color-dot) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Varsity lettering: filled accent with an ink outline and a hard drop shadow. */
+.varsity {
+  font-family: var(--font-display);
+  color: var(--color-accent);
+  -webkit-text-stroke: 1.5px var(--color-ink);
+  paint-order: stroke fill;
+  text-shadow: 2px 3px 0 var(--color-ink);
+  letter-spacing: 0.02em;
+}
+
+.chunky {
+  border: 2px solid var(--color-ink);
+  box-shadow: var(--shadow-chunky);
+}
+.chunky-sm {
+  border: 2px solid var(--color-ink);
+  box-shadow: var(--shadow-chunky-sm);
+}
+.press {
+  transition: transform 80ms ease, box-shadow 80ms ease;
+}
+.press:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 0 var(--color-ink);
+}
+
+/* Tiles */
+.tile {
+  box-shadow: inset 0 -4px 0 rgb(0 0 0 / 0.18);
+}
+.tile-green { background: var(--color-t-green); color: #fff; }
+.tile-yellow { background: var(--color-t-yellow); color: #2a1d00; }
+.tile-orange { background: var(--color-t-orange); color: #2b1300; }
+.tile-red { background: var(--color-t-red); color: #fff; }
+.tile-gray { background: var(--color-t-gray); color: #fff; }
+.tile-missing { background: var(--color-t-gray); color: #fff; opacity: 0.75; }
+
+@keyframes flip-in {
+  0% { transform: perspective(400px) rotateX(-90deg); opacity: 0; }
+  55% { transform: perspective(400px) rotateX(14deg); opacity: 1; }
+  100% { transform: perspective(400px) rotateX(0); opacity: 1; }
+}
+.flip-in {
+  animation: flip-in 520ms cubic-bezier(0.2, 0.7, 0.3, 1.1) both;
+  animation-delay: calc(var(--i, 0) * 280ms);
+}
+
+@keyframes hop {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+}
+.hop {
+  animation: hop 420ms ease both;
+  animation-delay: calc(1900ms + var(--i, 0) * 80ms);
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60% { transform: translateX(6px); }
+}
+.shake { animation: shake 420ms ease both; }
+
+@keyframes sheet-in {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.sheet-in { animation: sheet-in 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in { animation: fade-in 200ms ease both; }
+
+@keyframes toast-in {
+  from { transform: translate(-50%, -12px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+.toast-in { animation: toast-in 180ms ease both; }
+
+@keyframes confetti-fall {
+  0% { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate3d(var(--drift), 105vh, 0) rotate(var(--spin)); opacity: 0.9; }
+}
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  animation: confetti-fall var(--dur) cubic-bezier(0.25, 0.6, 0.4, 1) var(--delay) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-in, .hop, .shake, .sheet-in, .fade-in, .toast-in { animation: none; }
+  .confetti-piece { display: none; }
+}

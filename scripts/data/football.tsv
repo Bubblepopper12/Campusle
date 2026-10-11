@@ -1,0 +1,140 @@
+# Gridiron mode data, hand-curated and approximate (no free API has it). Fix values here or in src/data/overrides.json. One row per FBS team (2026 conference lineups).
+# Titles = national championships the school claims. firstSeason = first season of varsity football.
+# Columns (tab-separated):
+# id	footballConference	stadium	capacity	firstSeason	titles	colors(name:#hex,...)
+university-of-alabama	SEC	Bryant–Denny Stadium	100077	1892	18	crimson:#9E1B32,white:#FFFFFF
+university-of-arkansas	SEC	Razorback Stadium	76212	1894	1	cardinal:#9D2235,white:#FFFFFF
+auburn-university	SEC	Jordan–Hare Stadium	88043	1892	2	navy:#0C2340,orange:#E87722
+university-of-florida	SEC	Ben Hill Griffin Stadium	88548	1906	3	orange:#FA4616,blue:#0021A5
+university-of-georgia	SEC	Sanford Stadium	93033	1892	4	red:#BA0C2F,black:#000000
+university-of-kentucky	SEC	Kroger Field	61000	1881	1	blue:#0033A0,white:#FFFFFF
+louisiana-state-university-and-agricultural-and-mechanical-college	SEC	Tiger Stadium	102321	1893	4	purple:#461D7C,gold:#FDD023
+mississippi-state-university	SEC	Davis Wade Stadium	61337	1895	0	maroon:#660000,white:#FFFFFF
+university-of-missouri-columbia	SEC	Faurot Field	62621	1890	0	gold:#F1B82D,black:#000000
+university-of-oklahoma-norman-campus	SEC	Gaylord Family Oklahoma Memorial Stadium	80126	1895	7	crimson:#841617,cream:#FDF9D8
+university-of-mississippi	SEC	Vaught–Hemingway Stadium	64038	1893	3	red:#CE1126,navy:#14213D
+university-of-south-carolina-columbia	SEC	Williams–Brice Stadium	77559	1896	0	garnet:#73000A,black:#000000
+university-of-tennessee-knoxville	SEC	Neyland Stadium	101915	1891	6	orange:#FF8200,white:#FFFFFF
+university-of-texas-at-austin	SEC	Darrell K Royal–Texas Memorial Stadium	100119	1893	4	burnt orange:#BF5700,white:#FFFFFF
+texas-a-and-m-university-college-station	SEC	Kyle Field	102733	1894	3	maroon:#500000,white:#FFFFFF
+vanderbilt-university	SEC	FirstBank Stadium	35000	1890	0	black:#000000,gold:#CFAE70
+university-of-illinois-urbana-champaign	Big Ten	Memorial Stadium	60670	1890	5	orange:#E84A27,navy:#13294B
+indiana-university-bloomington	Big Ten	Memorial Stadium	52626	1887	1	crimson:#990000,cream:#EEEDEB
+university-of-iowa	Big Ten	Kinnick Stadium	69250	1889	1	black:#000000,gold:#FFCD00
+university-of-maryland-college-park	Big Ten	SECU Stadium	51802	1892	1	red:#E03A3E,gold:#FFD520
+university-of-michigan-ann-arbor	Big Ten	Michigan Stadium	107601	1879	12	blue:#00274C,maize:#FFCB05
+michigan-state-university	Big Ten	Spartan Stadium	75005	1896	6	green:#18453B,white:#FFFFFF
+university-of-minnesota-twin-cities	Big Ten	Huntington Bank Stadium	50805	1882	7	maroon:#7A0019,gold:#FFCC33
+university-of-nebraska-lincoln	Big Ten	Memorial Stadium	85458	1890	5	scarlet:#E41C38,cream:#FDF2D9
+northwestern-university	Big Ten	Ryan Field	35000	1882	0	purple:#4E2A84,white:#FFFFFF
+ohio-state-university-main-campus	Big Ten	Ohio Stadium	102780	1890	9	scarlet:#BB0000,gray:#666666
+university-of-oregon	Big Ten	Autzen Stadium	54000	1894	0	green:#154733,yellow:#FEE123
+pennsylvania-state-university-main-campus	Big Ten	Beaver Stadium	106572	1887	2	navy:#041E42,white:#FFFFFF
+purdue-university-main-campus	Big Ten	Ross–Ade Stadium	61441	1887	0	gold:#CFB991,black:#000000
+rutgers-university-new-brunswick	Big Ten	SHI Stadium	52454	1869	1	scarlet:#CC0033,white:#FFFFFF
+university-of-california-los-angeles	Big Ten	Rose Bowl	89702	1919	1	blue:#2774AE,gold:#FFD100
+university-of-southern-california	Big Ten	Los Angeles Memorial Coliseum	77500	1888	11	cardinal:#990000,gold:#FFCC00
+university-of-washington-seattle-campus	Big Ten	Husky Stadium	70083	1889	2	purple:#4B2E83,gold:#B7A57A
+university-of-wisconsin-madison	Big Ten	Camp Randall Stadium	76057	1889	0	red:#C5050C,white:#FFFFFF
+university-of-arizona	Big 12	Arizona Stadium	50782	1899	0	navy:#0C234B,red:#AB0520
+arizona-state-university-campus-immersion	Big 12	Mountain America Stadium	53599	1897	0	maroon:#8C1D40,gold:#FFC627
+baylor-university	Big 12	McLane Stadium	45140	1899	0	green:#154734,gold:#FFB81C
+brigham-young-university	Big 12	LaVell Edwards Stadium	62073	1922	1	navy:#002E5D,white:#FFFFFF
+university-of-cincinnati-main-campus	Big 12	Nippert Stadium	38088	1885	0	red:#E00122,black:#000000
+university-of-colorado-boulder	Big 12	Folsom Field	50183	1890	1	black:#000000,gold:#CFB87C
+university-of-houston	Big 12	TDECU Stadium	40000	1946	0	red:#C8102E,white:#FFFFFF
+iowa-state-university	Big 12	Jack Trice Stadium	61500	1892	0	cardinal:#C8102E,gold:#F1BE48
+university-of-kansas	Big 12	David Booth Kansas Memorial Stadium	41525	1890	0	blue:#0051BA,crimson:#E8000D
+kansas-state-university	Big 12	Bill Snyder Family Stadium	50000	1896	0	purple:#512888,white:#FFFFFF
+oklahoma-state-university-main-campus	Big 12	Boone Pickens Stadium	55509	1901	1	orange:#FF7300,black:#000000
+texas-christian-university	Big 12	Amon G. Carter Stadium	45000	1896	2	purple:#4D1979,white:#FFFFFF
+texas-tech-university	Big 12	Jones AT&T Stadium	60229	1925	0	red:#CC0000,black:#000000
+university-of-central-florida	Big 12	FBC Mortgage Stadium	44206	1979	1	black:#000000,gold:#FFC904
+university-of-utah	Big 12	Rice–Eccles Stadium	51444	1892	0	red:#CC0000,white:#FFFFFF
+west-virginia-university	Big 12	Milan Puskar Stadium	60000	1891	0	blue:#002855,gold:#EAAA00
+boston-college	ACC	Alumni Stadium	44500	1893	1	maroon:#8A100B,gold:#BC9B6A
+university-of-california-berkeley	ACC	California Memorial Stadium	62467	1886	5	blue:#003262,gold:#FDB515
+clemson-university	ACC	Memorial Stadium	81500	1896	3	orange:#F56600,purple:#522D80
+duke-university	ACC	Wallace Wade Stadium	40004	1888	0	blue:#003087,white:#FFFFFF
+florida-state-university	ACC	Doak Campbell Stadium	67277	1947	3	garnet:#782F40,gold:#CEB888
+georgia-institute-of-technology-main-campus	ACC	Bobby Dodd Stadium	51913	1893	4	gold:#B3A369,navy:#003057
+university-of-louisville	ACC	L&N Federal Credit Union Stadium	60800	1912	0	red:#AD0000,black:#000000
+university-of-miami	ACC	Hard Rock Stadium	64767	1926	5	orange:#F47321,green:#005030
+university-of-north-carolina-at-chapel-hill	ACC	Kenan Stadium	50500	1888	0	light blue:#7BAFD4,white:#FFFFFF
+north-carolina-state-university-at-raleigh	ACC	Carter–Finley Stadium	56919	1892	0	red:#CC0000,white:#FFFFFF
+university-of-notre-dame	Independent	Notre Dame Stadium	77622	1887	11	blue:#0C2340,gold:#C99700
+university-of-pittsburgh-pittsburgh-campus	ACC	Acrisure Stadium	68400	1890	9	blue:#003594,gold:#FFB81C
+southern-methodist-university	ACC	Gerald J. Ford Stadium	32000	1915	3	red:#C8102E,blue:#0033A0
+stanford-university	ACC	Stanford Stadium	50424	1892	2	cardinal:#8C1515,white:#FFFFFF
+syracuse-university	ACC	JMA Wireless Dome	49057	1889	1	orange:#F76900,navy:#000E54
+university-of-virginia-main-campus	ACC	Scott Stadium	61500	1887	0	navy:#232D4B,orange:#E57200
+virginia-polytechnic-institute-and-state-university	ACC	Lane Stadium	65632	1892	0	maroon:#861F41,orange:#E5751F
+wake-forest-university	ACC	Allegacy Federal Credit Union Stadium	31500	1888	0	gold:#9E7E38,black:#000000
+oregon-state-university	Pac-12	Reser Stadium	35548	1893	0	orange:#DC4405,black:#000000
+washington-state-university	Pac-12	Gesa Field	32952	1894	0	crimson:#981E32,gray:#5E6A71
+boise-state-university	Pac-12	Albertsons Stadium	36387	1933	0	blue:#0033A0,orange:#D64309
+colorado-state-university-fort-collins	Pac-12	Canvas Stadium	36500	1893	0	green:#1E4D2B,gold:#C8C372
+california-state-university-fresno	Pac-12	Valley Children's Stadium	41031	1921	0	red:#DB0032,blue:#002E6D
+san-diego-state-university	Pac-12	Snapdragon Stadium	35000	1921	0	scarlet:#A6192E,black:#000000
+utah-state-university	Pac-12	Maverik Stadium	25100	1892	0	navy:#0F2439,white:#FFFFFF
+texas-state-university	Pac-12	UFCU Stadium	30000	1904	0	maroon:#501214,gold:#8D734A
+united-states-air-force-academy	Mountain West	Falcon Stadium	46692	1955	0	blue:#003087,silver:#8A8D8F
+university-of-hawaii-at-manoa	Mountain West	Clarence T. C. Ching Complex	15194	1909	0	green:#024731,white:#FFFFFF
+university-of-nevada-reno	Mountain West	Mackay Stadium	27000	1896	0	navy:#003366,silver:#A2AAAD
+university-of-new-mexico-main-campus	Mountain West	University Stadium	39224	1892	0	cherry:#BA0C2F,silver:#A7A8AA
+san-jose-state-university	Mountain West	CEFCU Stadium	21520	1893	0	blue:#0055A2,gold:#E5A823
+university-of-nevada-las-vegas	Mountain West	Allegiant Stadium	65000	1968	0	scarlet:#CF0A2C,gray:#666666
+university-of-wyoming	Mountain West	War Memorial Stadium	29181	1893	0	brown:#492F24,gold:#FFC425
+university-of-texas-at-el-paso	Mountain West	Sun Bowl	51500	1914	0	orange:#FF8200,navy:#041E42
+northern-illinois-university	Mountain West	Huskie Stadium	23595	1899	0	cardinal:#BA0C2F,black:#000000
+united-states-military-academy	American	Michie Stadium	38000	1890	3	black:#000000,gold:#D3BC8D
+united-states-naval-academy	American	Navy–Marine Corps Memorial Stadium	34000	1879	1	navy:#00205B,gold:#C5B783
+university-of-north-carolina-at-charlotte	American	Jerry Richardson Stadium	15314	2013	0	green:#005035,gold:#A49665
+east-carolina-university	American	Dowdy–Ficklen Stadium	50000	1932	0	purple:#592A8A,gold:#FDC82F
+florida-atlantic-university	American	FAU Stadium	29419	2001	0	blue:#003366,red:#CC0000
+university-of-memphis	American	Simmons Bank Liberty Stadium	58325	1912	0	blue:#003087,gray:#898D8D
+university-of-north-texas	American	DATCU Stadium	30500	1913	0	green:#00853E,white:#FFFFFF
+rice-university	American	Rice Stadium	47000	1912	0	blue:#00205B,gray:#7C7E7F
+university-of-south-florida	American	Raymond James Stadium	65618	1997	0	green:#006747,gold:#CFC493
+temple-university	American	Lincoln Financial Field	69596	1894	0	cherry:#9D2235,white:#FFFFFF
+tulane-university-of-louisiana	American	Yulman Stadium	30000	1893	0	green:#006747,blue:#418FDE
+university-of-tulsa	American	H. A. Chapman Stadium	30000	1895	0	blue:#002D72,gold:#C8B18B
+university-of-alabama-at-birmingham	American	Protective Stadium	47100	1991	0	green:#1E6B52,gold:#F4C300
+university-of-texas-at-san-antonio	American	Alamodome	64000	2011	0	blue:#0C2340,orange:#F15A22
+appalachian-state-university	Sun Belt	Kidd Brewer Stadium	30000	1928	0	black:#000000,gold:#FFCC00
+arkansas-state-university	Sun Belt	Centennial Bank Stadium	30406	1911	0	scarlet:#CC092F,black:#000000
+coastal-carolina-university	Sun Belt	Brooks Stadium	21000	2003	0	teal:#006F71,bronze:#A27752
+georgia-southern-university	Sun Belt	Paulson Stadium	25000	1924	0	navy:#011E41,white:#FFFFFF
+georgia-state-university	Sun Belt	Center Parc Stadium	24333	2010	0	blue:#0039A6,white:#FFFFFF
+james-madison-university	Sun Belt	Bridgeforth Stadium	25000	1972	0	purple:#450084,gold:#CBB677
+university-of-louisiana-at-lafayette	Sun Belt	Cajun Field	41426	1901	0	red:#CE181E,white:#FFFFFF
+university-of-louisiana-at-monroe	Sun Belt	Malone Stadium	27617	1931	0	maroon:#840029,gold:#BD955A
+marshall-university	Sun Belt	Joan C. Edwards Stadium	38227	1895	0	green:#00B140,white:#FFFFFF
+old-dominion-university	Sun Belt	S.B. Ballard Stadium	21944	1930	0	navy:#003057,silver:#7C878E
+university-of-south-alabama	Sun Belt	Hancock Whitney Stadium	25450	2009	0	blue:#00205B,red:#BF0D3E
+university-of-southern-mississippi	Sun Belt	M. M. Roberts Stadium	36000	1912	0	black:#000000,gold:#FFAB00
+troy-university	Sun Belt	Veterans Memorial Stadium	30402	1909	0	cardinal:#8A2432,silver:#B3B5B8
+louisiana-tech-university	Sun Belt	Joe Aillet Stadium	28562	1901	0	blue:#002F8B,red:#E31B23
+university-of-delaware	C-USA	Delaware Stadium	18800	1889	0	blue:#00539F,gold:#FFD200
+florida-international-university	C-USA	Pitbull Stadium	20000	2002	0	blue:#081E3F,gold:#B6862C
+jacksonville-state-university	C-USA	AmFirst Stadium	24000	1904	0	red:#CC0000,white:#FFFFFF
+kennesaw-state-university	C-USA	Fifth Third Stadium	8300	2015	0	black:#000000,gold:#FDBB30
+liberty-university	C-USA	Williams Stadium	25000	1973	0	red:#C41230,navy:#0A254E
+middle-tennessee-state-university	C-USA	Floyd Stadium	30788	1911	0	blue:#0066CC,white:#FFFFFF
+missouri-state-university-springfield	C-USA	Plaster Stadium	17500	1909	0	maroon:#5E0009,white:#FFFFFF
+new-mexico-state-university-main-campus	C-USA	Aggie Memorial Stadium	28853	1893	0	crimson:#8C0B42,white:#FFFFFF
+sam-houston-state-university	C-USA	Bowers Stadium	14000	1912	0	orange:#F47920,white:#FFFFFF
+western-kentucky-university	C-USA	Houchens Industries–L. T. Smith Stadium	22113	1908	0	red:#C60C30,white:#FFFFFF
+university-of-akron-main-campus	MAC	InfoCision Stadium	27881	1891	0	navy:#041E42,gold:#A89968
+ball-state-university	MAC	Scheumann Stadium	22500	1924	0	cardinal:#BA0C2F,white:#FFFFFF
+bowling-green-state-university-main-campus	MAC	Doyt Perry Stadium	24000	1919	0	orange:#FE5000,brown:#4F2C1D
+university-at-buffalo	MAC	UB Stadium	25013	1894	0	blue:#005BBB,white:#FFFFFF
+central-michigan-university	MAC	Kelly/Shorts Stadium	30255	1896	0	maroon:#6A0032,gold:#FFC82E
+eastern-michigan-university	MAC	Rynearson Stadium	30200	1891	0	green:#006938,white:#FFFFFF
+kent-state-university-at-kent	MAC	Dix Stadium	25319	1920	0	navy:#002664,gold:#EAAB00
+miami-university-oxford	MAC	Yager Stadium	24286	1888	0	red:#C3142D,white:#FFFFFF
+ohio-university-main-campus	MAC	Peden Stadium	24000	1894	0	green:#00694E,white:#FFFFFF
+university-of-toledo	MAC	Glass Bowl	26038	1917	0	blue:#15397F,gold:#FFDA00
+western-michigan-university	MAC	Waldo Stadium	30200	1906	0	brown:#6C4023,gold:#B5A167
+university-of-massachusetts-amherst	MAC	McGuirk Alumni Stadium	17000	1879	0	maroon:#881C1C,black:#000000
+university-of-connecticut	Independent	Rentschler Field	38066	1896	0	navy:#000E2F,white:#FFFFFF

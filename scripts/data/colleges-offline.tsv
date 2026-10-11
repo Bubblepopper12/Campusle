@@ -1,0 +1,273 @@
+# OFFLINE FALLBACK DATA, hand-entered and approximate (enrollment, tuition and acceptance rounded, coordinates at campus level).
+# `npm run data:offline` turns this file into src/data/colleges.json so the game is playable without API access.
+# `npm run data:build` replaces it with real College Scorecard and Wikidata values. Use src/data/overrides.json for fixes.
+# Columns (tab-separated):
+# name	city	state	lat	lon	undergrads	inStateTuition	acceptRate	control	founded	conference	mascot
+# --- SEC ---
+The University of Alabama	Tuscaloosa	AL	33.2140	-87.5391	33600	11940	0.76	public	1831	SEC	Crimson Tide
+University of Arkansas	Fayetteville	AR	36.0687	-94.1748	28000	9900	0.76	public	1871	SEC	Razorbacks
+Auburn University	Auburn	AL	32.6034	-85.4808	26000	12500	0.49	public	1856	SEC	Tigers
+University of Florida	Gainesville	FL	29.6436	-82.3549	34500	6380	0.24	public	1853	SEC	Gators
+University of Georgia	Athens	GA	33.9480	-83.3773	30500	11180	0.37	public	1785	SEC	Bulldogs
+University of Kentucky	Lexington	KY	38.0307	-84.5040	23500	13700	0.95	public	1865	SEC	Wildcats
+Louisiana State University and Agricultural & Mechanical College	Baton Rouge	LA	30.4133	-91.1800	31000	12000	0.76	public	1860	SEC	Tigers
+Mississippi State University	Starkville	MS	33.4552	-88.7944	19000	9800	0.75	public	1878	SEC	Bulldogs
+University of Missouri-Columbia	Columbia	MO	38.9404	-92.3277	23500	12500	0.77	public	1839	SEC	Tigers
+University of Oklahoma-Norman Campus	Norman	OK	35.2058	-97.4457	24000	10000	0.75	public	1890	SEC	Sooners
+University of Mississippi	University	MS	34.3650	-89.5383	21000	9400	0.98	public	1848	SEC	Rebels
+University of South Carolina-Columbia	Columbia	SC	33.9940	-81.0301	28000	12700	0.61	public	1801	SEC	Gamecocks
+The University of Tennessee-Knoxville	Knoxville	TN	35.9544	-83.9295	30500	13250	0.68	public	1794	SEC	Volunteers
+The University of Texas at Austin	Austin	TX	30.2849	-97.7341	42500	11700	0.29	public	1883	SEC	Longhorns
+Texas A & M University-College Station	College Station	TX	30.6188	-96.3365	59000	13200	0.63	public	1876	SEC	Aggies
+Vanderbilt University	Nashville	TN	36.1447	-86.8027	7100	63900	0.06	private	1873	SEC	Commodores
+# --- Big Ten ---
+University of Illinois Urbana-Champaign	Champaign	IL	40.1020	-88.2272	35000	17600	0.44	public	1867	Big Ten	Fighting Illini
+Indiana University-Bloomington	Bloomington	IN	39.1682	-86.5230	37000	11800	0.80	public	1820	Big Ten	Hoosiers
+University of Iowa	Iowa City	IA	41.6627	-91.5549	22000	10500	0.85	public	1847	Big Ten	Hawkeyes
+University of Maryland-College Park	College Park	MD	38.9869	-76.9426	30900	11500	0.45	public	1856	Big Ten	Terrapins
+University of Michigan-Ann Arbor	Ann Arbor	MI	42.2780	-83.7382	33000	17700	0.18	public	1817	Big Ten	Wolverines
+Michigan State University	East Lansing	MI	42.7018	-84.4822	40000	15700	0.84	public	1855	Big Ten	Spartans
+University of Minnesota-Twin Cities	Minneapolis	MN	44.9740	-93.2277	31500	16500	0.77	public	1851	Big Ten	Golden Gophers
+University of Nebraska-Lincoln	Lincoln	NE	40.8202	-96.7005	19500	9900	0.79	public	1869	Big Ten	Cornhuskers
+Northwestern University	Evanston	IL	42.0565	-87.6753	8800	65000	0.07	private	1851	Big Ten	Wildcats
+Ohio State University-Main Campus	Columbus	OH	40.0067	-83.0305	46000	12900	0.53	public	1870	Big Ten	Buckeyes
+University of Oregon	Eugene	OR	44.0448	-123.0726	19500	15000	0.86	public	1876	Big Ten	Ducks
+Pennsylvania State University-Main Campus	University Park	PA	40.7982	-77.8599	41500	19900	0.55	public	1855	Big Ten	Nittany Lions
+Purdue University-Main Campus	West Lafayette	IN	40.4237	-86.9212	38000	9990	0.50	public	1869	Big Ten	Boilermakers
+Rutgers University-New Brunswick	New Brunswick	NJ	40.5008	-74.4474	36500	17200	0.65	public	1766	Big Ten	Scarlet Knights
+University of California-Los Angeles	Los Angeles	CA	34.0689	-118.4452	32500	14300	0.09	public	1919	Big Ten	Bruins
+University of Southern California	Los Angeles	CA	34.0224	-118.2851	21000	66600	0.10	private	1880	Big Ten	Trojans
+University of Washington-Seattle Campus	Seattle	WA	47.6553	-122.3035	37000	12600	0.43	public	1861	Big Ten	Huskies
+University of Wisconsin-Madison	Madison	WI	43.0766	-89.4125	37000	11600	0.43	public	1848	Big Ten	Badgers
+# --- Big 12 ---
+University of Arizona	Tucson	AZ	32.2319	-110.9501	41000	13600	0.86	public	1885	Big 12	Wildcats
+Arizona State University Campus Immersion	Tempe	AZ	33.4242	-111.9281	63000	12000	0.90	public	1885	Big 12	Sun Devils
+Baylor University	Waco	TX	31.5489	-97.1131	15200	54800	0.52	private	1845	Big 12	Bears
+Brigham Young University	Provo	UT	40.2518	-111.6493	31500	6500	0.69	private	1875	Big 12	Cougars
+University of Cincinnati-Main Campus	Cincinnati	OH	39.1329	-84.5150	30000	12600	0.86	public	1819	Big 12	Bearcats
+University of Colorado Boulder	Boulder	CO	40.0076	-105.2659	31500	13000	0.81	public	1876	Big 12	Buffaloes
+University of Houston	Houston	TX	29.7199	-95.3422	39000	11400	0.70	public	1927	Big 12	Cougars
+Iowa State University	Ames	IA	42.0267	-93.6465	25500	9300	0.89	public	1858	Big 12	Cyclones
+University of Kansas	Lawrence	KS	38.9543	-95.2558	19000	11500	0.88	public	1865	Big 12	Jayhawks
+Kansas State University	Manhattan	KS	39.1974	-96.5847	15000	10500	0.96	public	1863	Big 12	Wildcats
+Oklahoma State University-Main Campus	Stillwater	OK	36.1270	-97.0737	21000	9900	0.71	public	1890	Big 12	Cowboys
+Texas Christian University	Fort Worth	TX	32.7096	-97.3628	11000	58000	0.44	private	1873	Big 12	Horned Frogs
+Texas Tech University	Lubbock	TX	33.5843	-101.8783	34000	11800	0.70	public	1923	Big 12	Red Raiders
+University of Central Florida	Orlando	FL	28.6024	-81.2001	58000	6370	0.41	public	1963	Big 12	Knights
+University of Utah	Salt Lake City	UT	40.7649	-111.8421	26000	10400	0.87	public	1850	Big 12	Utes
+West Virginia University	Morgantown	WV	39.6480	-79.9559	21000	9650	0.86	public	1867	Big 12	Mountaineers
+# --- ACC ---
+Boston College	Chestnut Hill	MA	42.3355	-71.1685	9500	67700	0.15	private	1863	ACC	Eagles
+University of California-Berkeley	Berkeley	CA	37.8719	-122.2585	33000	15900	0.12	public	1868	ACC	Golden Bears
+Clemson University	Clemson	SC	34.6834	-82.8374	23000	15600	0.38	public	1889	ACC	Tigers
+Duke University	Durham	NC	36.0014	-78.9382	6600	66200	0.06	private	1838	ACC	Blue Devils
+Florida State University	Tallahassee	FL	30.4419	-84.2985	33500	5660	0.25	public	1851	ACC	Seminoles
+Georgia Institute of Technology-Main Campus	Atlanta	GA	33.7756	-84.3963	18500	11800	0.16	public	1885	ACC	Yellow Jackets
+University of Louisville	Louisville	KY	38.2123	-85.7585	16000	12900	0.80	public	1798	ACC	Cardinals
+University of Miami	Coral Gables	FL	25.7215	-80.2793	12500	59300	0.19	private	1925	ACC	Hurricanes
+University of North Carolina at Chapel Hill	Chapel Hill	NC	35.9049	-79.0469	20000	8990	0.17	public	1789	ACC	Tar Heels
+North Carolina State University at Raleigh	Raleigh	NC	35.7847	-78.6821	27000	9100	0.40	public	1887	ACC	Wolfpack
+University of Notre Dame	Notre Dame	IN	41.7052	-86.2353	9000	62700	0.12	private	1842	ACC	Fighting Irish
+University of Pittsburgh-Pittsburgh Campus	Pittsburgh	PA	40.4444	-79.9532	19500	20000	0.49	public	1787	ACC	Panthers
+Southern Methodist University	Dallas	TX	32.8412	-96.7845	7000	63000	0.52	private	1911	ACC	Mustangs
+Stanford University	Stanford	CA	37.4275	-122.1697	7800	62500	0.04	private	1885	ACC	Cardinal
+Syracuse University	Syracuse	NY	43.0392	-76.1351	15500	63000	0.42	private	1870	ACC	Orange
+University of Virginia-Main Campus	Charlottesville	VA	38.0336	-78.5080	17500	21000	0.17	public	1819	ACC	Cavaliers
+Virginia Polytechnic Institute and State University	Blacksburg	VA	37.2284	-80.4234	30500	15000	0.57	public	1872	ACC	Hokies
+Wake Forest University	Winston-Salem	NC	36.1335	-80.2770	5500	64800	0.22	private	1834	ACC	Demon Deacons
+# --- Pac-12 (2026 lineup) ---
+Oregon State University	Corvallis	OR	44.5638	-123.2794	28000	13300	0.80	public	1868	Pac-12	Beavers
+Washington State University	Pullman	WA	46.7319	-117.1542	23500	12700	0.85	public	1890	Pac-12	Cougars
+Boise State University	Boise	ID	43.6027	-116.2009	21000	8600	0.85	public	1932	Pac-12	Broncos
+Colorado State University-Fort Collins	Fort Collins	CO	40.5734	-105.0865	24000	12900	0.90	public	1870	Pac-12	Rams
+California State University-Fresno	Fresno	CA	36.8133	-119.7483	22000	6700	0.94	public	1911	Pac-12	Bulldogs
+San Diego State University	San Diego	CA	32.7757	-117.0719	33000	8700	0.39	public	1897	Pac-12	Aztecs
+Utah State University	Logan	UT	41.7452	-111.8097	25000	9000	0.94	public	1888	Pac-12	Aggies
+Texas State University	San Marcos	TX	29.8884	-97.9384	33000	11600	0.89	public	1899	Pac-12	Bobcats
+Gonzaga University	Spokane	WA	47.6670	-117.4020	5300	54000	0.76	private	1887	Pac-12	Bulldogs
+# --- Mountain West ---
+United States Air Force Academy	USAF Academy	CO	38.9983	-104.8613	4200	0	0.12	public	1954	Mountain West	Falcons
+University of Hawaii at Manoa	Honolulu	HI	21.2969	-157.8171	14000	12200	0.79	public	1907	Big West	Rainbow Warriors
+University of Nevada-Reno	Reno	NV	39.5442	-119.8164	17000	9200	0.86	public	1874	Mountain West	Wolf Pack
+University of New Mexico-Main Campus	Albuquerque	NM	35.0844	-106.6198	16000	8900	0.97	public	1889	Mountain West	Lobos
+San Jose State University	San Jose	CA	37.3352	-121.8811	28000	8200	0.79	public	1857	Mountain West	Spartans
+University of Nevada-Las Vegas	Las Vegas	NV	36.1083	-115.1437	26000	9100	0.85	public	1957	Mountain West	Rebels
+University of Wyoming	Laramie	WY	41.3149	-105.5666	9500	6600	0.97	public	1886	Mountain West	Cowboys
+The University of Texas at El Paso	El Paso	TX	31.7710	-106.5050	21000	9700	1.00	public	1914	Mountain West	Miners
+Northern Illinois University	DeKalb	IL	41.9339	-88.7686	11000	12500	0.73	public	1895	Horizon	Huskies
+# --- American ---
+United States Military Academy	West Point	NY	41.3915	-73.9560	4400	0	0.12	public	1802	Patriot	Black Knights
+United States Naval Academy	Annapolis	MD	38.9822	-76.4840	4500	0	0.09	public	1845	Patriot	Midshipmen
+University of North Carolina at Charlotte	Charlotte	NC	35.3071	-80.7352	25000	7000	0.80	public	1946	American	49ers
+East Carolina University	Greenville	NC	35.6067	-77.3664	22000	7240	0.91	public	1907	American	Pirates
+Florida Atlantic University	Boca Raton	FL	26.3705	-80.1028	25000	4880	0.65	public	1961	American	Owls
+University of Memphis	Memphis	TN	35.1187	-89.9375	17500	10700	0.92	public	1912	American	Tigers
+University of North Texas	Denton	TX	33.2075	-97.1526	37000	11600	0.72	public	1890	American	Mean Green
+Rice University	Houston	TX	29.7174	-95.4018	4500	60700	0.08	private	1912	American	Owls
+University of South Florida	Tampa	FL	28.0587	-82.4139	38000	6410	0.44	public	1956	American	Bulls
+Temple University	Philadelphia	PA	39.9812	-75.1554	24000	19000	0.80	public	1884	American	Owls
+Tulane University of Louisiana	New Orleans	LA	29.9400	-90.1203	8500	66000	0.14	private	1834	American	Green Wave
+The University of Tulsa	Tulsa	OK	36.1522	-95.9450	3000	47000	0.70	private	1894	American	Golden Hurricane
+University of Alabama at Birmingham	Birmingham	AL	33.5021	-86.8064	13500	9600	0.87	public	1969	American	Blazers
+The University of Texas at San Antonio	San Antonio	TX	29.5830	-98.6196	30000	9500	0.90	public	1969	American	Roadrunners
+# --- Sun Belt ---
+Appalachian State University	Boone	NC	36.2135	-81.6843	20000	7900	0.89	public	1899	Sun Belt	Mountaineers
+Arkansas State University	Jonesboro	AR	35.8423	-90.6750	9000	9300	0.63	public	1909	Sun Belt	Red Wolves
+Coastal Carolina University	Conway	SC	33.7951	-79.0129	10500	12000	0.77	public	1954	Sun Belt	Chanticleers
+Georgia Southern University	Statesboro	GA	32.4226	-81.7845	24000	6300	0.92	public	1906	Sun Belt	Eagles
+Georgia State University	Atlanta	GA	33.7531	-84.3853	27000	10300	0.78	public	1913	Sun Belt	Panthers
+James Madison University	Harrisonburg	VA	38.4350	-78.8701	20000	13800	0.78	public	1908	Sun Belt	Dukes
+University of Louisiana at Lafayette	Lafayette	LA	30.2133	-92.0197	14000	11000	0.64	public	1898	Sun Belt	Ragin' Cajuns
+University of Louisiana at Monroe	Monroe	LA	32.5291	-92.0754	6000	9500	0.73	public	1931	Sun Belt	Warhawks
+Marshall University	Huntington	WV	38.4232	-82.4268	9500	9400	0.95	public	1837	Sun Belt	Thundering Herd
+Old Dominion University	Norfolk	VA	36.8855	-76.3058	19000	12100	0.94	public	1930	Sun Belt	Monarchs
+University of South Alabama	Mobile	AL	30.6966	-88.1781	10000	10500	0.73	public	1963	Sun Belt	Jaguars
+University of Southern Mississippi	Hattiesburg	MS	31.3282	-89.3333	11000	10200	0.98	public	1910	Sun Belt	Golden Eagles
+Troy University	Troy	AL	31.8008	-85.9568	11000	10000	0.91	public	1887	Sun Belt	Trojans
+Louisiana Tech University	Ruston	LA	32.5267	-92.6487	9500	10500	0.65	public	1894	Sun Belt	Bulldogs
+# --- Conference USA ---
+University of Delaware	Newark	DE	39.6780	-75.7506	19000	16600	0.70	public	1743	C-USA	Blue Hens
+Florida International University	Miami	FL	25.7562	-80.3755	46000	6570	0.59	public	1965	C-USA	Panthers
+Jacksonville State University	Jacksonville	AL	33.8213	-85.7656	7500	10600	0.98	public	1883	C-USA	Gamecocks
+Kennesaw State University	Kennesaw	GA	34.0382	-84.5810	39000	5800	0.73	public	1963	C-USA	Owls
+Liberty University	Lynchburg	VA	37.3534	-79.1767	50000	23800	0.99	private	1971	C-USA	Flames
+Middle Tennessee State University	Murfreesboro	TN	35.8487	-86.3669	19000	10000	0.95	public	1911	C-USA	Blue Raiders
+Missouri State University-Springfield	Springfield	MO	37.1993	-93.2806	19000	9000	0.89	public	1905	C-USA	Bears
+New Mexico State University-Main Campus	Las Cruces	NM	32.2803	-106.7467	11500	8000	0.89	public	1888	C-USA	Aggies
+Sam Houston State University	Huntsville	TX	30.7140	-95.5470	18500	11600	0.84	public	1879	C-USA	Bearkats
+Western Kentucky University	Bowling Green	KY	36.9858	-86.4550	14000	11400	0.98	public	1906	C-USA	Hilltoppers
+# --- MAC ---
+University of Akron Main Campus	Akron	OH	41.0757	-81.5115	12000	12500	0.86	public	1870	MAC	Zips
+Ball State University	Muncie	IN	40.2059	-85.4087	14500	10600	0.70	public	1918	MAC	Cardinals
+Bowling Green State University-Main Campus	Bowling Green	OH	41.3780	-83.6416	14000	13000	0.78	public	1910	MAC	Falcons
+University at Buffalo	Buffalo	NY	43.0008	-78.7890	21000	10900	0.68	public	1846	MAC	Bulls
+Central Michigan University	Mount Pleasant	MI	43.5906	-84.7747	11000	13700	0.81	public	1892	MAC	Chippewas
+Eastern Michigan University	Ypsilanti	MI	42.2507	-83.6243	11500	15500	0.79	public	1849	MAC	Eagles
+Kent State University at Kent	Kent	OH	41.1456	-81.3415	21500	12400	0.87	public	1910	MAC	Golden Flashes
+Miami University-Oxford	Oxford	OH	39.5089	-84.7344	17000	17800	0.80	public	1809	MAC	RedHawks
+Ohio University-Main Campus	Athens	OH	39.3240	-82.1013	17000	13300	0.87	public	1804	MAC	Bobcats
+University of Toledo	Toledo	OH	41.6576	-83.6130	12500	11000	0.95	public	1872	MAC	Rockets
+Western Michigan University	Kalamazoo	MI	42.2836	-85.6136	14500	14800	0.86	public	1903	MAC	Broncos
+University of Massachusetts-Amherst	Amherst	MA	42.3868	-72.5301	24000	17400	0.58	public	1863	MAC	Minutemen
+# --- Independent in football ---
+University of Connecticut	Storrs	CT	41.8077	-72.2540	19500	21000	0.55	public	1881	Big East	Huskies
+# --- Ivy League ---
+Brown University	Providence	RI	41.8268	-71.4025	7300	68000	0.05	private	1764	Ivy League	Bears
+Columbia University in the City of New York	New York	NY	40.8075	-73.9626	8900	68000	0.04	private	1754	Ivy League	Lions
+Cornell University	Ithaca	NY	42.4534	-76.4735	16000	66000	0.08	private	1865	Ivy League	Big Red
+Dartmouth College	Hanover	NH	43.7044	-72.2887	4400	66000	0.06	private	1769	Ivy League	Big Green
+Harvard University	Cambridge	MA	42.3770	-71.1167	7100	59000	0.03	private	1636	Ivy League	Crimson
+University of Pennsylvania	Philadelphia	PA	39.9522	-75.1932	10000	66000	0.06	private	1740	Ivy League	Quakers
+Princeton University	Princeton	NJ	40.3431	-74.6551	5600	59700	0.05	private	1746	Ivy League	Tigers
+Yale University	New Haven	CT	41.3163	-72.9223	6600	64700	0.05	private	1701	Ivy League	Bulldogs
+# --- Research universities ---
+Massachusetts Institute of Technology	Cambridge	MA	42.3601	-71.0942	4600	60200	0.04	private	1861	Division III	Engineers
+California Institute of Technology	Pasadena	CA	34.1377	-118.1253	1000	63300	0.03	private	1891	Division III	Beavers
+University of Chicago	Chicago	IL	41.7886	-87.5987	7500	65600	0.05	private	1890	Division III	Maroons
+Johns Hopkins University	Baltimore	MD	39.3299	-76.6205	6000	63300	0.07	private	1876	Division III	Blue Jays
+Georgetown University	Washington	DC	38.9076	-77.0723	7500	65000	0.13	private	1789	Big East	Hoyas
+New York University	New York	NY	40.7295	-73.9965	29000	60400	0.09	private	1831	Division III	Violets
+Carnegie Mellon University	Pittsburgh	PA	40.4433	-79.9436	7300	63800	0.11	private	1900	Division III	Tartans
+Emory University	Atlanta	GA	33.7925	-84.3240	7300	60800	0.11	private	1836	Division III	Eagles
+Washington University in St Louis	St. Louis	MO	38.6488	-90.3108	8000	62400	0.12	private	1853	Division III	Bears
+Case Western Reserve University	Cleveland	OH	41.5043	-81.6084	6000	62200	0.27	private	1826	Division III	Spartans
+University of Rochester	Rochester	NY	43.1306	-77.6260	6500	64000	0.39	private	1850	Division III	Yellowjackets
+Tufts University	Medford	MA	42.4075	-71.1190	6700	68000	0.10	private	1852	Division III	Jumbos
+Boston University	Boston	MA	42.3505	-71.1054	18500	65000	0.11	private	1839	Patriot	Terriers
+Northeastern University	Boston	MA	42.3398	-71.0892	20000	63000	0.06	private	1898	CAA	Huskies
+Brandeis University	Waltham	MA	42.3655	-71.2590	3600	64000	0.39	private	1948	Division III	Judges
+University of California-San Diego	La Jolla	CA	32.8801	-117.2340	33000	15800	0.25	public	1960	Big West	Tritons
+University of California-Davis	Davis	CA	38.5382	-121.7617	31500	15700	0.42	public	1905	Big West	Aggies
+University of California-Irvine	Irvine	CA	33.6405	-117.8443	29500	14700	0.26	public	1965	Big West	Anteaters
+University of California-Santa Barbara	Santa Barbara	CA	34.4140	-119.8489	23500	15500	0.28	public	1891	Big West	Gauchos
+University of California-Santa Cruz	Santa Cruz	CA	36.9914	-122.0609	17500	15000	0.62	public	1965	Division III	Banana Slugs
+California Polytechnic State University-San Luis Obispo	San Luis Obispo	CA	35.3050	-120.6625	21000	11000	0.30	public	1901	Big West	Mustangs
+University of Texas at Dallas	Richardson	TX	32.9857	-96.7502	22000	14600	0.85	public	1969	Division III	Comets
+Colorado School of Mines	Golden	CO	39.7510	-105.2226	5800	20000	0.58	public	1874	Division II	Orediggers
+Rensselaer Polytechnic Institute	Troy	NY	42.7298	-73.6789	5800	62000	0.65	private	1824	Division III	Engineers
+Worcester Polytechnic Institute	Worcester	MA	42.2746	-71.8063	5300	58000	0.58	private	1865	Division III	Engineers
+Rochester Institute of Technology	Rochester	NY	43.0846	-77.6743	14000	56000	0.71	private	1829	Division III	Tigers
+Drexel University	Philadelphia	PA	39.9566	-75.1899	13000	60000	0.83	private	1891	CAA	Dragons
+William & Mary	Williamsburg	VA	37.2707	-76.7075	6800	25000	0.33	public	1693	CAA	Tribe
+University of Maryland-Baltimore County	Baltimore	MD	39.2554	-76.7107	11000	13000	0.75	public	1966	America East	Retrievers
+Stony Brook University	Stony Brook	NY	40.9124	-73.1234	18000	10600	0.49	public	1957	CAA	Seawolves
+University of Vermont	Burlington	VT	44.4779	-73.1965	11500	19000	0.60	public	1791	America East	Catamounts
+University of New Hampshire-Main Campus	Durham	NH	43.1340	-70.9264	11500	19000	0.87	public	1866	America East	Wildcats
+University of Maine	Orono	ME	44.9010	-68.6721	9500	12500	0.97	public	1865	America East	Black Bears
+# --- Big East and other hoops schools ---
+Villanova University	Villanova	PA	40.0379	-75.3426	7000	66000	0.25	private	1842	Big East	Wildcats
+Marquette University	Milwaukee	WI	43.0389	-87.9295	7500	48000	0.87	private	1881	Big East	Golden Eagles
+Creighton University	Omaha	NE	41.2655	-95.9468	4500	46000	0.78	private	1878	Big East	Bluejays
+Butler University	Indianapolis	IN	39.8406	-86.1695	4500	46000	0.81	private	1855	Big East	Bulldogs
+Xavier University	Cincinnati	OH	39.1495	-84.4734	4900	47000	0.82	private	1831	Big East	Musketeers
+St. John's University-New York	Queens	NY	40.7223	-73.7949	15000	48000	0.79	private	1870	Big East	Red Storm
+Providence College	Providence	RI	41.8435	-71.4389	4300	61000	0.53	private	1917	Big East	Friars
+Seton Hall University	South Orange	NJ	40.7428	-74.2468	6000	49000	0.75	private	1856	Big East	Pirates
+DePaul University	Chicago	IL	41.9246	-87.6553	13500	45000	0.70	private	1898	Big East	Blue Demons
+Pepperdine University	Malibu	CA	34.0360	-118.7090	3500	66000	0.49	private	1937	WCC	Waves
+Santa Clara University	Santa Clara	CA	37.3496	-121.9390	6200	62000	0.48	private	1851	WCC	Broncos
+Loyola Marymount University	Los Angeles	CA	33.9700	-118.4180	7000	57000	0.42	private	1911	WCC	Lions
+Saint Mary's College of California	Moraga	CA	37.8410	-122.1090	2000	55000	0.80	private	1863	WCC	Gaels
+University of San Francisco	San Francisco	CA	37.7765	-122.4505	5800	57000	0.70	private	1855	WCC	Dons
+University of Dayton	Dayton	OH	39.7384	-84.1792	8500	47000	0.70	private	1850	A-10	Flyers
+Saint Louis University	St. Louis	MO	38.6367	-90.2341	9000	52000	0.75	private	1818	A-10	Billikens
+Virginia Commonwealth University	Richmond	VA	37.5488	-77.4530	22000	16000	0.92	public	1838	A-10	Rams
+George Washington University	Washington	DC	38.8997	-77.0486	12000	65000	0.44	private	1821	A-10	Revolutionaries
+Fordham University	Bronx	NY	40.8610	-73.8856	10000	60000	0.54	private	1841	A-10	Rams
+University of Richmond	Richmond	VA	37.5762	-77.5401	3200	62000	0.22	private	1830	A-10	Spiders
+Davidson College	Davidson	NC	35.5013	-80.8459	2000	60000	0.13	private	1837	A-10	Wildcats
+George Mason University	Fairfax	VA	38.8316	-77.3075	28000	14000	0.89	public	1957	A-10	Patriots
+Loyola University Chicago	Chicago	IL	41.9989	-87.6577	12000	50000	0.80	private	1870	A-10	Ramblers
+University of Rhode Island	Kingston	RI	41.4807	-71.5260	14500	16000	0.76	public	1892	A-10	Rams
+Lehigh University	Bethlehem	PA	40.6070	-75.3780	5800	63000	0.29	private	1865	Patriot	Mountain Hawks
+Bucknell University	Lewisburg	PA	40.9548	-76.8838	3800	65000	0.32	private	1846	Patriot	Bison
+Colgate University	Hamilton	NY	42.8178	-75.5364	3200	67000	0.13	private	1819	Patriot	Raiders
+College of the Holy Cross	Worcester	MA	42.2382	-71.8085	3200	60000	0.36	private	1843	Patriot	Crusaders
+Lafayette College	Easton	PA	40.6982	-75.2093	2700	62000	0.31	private	1826	Patriot	Leopards
+American University	Washington	DC	38.9376	-77.0889	8500	56000	0.47	private	1893	Patriot	Eagles
+University of Montana	Missoula	MT	46.8601	-113.9852	7500	7700	0.96	public	1893	Big Sky	Grizzlies
+Montana State University	Bozeman	MT	45.6670	-111.0546	15000	7900	0.85	public	1893	Big Sky	Bobcats
+North Dakota State University-Main Campus	Fargo	ND	46.8975	-96.8013	10000	10500	0.95	public	1890	Summit	Bison
+University of Idaho	Moscow	ID	46.7268	-117.0158	9000	8700	0.77	public	1889	Big Sky	Vandals
+University of Denver	Denver	CO	39.6766	-104.9619	5800	59000	0.78	private	1864	Summit	Pioneers
+Northern Arizona University	Flagstaff	AZ	35.1894	-111.6513	22000	12900	0.80	public	1899	Big Sky	Lumberjacks
+California State University-Sacramento	Sacramento	CA	38.5611	-121.4240	28000	7900	0.94	public	1947	Big Sky	Hornets
+Elon University	Elon	NC	36.1034	-79.5011	6500	42000	0.73	private	1889	CAA	Phoenix
+Furman University	Greenville	SC	34.9257	-82.4386	2400	58000	0.52	private	1826	SoCon	Paladins
+Belmont University	Nashville	TN	36.1330	-86.7950	7500	41000	0.83	private	1890	MVC	Bruins
+# --- HBCUs ---
+Howard University	Washington	DC	38.9227	-77.0194	10500	33000	0.35	private	1867	MEAC	Bison
+Spelman College	Atlanta	GA	33.7454	-84.4115	2500	29000	0.28	private	1881	None	Jaguars
+Morehouse College	Atlanta	GA	33.7468	-84.4142	2600	29000	0.58	private	1867	Division II	Maroon Tigers
+Florida Agricultural and Mechanical University	Tallahassee	FL	30.4250	-84.2847	8500	5800	0.30	public	1887	SWAC	Rattlers
+Jackson State University	Jackson	MS	32.2965	-90.2072	5500	8400	0.80	public	1877	SWAC	Tigers
+North Carolina A & T State University	Greensboro	NC	36.0762	-79.7710	12500	6700	0.55	public	1891	CAA	Aggies
+Grambling State University	Grambling	LA	32.5268	-92.7143	5000	7600	0.72	public	1901	SWAC	Tigers
+Hampton University	Hampton	VA	37.0225	-76.3363	3500	30000	0.36	private	1868	CAA	Pirates
+Tuskegee University	Tuskegee	AL	32.4304	-85.7071	2500	24000	0.69	private	1881	Division II	Golden Tigers
+# --- Liberal arts colleges ---
+Williams College	Williamstown	MA	42.7128	-73.2032	2100	64000	0.10	private	1793	Division III	Ephs
+Amherst College	Amherst	MA	42.3709	-72.5170	1900	66000	0.09	private	1821	Division III	Mammoths
+Swarthmore College	Swarthmore	PA	39.9056	-75.3540	1700	62000	0.07	private	1864	Division III	Garnet
+Pomona College	Claremont	CA	34.0977	-117.7130	1750	62000	0.07	private	1887	Division III	Sagehens
+Wellesley College	Wellesley	MA	42.2936	-71.3060	2400	63000	0.14	private	1870	Division III	Blue
+Bowdoin College	Brunswick	ME	43.9076	-69.9629	1900	63000	0.07	private	1794	Division III	Polar Bears
+Middlebury College	Middlebury	VT	44.0081	-73.1770	2800	66000	0.11	private	1800	Division III	Panthers
+Carleton College	Northfield	MN	44.4627	-93.1546	2000	66000	0.18	private	1866	Division III	Knights
+Haverford College	Haverford	PA	40.0094	-75.3062	1450	66000	0.13	private	1833	Division III	Fords
+Claremont McKenna College	Claremont	CA	34.1018	-117.7068	1400	63000	0.10	private	1946	Division III	Stags
+Harvey Mudd College	Claremont	CA	34.1061	-117.7092	900	66000	0.13	private	1955	Division III	Stags
+Vassar College	Poughkeepsie	NY	41.6868	-73.8960	2450	66000	0.19	private	1861	Division III	Brewers
+Grinnell College	Grinnell	IA	41.7491	-92.7199	1700	62000	0.11	private	1846	Division III	Pioneers
+Colby College	Waterville	ME	44.5639	-69.6626	2300	66000	0.07	private	1813	Division III	Mules
+Hamilton College	Clinton	NY	43.0518	-75.4044	2000	64000	0.12	private	1812	Division III	Continentals
+Smith College	Northampton	MA	42.3184	-72.6376	2500	62000	0.20	private	1871	Division III	Pioneers
+Wesleyan University	Middletown	CT	41.5566	-72.6569	3000	67000	0.16	private	1831	Division III	Cardinals
+Bates College	Lewiston	ME	44.1057	-70.2023	1800	65000	0.14	private	1855	Division III	Bobcats
+Washington and Lee University	Lexington	VA	37.7898	-79.4428	1900	64000	0.17	private	1749	Division III	Generals
+Oberlin College	Oberlin	OH	41.2939	-82.2210	2800	64000	0.33	private	1833	Division III	Yeomen
+Kenyon College	Gambier	OH	40.3756	-82.3971	1750	68000	0.29	private	1824	Division III	Owls
+Macalester College	Saint Paul	MN	44.9379	-93.1691	2100	63000	0.28	private	1874	Division III	Scots
+Colorado College	Colorado Springs	CO	38.8481	-104.8236	2200	66000	0.15	private	1874	Division III	Tigers
+Reed College	Portland	OR	45.4812	-122.6303	1500	67000	0.39	private	1908	None	Griffins
+Occidental College	Los Angeles	CA	34.1271	-118.2109	1900	63000	0.39	private	1887	Division III	Tigers

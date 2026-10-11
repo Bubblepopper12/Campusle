@@ -1,0 +1,7 @@
+{
+  "_readme": "Hand fixes merged in last by `npm run data:build` and `npm run data:offline`. Keys are school ids. Set any College field (undergrads, tuition, acceptance, control, founded, conference, mascot, short, aliases, city, state, lat, lon, name). Use {\"exclude\": true} to drop a school. An unknown id with name, city, state, lat and lon adds a new school. The football section patches scripts/data/football.tsv the same way.",
+  "colleges": {
+    "_example-school-id": { "founded": 1885, "conference": "Big 12" }
+  },
+  "football": {}
+}

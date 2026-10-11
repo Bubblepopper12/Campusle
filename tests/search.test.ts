@@ -28,6 +28,9 @@ describe("autocomplete", () => {
   ])("%s → %s", (q, id) => {
     expect(top(q)).toBe(id);
   });
+  it("doesn't match short abbreviations inside words", () => {
+    expect(search.search("usc", 5).map((c) => c.id)).not.toContain("university-of-alabama");
+  });
   it("returns nothing for gibberish", () => {
     expect(search.search("zzqxj")).toEqual([]);
   });

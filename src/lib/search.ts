@@ -56,7 +56,8 @@ function scoreKey(q: string, qTokens: string[], key: Entry["keys"][number]): num
   // Fewer leftover words = closer match ("michgan" prefers "Michigan" over "Michigan State").
   const extra = Math.min(6, (key.tokens.length - words.length) * 2);
   if (words.every((w) => tokenMatches(w, key.tokens, false))) return 65 - extra;
-  if (key.text.includes(q)) return 50;
+  // Mid-word matches only for 4+ letters, so "usc" doesn't match "tUSCaloosa".
+  if (q.length >= 4 && key.text.includes(q)) return 50;
   if (words.every((w) => tokenMatches(w, key.tokens, true))) return 35 - extra;
   return 0;
 }

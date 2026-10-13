@@ -36,7 +36,7 @@ export function Modal({ title, onClose, children, bareTitle }: Props) {
         aria-label={title}
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
-        className="sheet-in chunky relative max-h-[92dvh] w-full max-w-[460px] overflow-y-auto rounded-t-[26px] bg-surface px-5 pt-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] outline-none sm:rounded-[26px]"
+        className="paper sheet sheet-in relative max-h-[92dvh] w-full max-w-[460px] overflow-y-auto rounded-t-[22px] px-5 pt-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] outline-none sm:rounded-[22px]"
       >
         <button
           onClick={onClose}
@@ -45,7 +45,7 @@ export function Modal({ title, onClose, children, bareTitle }: Props) {
         >
           <CloseIcon className="h-4.5 w-4.5" />
         </button>
-        {!bareTitle && <h2 className="varsity mb-4 pr-10 text-[26px] leading-tight">{title}</h2>}
+        {!bareTitle && <h2 className="title mb-4 pr-10 text-[28px] leading-tight">{title}</h2>}
         {children}
       </div>
     </div>

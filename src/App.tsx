@@ -1,17 +1,23 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { DATA_SOURCE } from "./lib/data";
 import { puzzleNumber } from "./lib/daily";
 import { isMode, type Mode } from "./lib/modes";
 import { KEYS, load, save } from "./lib/storage";
 import { isDone } from "./useGame";
 import { Game, type GameModal } from "./Game";
-import { Header, ModeTabs, Toast } from "./components/Chrome";
+import { Pennants, Toast } from "./components/Scenes";
 import { HowToPlay } from "./components/HowToPlay";
 
 function modeFromHash(): Mode | null {
   const h = window.location.hash.replace("#", "").toLowerCase();
   return isMode(h) ? h : h === "football" || h === "cfb" ? "gridiron" : null;
 }
+
+/** Browser chrome color per scene, light then dark. */
+const THEME_COLOR: Record<Mode, [string, string]> = {
+  classic: ["#6e4626", "#2a1a10"],
+  gridiron: ["#5aa9f0", "#050816"],
+};
 
 export default function App() {
   const [mode, setMode] = useState<Mode>(() => modeFromHash() ?? (isMode(load(KEYS.mode, "classic")) ? load<Mode>(KEYS.mode, "classic") : "classic"));
@@ -21,6 +27,14 @@ export default function App() {
   const [toastMsg, setToastMsg] = useState<{ text: string; id: number } | null>(null);
   const [, setDoneTick] = useState(0);
   const toastTimer = useRef<number>(0);
+
+  // The scene (lecture hall or stadium) is driven by <html data-mode>, set before paint to avoid a flash.
+  useLayoutEffect(() => {
+    document.documentElement.dataset.mode = mode;
+    document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((m) => {
+      m.content = THEME_COLOR[mode][m.media.includes("dark") ? 1 : 0];
+    });
+  }, [mode]);
 
   // Roll over to the new puzzle at local midnight, including when the tab was in the background.
   useEffect(() => {
@@ -66,32 +80,36 @@ export default function App() {
   const offline = DATA_SOURCE.startsWith("Offline");
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col px-4 pb-8">
-      <Header onHelp={() => setHelp(true)} onStats={() => setModal("stats")} />
-      <ModeTabs mode={mode} done={done} onChange={switchMode} />
+    <div className="relative min-h-dvh">
+      {mode === "classic" && <Pennants />}
+      <div
+        className={`mx-auto flex min-h-dvh w-full max-w-[480px] flex-col pb-8 ${
+          mode === "classic" ? "px-4 pt-[64px]" : "px-2.5 pt-[max(0.75rem,env(safe-area-inset-top))]"
+        }`}
+      >
+        <main className="flex-1">
+          <Game
+            key={`${mode}-${puzzle}`}
+            mode={mode}
+            puzzle={puzzle}
+            done={done}
+            onHelp={() => setHelp(true)}
+            modal={modal}
+            setModal={setModal}
+            otherMode={{ mode: other, done: done[other] }}
+            onSwitchMode={switchMode}
+            onFinished={() => setDoneTick((n) => n + 1)}
+            toast={toast}
+          />
+        </main>
 
-      <main className="flex-1">
-        <Game
-          key={`${mode}-${puzzle}`}
-          mode={mode}
-          puzzle={puzzle}
-          modal={modal}
-          setModal={setModal}
-          otherMode={{ mode: other, done: done[other] }}
-          onSwitchMode={switchMode}
-          onFinished={() => setDoneTick((n) => n + 1)}
-          toast={toast}
-        />
-      </main>
-
-      <footer className="mt-8 text-center text-[12px] leading-relaxed font-medium text-muted">
-        A new school every day at midnight. Free, no account.
-        <br />
-        {offline
-          ? "Preview data: school stats are approximate."
-          : "School data: U.S. Dept. of Education College Scorecard and Wikidata."}{" "}
-        {mode === "gridiron" && "Football data is hand-curated."}
-      </footer>
+        <footer className="site-footer mt-7 text-center text-[12px] leading-relaxed font-semibold text-muted [text-shadow:0_1px_2px_rgb(0_0_0/0.5)]">
+          A new school every day at midnight. Free, no account.
+          <br />
+          {offline ? "Preview data: school stats are approximate." : "School data: U.S. Dept. of Education College Scorecard and Wikidata."}{" "}
+          {mode === "gridiron" && "Football data is hand-curated."}
+        </footer>
+      </div>
 
       {help && <HowToPlay mode={mode} onClose={closeHelp} />}
       {toastMsg && <Toast key={toastMsg.id} message={toastMsg.text} />}

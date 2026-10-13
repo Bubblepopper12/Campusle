@@ -37,7 +37,7 @@ export function HowToPlay({ mode, onClose }: { mode: Mode; onClose: () => void }
               <span className="text-[12px] font-black uppercase tracking-wider text-muted">Example guess</span>
               <span className="font-extrabold">{example.guess.short}</span>
             </div>
-            <div className="grid grid-cols-6 gap-1.5">
+            <div className="tile-row grid grid-cols-6 gap-1.5">
               {example.tiles.map((t, i) => (
                 <Tile key={i} tile={t} index={i} kind={cfg.columns[i].kind} animate />
               ))}
@@ -74,7 +74,7 @@ export function HowToPlay({ mode, onClose }: { mode: Mode; onClose: () => void }
 function Legend({ color, children }: { color: string; children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-2.5">
-      <span className={`tile tile-${color} h-5 w-5 shrink-0 rounded-md`} />
+      <span className={`tile tile-${color} h-5 w-5 shrink-0`} />
       <span>{children}</span>
     </div>
   );

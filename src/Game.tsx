@@ -14,6 +14,7 @@ import { Modal } from "./components/Modal";
 import { RevealCard } from "./components/RevealCard";
 import { StatsModal } from "./components/StatsModal";
 import { ShareIcon } from "./components/icons";
+import { ClassicFrame, GridironFrame } from "./components/Scenes";
 
 export type GameModal = "stats" | "result" | null;
 
@@ -34,6 +35,8 @@ const REVEAL_DELAY = 6 * 280 + 650;
 interface Props {
   mode: Mode;
   puzzle: number;
+  done: Record<Mode, boolean>;
+  onHelp: () => void;
   modal: GameModal;
   setModal: (m: GameModal) => void;
   otherMode: { mode: Mode; done: boolean };
@@ -42,7 +45,7 @@ interface Props {
   toast: (msg: string) => void;
 }
 
-export function Game({ mode, puzzle, modal, setModal, otherMode, onSwitchMode, onFinished, toast }: Props) {
+export function Game({ mode, puzzle, done, onHelp, modal, setModal, otherMode, onSwitchMode, onFinished, toast }: Props) {
   const { cfg, answer, guesses, rows, status, stats, submit } = useGame(mode, puzzle);
   const search = useMemo(() => searchFor(mode), [mode]);
   const [animateRow, setAnimateRow] = useState(-1);
@@ -78,26 +81,27 @@ export function Game({ mode, puzzle, modal, setModal, otherMode, onSwitchMode, o
     else if (outcome === "failed") toast("Couldn't copy. Try again?");
   };
 
-  const date = new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+  const Frame = mode === "gridiron" ? GridironFrame : ClassicFrame;
 
   return (
     <>
-      <div className="mt-4 mb-2.5 flex items-center justify-between gap-2 px-0.5 text-[13px] font-extrabold whitespace-nowrap">
-        <span>
-          <span className="font-display text-accent">#{puzzle}</span> <span className="text-muted">· {date}</span>
-        </span>
-        <span className="truncate text-muted">
-          {cfg.emoji} {cfg.tagline}
-        </span>
-      </div>
-
-      {status === "playing" ? (
-        <GuessInput search={search} guessed={guessed} guessNumber={guesses.length + 1} onGuess={onGuess} />
-      ) : (
-        <ResultBar status={status} answer={answer} guessCount={guesses.length} onOpen={() => setModal("result")} onShare={share} />
-      )}
-
-      <Board columns={cfg.columns} guesses={guessColleges} rows={rows} animateRow={animateRow} wonRow={wonRow} />
+      <Frame
+        mode={mode}
+        done={done}
+        onChangeMode={onSwitchMode}
+        onHelp={onHelp}
+        onStats={() => setModal("stats")}
+        puzzle={puzzle}
+        guessCount={guesses.length}
+        finished={status !== "playing"}
+      >
+        {status === "playing" ? (
+          <GuessInput search={search} guessed={guessed} guessNumber={guesses.length + 1} onGuess={onGuess} />
+        ) : (
+          <ResultBar status={status} answer={answer} guessCount={guesses.length} onOpen={() => setModal("result")} onShare={share} />
+        )}
+        <Board columns={cfg.columns} guesses={guessColleges} rows={rows} animateRow={animateRow} wonRow={wonRow} />
+      </Frame>
 
       {modal === "result" && status !== "playing" && (
         <Modal title="Result" bareTitle onClose={() => setModal(null)}>
@@ -124,14 +128,14 @@ export function Game({ mode, puzzle, modal, setModal, otherMode, onSwitchMode, o
 function ResultBar(props: { status: "won" | "lost"; answer: College; guessCount: number; onOpen: () => void; onShare: () => void }) {
   const { status, answer, guessCount, onOpen, onShare } = props;
   return (
-    <div className="chunky flex items-center gap-3 rounded-2xl bg-surface p-2.5 pl-4">
+    <div className="paper card flex items-center gap-3 rounded-2xl p-2.5 pl-4">
       <button onClick={onOpen} className="min-w-0 flex-1 text-left">
         <div className="text-[11px] font-black uppercase tracking-wider text-muted">
           {status === "won" ? `✅ Solved in ${guessCount}/6` : "❌ It was"} · next in <Countdown />
         </div>
         <div className="truncate text-[18px] font-black">{answer.short}</div>
       </button>
-      <button onClick={onShare} className="press chunky-sm flex items-center gap-1.5 rounded-xl bg-accent px-4 py-2.5 text-[16px] font-black text-accent-ink">
+      <button onClick={onShare} className="btn btn-primary flex items-center gap-1.5 px-4 py-2.5 text-[16px]">
         Share <ShareIcon className="h-4 w-4" />
       </button>
     </div>

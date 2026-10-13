@@ -9,7 +9,7 @@ There are two daily puzzles:
 | 🎓 **Classic** | ~220 well-known schools (`src/data/answers.txt`) | 📍 distance + direction · 👥 undergrads · 🎟️ acceptance rate · 💵 in-state tuition · 🏛️ founded · 🏆 athletic conference |
 | 🏈 **Gridiron** | All 136 FBS programs (`scripts/data/football.tsv`) | 📍 distance + direction · 🏆 football conference · 🏟️ stadium capacity · 📜 first season · 🥇 national titles · 🎨 team colors |
 
-Each mode has its own saved game, stats and streak. `campusle.com/#gridiron` opens Gridiron directly.
+Each mode has its own scene: Classic is a lecture-hall chalkboard with sticky-note tiles, Gridiron is a stadium with a jumbotron and a painted field (a night game in dark mode). The scene is set by `<html data-mode>` and styled in `src/index.css`. Each mode has its own saved game, stats and streak. `campusle.com/#gridiron` opens Gridiron directly.
 
 ## Run it
 

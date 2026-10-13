@@ -32,7 +32,7 @@ export function StatsModal({ mode, stats, puzzle, status, guessCount, onShare, o
       <div className="grid grid-cols-4 gap-2">
         {boxes.map((b) => (
           <div key={b.label} className="rounded-2xl bg-sunken py-3 text-center">
-            <div className="font-display text-[28px] leading-none">{b.value}</div>
+            <div className="title text-[28px] leading-none">{b.value}</div>
             <div className="mt-1 text-[11px] font-black uppercase tracking-wider text-muted">{b.label}</div>
           </div>
         ))}
@@ -42,11 +42,11 @@ export function StatsModal({ mode, stats, puzzle, status, guessCount, onShare, o
       <div className="space-y-1.5">
         {stats.distribution.slice(0, MAX_GUESSES + 1).map((count, i) => (
           <div key={i} className="flex items-center gap-2">
-            <span className="w-4 text-center font-display text-[14px]">{i === MAX_GUESSES ? "X" : i + 1}</span>
+            <span className="w-4 text-center text-[14px] font-black">{i === MAX_GUESSES ? "X" : i + 1}</span>
             <div className="flex-1">
               <div
                 className={`flex h-6 min-w-7 items-center justify-end rounded-md px-2 text-[13px] font-extrabold ${
-                  i === todayBar ? "bg-accent text-accent-ink" : "bg-t-gray text-white"
+                  i === todayBar ? "bar-today" : "bar"
                 }`}
                 style={{ width: `${Math.max(8, (count / max) * 100)}%` }}
               >
@@ -63,7 +63,7 @@ export function StatsModal({ mode, stats, puzzle, status, guessCount, onShare, o
             <div className="text-[11px] font-black uppercase tracking-wider text-muted">Next {cfg.name}</div>
             <Countdown className="text-[24px]" />
           </div>
-          <button onClick={onShare} className="press chunky flex items-center gap-2 rounded-2xl bg-accent px-5 py-3 text-[17px] font-black text-accent-ink">
+          <button onClick={onShare} className="btn btn-primary flex items-center gap-2 px-5 py-3 text-[17px]">
             Share <ShareIcon className="h-5 w-5" />
           </button>
         </div>

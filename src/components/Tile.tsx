@@ -11,9 +11,10 @@ interface Props {
   kind: ColumnKind;
 }
 
+/** One clue tile. Its look (sticky note or stitched panel) comes from the scene CSS. */
 export function Tile({ tile, index, animate, celebrate, kind }: Props) {
   const cls = [
-    "tile relative flex aspect-[1/1.02] min-w-0 flex-col items-center justify-center rounded-[11px] px-0.5 text-center leading-none select-none",
+    "tile flex aspect-[1/1.02] min-w-0 flex-col items-center justify-center px-0.5 text-center leading-none select-none",
     `tile-${tile.color}`,
     animate ? "flip-in" : "",
     celebrate ? "hop" : "",
@@ -21,20 +22,18 @@ export function Tile({ tile, index, animate, celebrate, kind }: Props) {
 
   return (
     <div className={cls} style={{ ["--i" as string]: index }} role="img" aria-label={tile.aria} title={tile.aria}>
-      {kind === "location" && !tile.hit && tile.bearing !== undefined && (
-        <ArrowIcon className="mb-0.5 h-[18px] w-[18px] drop-shadow-sm" rotate={tile.bearing} />
-      )}
+      {kind === "location" && !tile.hit && tile.bearing !== undefined && <ArrowIcon className="mb-0.5 h-[17px] w-[17px]" rotate={tile.bearing} />}
       {kind === "colors" ? (
         <Swatches colors={tile.swatches ?? []} />
       ) : (
         <span
           className={[
-            "font-extrabold tracking-tight tabular-nums",
+            "tile-text tracking-tight tabular-nums",
             tile.hit
               ? "text-[26px]"
               : kind === "category"
-                ? `${tile.text.length > 7 ? "text-[9.5px]" : "text-[11.5px]"} leading-[1.05] font-black uppercase break-words`
-                : tile.text.length >= 6
+                ? `${tile.text.length > 7 ? "text-[9.5px]" : "text-[11.5px]"} leading-[1.05] uppercase break-words`
+                : tile.text.length >= 5
                   ? "text-[13.5px] sm:text-[16px]"
                   : "text-[15px] sm:text-[17px]",
           ].join(" ")}
@@ -42,14 +41,14 @@ export function Tile({ tile, index, animate, celebrate, kind }: Props) {
           {tile.text}
         </span>
       )}
-      {tile.unit && <span className="mt-0.5 text-[10px] font-bold uppercase opacity-80">{tile.unit}</span>}
+      {tile.unit && <span className="tile-unit mt-0.5 text-[10px] font-bold uppercase opacity-80">{tile.unit}</span>}
       {kind === "number" && tile.dir && <ArrowIcon className="mt-0.5 h-4 w-4" rotate={tile.dir === "up" ? 0 : 180} />}
     </div>
   );
 }
 
 function Swatches({ colors }: { colors: string[] }) {
-  if (!colors.length) return <span className="text-[15px] font-extrabold">?</span>;
+  if (!colors.length) return <span className="tile-text text-[15px]">?</span>;
   return (
     <span className="flex -space-x-2">
       {colors.slice(0, 3).map((hex, i) => (
@@ -60,5 +59,5 @@ function Swatches({ colors }: { colors: string[] }) {
 }
 
 export function EmptyTile() {
-  return <div className="aspect-[1/1.02] rounded-[11px] border-2 border-dashed border-line bg-t-empty/60" />;
+  return <div className="tile-empty aspect-[1/1.02]" />;
 }

@@ -15,7 +15,7 @@ export function Countdown({ onExpire, className = "" }: { onExpire?: () => void;
   }, [onExpire]);
   const s = Math.floor(ms / 1000);
   return (
-    <span className={`font-display tabular-nums ${className}`}>
+    <span className={`countdown font-black tabular-nums ${className}`}>
       {pad(Math.floor(s / 3600))}:{pad(Math.floor((s % 3600) / 60))}:{pad(s % 60)}
     </span>
   );

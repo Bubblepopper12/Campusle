@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
+/*
+ * Campusle has two themed scenes, picked by <html data-mode="classic|gridiron">:
+ *   classic  = a lecture hall: wood wall, pennants, chalkboard, sticky-note tiles, notebook-paper popups
+ *   gridiron = a stadium: jumbotron scoreboard, painted end zone, turf, night game in dark mode
+ * Components use semantic classes (.card, .sheet, .btn-primary, .tile-*, .row-panel…) styled per scene below.
+ * Inside a scene, `.paper` marks a panel (input card, popups) that has its own ink colors.
+ */
+
 @theme {
   --font-display: "Graduate", ui-serif, Georgia, serif;
   --font-sans: "Archivo Variable", "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-chalk: "Cabin Sketch", "Kalam", ui-rounded, cursive;
+  --font-hand: "Kalam", ui-rounded, "Comic Sans MS", cursive;
+  --font-pixel: "Silkscreen", ui-monospace, monospace;
 
   --color-bg: #fff6e9;
   --color-surface: #ffffff;
@@ -10,7 +21,6 @@
   --color-ink: #141a33;
   --color-muted: #5d6480;
   --color-line: #e6d7bf;
-  --color-dot: #ecdcc3;
   --color-accent: #ff4f1a;
   --color-accent-ink: #ffffff;
   --color-gold: #ffc23d;
@@ -20,28 +30,6 @@
   --color-t-orange: #ff8a2b;
   --color-t-red: #e2434b;
   --color-t-gray: #9aa1b8;
-  --color-t-empty: #efe3cf;
-
-  --shadow-chunky: 0 4px 0 0 var(--color-ink);
-  --shadow-chunky-sm: 0 3px 0 0 var(--color-ink);
-}
-
-/* Dark mode follows the system setting. Tailwind utilities read these variables, so one override covers everything. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #0d1124;
-    --color-surface: #171d3a;
-    --color-sunken: #121734;
-    --color-ink: #f6f1e7;
-    --color-muted: #a5abc6;
-    --color-line: #2b3360;
-    --color-dot: #1a2044;
-    --color-accent: #ff6a3d;
-    --color-t-gray: #444d75;
-    --color-t-empty: #1a2044;
-    --shadow-chunky: 0 4px 0 0 #05070f;
-    --shadow-chunky-sm: 0 3px 0 0 #05070f;
-  }
 }
 
 html {
@@ -53,48 +41,555 @@ body {
   margin: 0;
   min-height: 100dvh;
   background-color: var(--color-bg);
-  background-image: radial-gradient(var(--color-dot) 1.2px, transparent 1.2px);
-  background-size: 20px 20px;
   color: var(--color-ink);
   font-family: var(--font-sans);
+  overflow-x: hidden;
 }
 
-/* Varsity lettering: filled accent with an ink outline and a hard drop shadow. */
-.varsity {
+/* ───────────────────────────── Shared building blocks ───────────────────────────── */
+
+.tile {
+  position: relative;
+}
+.tile-text {
+  font-weight: 800;
+}
+.btn {
+  font-weight: 900;
+  transition: transform 80ms ease, box-shadow 80ms ease, filter 120ms ease;
+}
+.btn:active {
+  transform: translateY(3px);
+}
+.btn:hover {
+  filter: brightness(1.05);
+}
+
+/* ═══════════════════════════════ CLASSIC: lecture hall ═══════════════════════════════ */
+
+html[data-mode="classic"] {
+  --chalk: #f3f0e4;
+  --color-ink: var(--chalk);
+  --color-muted: rgb(243 240 228 / 0.72);
+  --color-accent: #e2553d;
+  --color-accent-ink: #fff;
+  --color-gold: #f7df72;
+  --color-t-green: #7fd99a;
+  --wood: #6b4325;
+}
+
+html[data-mode="classic"] body {
+  background-color: #6e4626;
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgb(255 222 160 / 0.32), transparent 70%),
+    repeating-linear-gradient(90deg, rgb(0 0 0 / 0.2) 0 2px, transparent 2px 72px),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.035) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(180deg, rgb(0 0 0 / 0.05) 0 1px, transparent 1px 23px),
+    linear-gradient(180deg, #8d5c34, #5f3b1f);
+  background-attachment: fixed;
+}
+@media (prefers-color-scheme: dark) {
+  html[data-mode="classic"] body {
+    background-color: #2a1a10;
+    background-image:
+      radial-gradient(ellipse 70% 45% at 15% 0%, rgb(255 190 110 / 0.22), transparent 70%),
+      radial-gradient(ellipse 120% 80% at 50% 120%, rgb(0 0 0 / 0.55), transparent 70%),
+      repeating-linear-gradient(90deg, rgb(0 0 0 / 0.28) 0 2px, transparent 2px 72px),
+      repeating-linear-gradient(90deg, rgb(255 255 255 / 0.025) 0 1px, transparent 1px 9px),
+      linear-gradient(180deg, #4a2e1a, #24160d);
+  }
+}
+
+/* Chalkboard with a wooden frame and chalk-dust texture. */
+.chalkboard {
+  position: relative;
+  border-radius: 6px;
+  background-color: #2c4236;
+  background-image:
+    radial-gradient(ellipse 60% 35% at 22% 8%, rgb(255 255 255 / 0.08), transparent 70%),
+    radial-gradient(ellipse 50% 30% at 80% 62%, rgb(255 255 255 / 0.06), transparent 70%),
+    radial-gradient(ellipse 40% 20% at 35% 92%, rgb(255 255 255 / 0.05), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  box-shadow:
+    0 0 0 9px #8a5a2f,
+    0 0 0 11px #5a3718,
+    0 0 0 12px rgb(0 0 0 / 0.25),
+    0 18px 40px rgb(0 0 0 / 0.55),
+    inset 0 0 50px rgb(0 0 0 / 0.5);
+}
+.chalk {
+  color: var(--chalk);
+  text-shadow: 0 0 1px rgb(255 255 255 / 0.55), 0 0 7px rgb(255 255 255 / 0.12);
+}
+.chalk-logo {
+  font-family: var(--font-chalk);
+  font-weight: 700;
+  color: var(--chalk);
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 1px rgb(255 255 255 / 0.7), 0 0 10px rgb(255 255 255 / 0.18);
+}
+.chalk-tray {
+  position: relative;
+  height: 16px;
+  margin: 10px -14px 0;
+  border-radius: 3px 3px 6px 6px;
+  background: linear-gradient(180deg, #a06a39 0, #7c4e27 55%, #4f2f15 100%);
+  box-shadow: 0 10px 18px rgb(0 0 0 / 0.45), inset 0 2px 0 rgb(255 255 255 / 0.18);
+}
+
+html[data-mode="classic"] .icon-btn {
+  color: var(--chalk);
+  border: 2.5px solid rgb(243 240 228 / 0.85);
+  border-radius: 52% 48% 55% 45% / 47% 55% 45% 53%;
+  background: rgb(255 255 255 / 0.03);
+  filter: drop-shadow(0 0 4px rgb(255 255 255 / 0.12));
+}
+
+html[data-mode="classic"] .tab {
+  position: relative;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 19px;
+  color: rgb(243 240 228 / 0.6);
+}
+html[data-mode="classic"] .tab[aria-selected="true"] {
+  color: var(--chalk);
+  text-shadow: 0 0 1px rgb(255 255 255 / 0.6);
+}
+html[data-mode="classic"] .tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 1px -4px;
+  border: 2.5px solid #f7df72;
+  border-radius: 50% 46% 52% 48% / 55% 48% 52% 45%;
+  transform: rotate(-2deg);
+  opacity: 0.9;
+}
+
+/* Paper panels: index card input, notebook-paper popups. */
+html[data-mode="classic"] .paper {
+  --color-ink: #23314f;
+  --color-muted: #6b6f80;
+  --color-surface: #fffdf6;
+  --color-sunken: #f2ead3;
+  --color-line: #c7d6ec;
+  --color-gold: #c99700;
+  color: var(--color-ink);
+}
+html[data-mode="classic"] .card {
+  background-color: #fffdf6;
+  background-image:
+    linear-gradient(180deg, transparent 0 9px, rgb(226 85 61 / 0.55) 9px 10.5px, transparent 10.5px),
+    repeating-linear-gradient(180deg, transparent 0 25px, #d3e0f2 25px 26px);
+  border-radius: 4px;
+  box-shadow: 0 10px 18px rgb(0 0 0 / 0.38), 0 1px 0 rgb(0 0 0 / 0.15);
+}
+html[data-mode="classic"] .guess-input {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 21px;
+  color: #2346a8;
+}
+html[data-mode="classic"] .guess-input::placeholder {
+  color: #8a8fa3;
+  font-weight: 400;
+}
+html[data-mode="classic"] .option-name {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 18px;
+}
+html[data-mode="classic"] .option-active {
+  background: rgb(247 223 114 / 0.45);
+}
+
+html[data-mode="classic"] .sheet {
+  background-color: #fffdf6;
+  background-image:
+    linear-gradient(90deg, transparent 0 30px, rgb(226 85 61 / 0.45) 30px 31.5px, transparent 31.5px),
+    repeating-linear-gradient(180deg, transparent 0 29px, #d7e3f3 29px 30px);
+  box-shadow: 0 -10px 40px rgb(0 0 0 / 0.45);
+}
+@media (prefers-color-scheme: dark) {
+  html[data-mode="classic"] .sheet,
+  html[data-mode="classic"] .card {
+    background-color: #f1ead8;
+  }
+}
+html[data-mode="classic"] .title {
+  font-family: var(--font-chalk);
+  font-weight: 700;
+  color: #23314f;
+}
+html[data-mode="classic"] .panel {
+  background: rgb(255 255 255 / 0.75);
+  border: 2px solid #23314f;
+  border-radius: 6px;
+  box-shadow: 3px 4px 0 rgb(35 49 79 / 0.85);
+}
+html[data-mode="classic"] .btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 #9c3220;
+}
+html[data-mode="classic"] .btn-primary:active {
+  box-shadow: 0 1px 0 #9c3220;
+}
+html[data-mode="classic"] .btn-secondary {
+  background: #fffdf6;
+  color: #23314f;
+  border: 2px solid #23314f;
+  border-radius: 8px;
+  box-shadow: 0 3px 0 #23314f;
+}
+html[data-mode="classic"] .bar {
+  background: #8f9bb3;
+  color: #fff;
+}
+html[data-mode="classic"] .bar-today {
+  background: var(--color-accent);
+  color: #fff;
+}
+html[data-mode="classic"] .toast {
+  background: #fffdf6;
+  color: #23314f;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgb(0 0 0 / 0.4);
+  border-radius: 4px;
+}
+
+/* Board on the chalkboard */
+html[data-mode="classic"] .col-label {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: rgb(243 240 228 / 0.8);
+}
+html[data-mode="classic"] .row-label {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--chalk);
+  text-shadow: 0 0 1px rgb(255 255 255 / 0.5);
+}
+html[data-mode="classic"] .row-meta {
+  font-family: var(--font-hand);
+  color: rgb(243 240 228 / 0.68);
+}
+
+/* Sticky-note tiles */
+html[data-mode="classic"] .tile {
+  border-radius: 2px;
+  color: #1c2333;
+  background-image: linear-gradient(170deg, rgb(255 255 255 / 0.28), rgb(255 255 255 / 0) 45%, rgb(0 0 0 / 0.05));
+  box-shadow: 0 5px 7px rgb(0 0 0 / 0.38), inset 0 7px 0 rgb(0 0 0 / 0.035);
+}
+html[data-mode="classic"] .tile-text {
+  font-family: var(--font-hand);
+  font-weight: 700;
+}
+html[data-mode="classic"] .tile-unit {
+  font-family: var(--font-hand);
+}
+html[data-mode="classic"] .tile-row > :nth-child(6n + 1) { rotate: -1.6deg; }
+html[data-mode="classic"] .tile-row > :nth-child(6n + 2) { rotate: 1.1deg; }
+html[data-mode="classic"] .tile-row > :nth-child(6n + 3) { rotate: -0.6deg; }
+html[data-mode="classic"] .tile-row > :nth-child(6n + 4) { rotate: 1.5deg; }
+html[data-mode="classic"] .tile-row > :nth-child(6n + 5) { rotate: -1.2deg; }
+html[data-mode="classic"] .tile-row > :nth-child(6n + 6) { rotate: 0.8deg; }
+html[data-mode="classic"] .tile-green { background-color: #86e0a2; }
+html[data-mode="classic"] .tile-yellow { background-color: #ffe27a; }
+html[data-mode="classic"] .tile-orange { background-color: #ffb26b; }
+html[data-mode="classic"] .tile-red { background-color: #ff8f86; }
+html[data-mode="classic"] .tile-gray { background-color: #e3dccb; }
+html[data-mode="classic"] .tile-missing { background-color: #e3dccb; opacity: 0.7; }
+html[data-mode="classic"] .tile-empty {
+  border: 2px dashed rgb(243 240 228 / 0.26);
+  border-radius: 3px;
+}
+
+/* ═══════════════════════════════ GRIDIRON: stadium ═══════════════════════════════ */
+
+html[data-mode="gridiron"] {
+  --color-ink: #ffffff;
+  --color-muted: rgb(255 255 255 / 0.8);
+  --color-accent: #ffb000;
+  --color-accent-ink: #1d1300;
+  --color-gold: #ffc23d;
+  --color-t-green: #4ade80;
+  --led: #ffb72b;
+}
+
+/* Day game: sky, then packed stands. */
+html[data-mode="gridiron"] body {
+  background-color: #2b3040;
+  background-image:
+    linear-gradient(180deg, #5aa9f0 0, #9fd0ff 70px, rgb(0 0 0 / 0) 70px),
+    linear-gradient(180deg, rgb(0 0 0 / 0) 70px, rgb(0 0 0 / 0.35) 72px, rgb(0 0 0 / 0) 80px),
+    repeating-linear-gradient(180deg, rgb(0 0 0 / 0.28) 0 2px, transparent 2px 13px),
+    radial-gradient(circle, #f1f1f1 1.5px, transparent 1.8px),
+    radial-gradient(circle, #d8433f 1.5px, transparent 1.8px),
+    radial-gradient(circle, #3f73d9 1.5px, transparent 1.8px),
+    radial-gradient(circle, #f2c230 1.4px, transparent 1.7px),
+    linear-gradient(180deg, #3a4155, #1f2433);
+  background-size: auto, auto, auto, 9px 13px, 15px 13px, 11px 13px, 19px 13px, auto;
+  background-position: 0 0, 0 0, 0 0, 0 2px, 5px 2px, 3px 8px, 8px 8px, 0 0;
+}
+/* Night game: dark sky, glowing light towers, dimmer crowd. */
+@media (prefers-color-scheme: dark) {
+  html[data-mode="gridiron"] body {
+    background-color: #0b0f1d;
+    background-image:
+      radial-gradient(ellipse 38% 26% at 4% 0%, rgb(255 244 210 / 0.5), transparent 70%),
+      radial-gradient(ellipse 38% 26% at 96% 0%, rgb(255 244 210 / 0.5), transparent 70%),
+      linear-gradient(180deg, #050816 0, #0c1430 70px, rgb(0 0 0 / 0) 70px),
+      repeating-linear-gradient(180deg, rgb(0 0 0 / 0.4) 0 2px, transparent 2px 13px),
+      radial-gradient(circle, rgb(220 220 230 / 0.55) 1.5px, transparent 1.8px),
+      radial-gradient(circle, rgb(216 67 63 / 0.6) 1.5px, transparent 1.8px),
+      radial-gradient(circle, rgb(63 115 217 / 0.6) 1.5px, transparent 1.8px),
+      radial-gradient(circle, rgb(255 236 150 / 0.75) 1px, transparent 1.4px),
+      linear-gradient(180deg, #1a1f30, #0d1020);
+    background-size: auto, auto, auto, auto, 9px 13px, 15px 13px, 11px 13px, 37px 29px, auto;
+    background-position: 0 0, 0 0, 0 0, 0 0, 0 2px, 5px 2px, 3px 8px, 8px 8px, 0 0;
+  }
+}
+
+/* Jumbotron scoreboard */
+.scoreboard {
+  position: relative;
+  border-radius: 10px;
+  background-color: #07090f;
+  background-image: radial-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1.3px);
+  background-size: 4px 4px;
+  border: 4px solid #232838;
+  box-shadow: 0 0 0 2px #0a0c12, 0 14px 30px rgb(0 0 0 / 0.55), inset 0 0 24px rgb(0 0 0 / 0.8);
+}
+.led {
+  font-family: var(--font-pixel);
+  color: var(--led);
+  text-shadow: 0 0 6px rgb(255 170 0 / 0.65), 0 0 1px rgb(255 220 150 / 0.9);
+}
+.led-white {
+  font-family: var(--font-pixel);
+  color: #f6f6f6;
+  text-shadow: 0 0 6px rgb(255 255 255 / 0.45);
+}
+.led-cell {
+  border-radius: 6px;
+  background: rgb(255 255 255 / 0.03);
+  border: 1px solid rgb(255 255 255 / 0.08);
+}
+
+html[data-mode="gridiron"] .icon-btn {
+  color: var(--led);
+  border: 2px solid rgb(255 183 43 / 0.55);
+  border-radius: 8px;
+  background: rgb(255 183 43 / 0.06);
+  filter: drop-shadow(0 0 5px rgb(255 170 0 / 0.35));
+}
+html[data-mode="gridiron"] .tab {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: rgb(255 255 255 / 0.4);
+  border-radius: 6px;
+  border: 1px solid rgb(255 255 255 / 0.08);
+}
+html[data-mode="gridiron"] .tab[aria-selected="true"] {
+  color: #1d1300;
+  background: var(--led);
+  box-shadow: 0 0 14px rgb(255 170 0 / 0.55);
+  border-color: transparent;
+}
+
+/* The field: mowed stripes, yard lines, sidelines and hash marks. */
+.field {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #2f8a3c;
+  background-image:
+    repeating-linear-gradient(180deg, transparent 0 62px, rgb(255 255 255 / 0.8) 62px 64px),
+    repeating-linear-gradient(180deg, #31903f 0 64px, #2b8037 64px 128px);
+  border-left: 5px solid #f4f4ee;
+  border-right: 5px solid #f4f4ee;
+  box-shadow: 0 0 0 5px #24622d, 0 16px 34px rgb(0 0 0 / 0.5);
+}
+.field::before,
+.field::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 9px;
+  background: repeating-linear-gradient(180deg, transparent 0 11px, rgb(255 255 255 / 0.75) 11px 13px);
+  pointer-events: none;
+}
+.field::before { left: 6px; }
+.field::after { right: 6px; }
+@media (prefers-color-scheme: dark) {
+  .field {
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% 0%, rgb(255 255 230 / 0.12), transparent 70%),
+      repeating-linear-gradient(180deg, transparent 0 62px, rgb(255 255 255 / 0.75) 62px 64px),
+      repeating-linear-gradient(180deg, #2a7f37 0 64px, #246f30 64px 128px);
+  }
+}
+.endzone {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  height: 66px;
+  background-color: #a3192b;
+  background-image: repeating-linear-gradient(-45deg, rgb(255 255 255 / 0.09) 0 10px, transparent 10px 20px);
+  border-bottom: 5px solid #f4f4ee;
+}
+.endzone-bottom {
+  height: 44px;
+  border-bottom: none;
+  border-top: 5px solid #f4f4ee;
+}
+.endzone-text {
   font-family: var(--font-display);
-  color: var(--color-accent);
-  -webkit-text-stroke: 1.5px var(--color-ink);
+  color: #fff;
+  letter-spacing: 0.14em;
+  -webkit-text-stroke: 1.5px #3b0a12;
   paint-order: stroke fill;
-  text-shadow: 2px 3px 0 var(--color-ink);
+  text-shadow: 0 3px 0 rgb(0 0 0 / 0.35);
+}
+
+/* Jumbotron panels: input, popups. */
+html[data-mode="gridiron"] .paper {
+  --color-ink: #f5f3ec;
+  --color-muted: #a3abc8;
+  --color-surface: #0b0e17;
+  --color-sunken: #171c2e;
+  --color-line: #2b3250;
+  --color-accent: #ffb000;
+  --color-accent-ink: #1d1300;
+  color: var(--color-ink);
+}
+html[data-mode="gridiron"] .card {
+  background: #0b0e17;
+  border: 3px solid var(--led);
+  border-radius: 10px;
+  box-shadow: 0 0 0 2px #07090f, 0 0 18px rgb(255 170 0 / 0.28), 0 10px 18px rgb(0 0 0 / 0.45);
+}
+html[data-mode="gridiron"] .guess-input {
+  font-weight: 700;
+  color: #fff;
+}
+html[data-mode="gridiron"] .guess-input::placeholder {
+  color: rgb(255 199 90 / 0.65);
+}
+html[data-mode="gridiron"] .option-name {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+html[data-mode="gridiron"] .option-active {
+  background: rgb(255 183 43 / 0.16);
+}
+html[data-mode="gridiron"] .sheet {
+  background-color: #07090f;
+  background-image: radial-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1.3px);
+  background-size: 4px 4px;
+  border: 4px solid #232838;
+  box-shadow: 0 -10px 40px rgb(0 0 0 / 0.6);
+}
+html[data-mode="gridiron"] .title {
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  color: var(--led);
+  text-shadow: 0 0 10px rgb(255 170 0 / 0.55);
   letter-spacing: 0.02em;
 }
+html[data-mode="gridiron"] .panel {
+  background: #0f1322;
+  border: 2px solid #2b3250;
+  border-radius: 10px;
+}
+html[data-mode="gridiron"] .btn-primary {
+  background: var(--led);
+  color: #1d1300;
+  border-radius: 10px;
+  box-shadow: 0 4px 0 #a86f00, 0 0 16px rgb(255 170 0 / 0.35);
+}
+html[data-mode="gridiron"] .btn-primary:active {
+  box-shadow: 0 1px 0 #a86f00;
+}
+html[data-mode="gridiron"] .btn-secondary {
+  background: #121729;
+  color: #fff;
+  border: 2px solid #3a4366;
+  border-radius: 10px;
+  box-shadow: 0 3px 0 #05060b;
+}
+html[data-mode="gridiron"] .bar {
+  background: #2b3250;
+  color: #fff;
+}
+html[data-mode="gridiron"] .bar-today {
+  background: var(--led);
+  color: #1d1300;
+  box-shadow: 0 0 10px rgb(255 170 0 / 0.5);
+}
+html[data-mode="gridiron"] .toast {
+  background: #07090f;
+  color: var(--led);
+  font-family: var(--font-pixel);
+  border: 2px solid var(--led);
+  border-radius: 8px;
+  box-shadow: 0 0 16px rgb(255 170 0 / 0.4);
+}
 
-.chunky {
-  border: 2px solid var(--color-ink);
-  box-shadow: var(--shadow-chunky);
+/* Board on the turf: each guess sits on a dark sideline board so tiles pop off the grass. */
+html[data-mode="gridiron"] .col-label {
+  font-family: var(--font-pixel);
+  font-size: 9.5px;
+  color: #fff;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 0.5);
 }
-.chunky-sm {
-  border: 2px solid var(--color-ink);
-  box-shadow: var(--shadow-chunky-sm);
+html[data-mode="gridiron"] .row-panel {
+  padding: 6px 6px 7px;
+  border-radius: 10px;
+  background: rgb(8 14 10 / 0.42);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
 }
-.press {
-  transition: transform 80ms ease, box-shadow 80ms ease;
+html[data-mode="gridiron"] .row-label {
+  font-family: var(--font-display);
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-shadow: 0 2px 0 rgb(0 0 0 / 0.4);
 }
-.press:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 0 var(--color-ink);
+html[data-mode="gridiron"] .row-meta {
+  color: rgb(255 255 255 / 0.75);
+}
+html[data-mode="gridiron"] .tile {
+  border-radius: 8px;
+  color: #fff;
+  box-shadow: inset 0 -4px 0 rgb(0 0 0 / 0.22), 0 2px 0 rgb(0 0 0 / 0.3);
+  outline: 1.5px dashed rgb(255 255 255 / 0.5);
+  outline-offset: -3.5px;
+}
+html[data-mode="gridiron"] .tile-green { background-color: #16b364; }
+html[data-mode="gridiron"] .tile-yellow { background-color: #f4b71f; color: #241900; outline-color: rgb(60 40 0 / 0.4); }
+html[data-mode="gridiron"] .tile-orange { background-color: #f97316; color: #2a1000; outline-color: rgb(60 20 0 / 0.35); }
+html[data-mode="gridiron"] .tile-red { background-color: #dc2f3c; }
+html[data-mode="gridiron"] .tile-gray { background-color: #4b5468; }
+html[data-mode="gridiron"] .tile-missing { background-color: #4b5468; opacity: 0.75; }
+html[data-mode="gridiron"] .tile-empty {
+  border: 2px dashed rgb(255 255 255 / 0.32);
+  border-radius: 8px;
 }
 
-/* Tiles */
-.tile {
-  box-shadow: inset 0 -4px 0 rgb(0 0 0 / 0.18);
-}
-.tile-green { background: var(--color-t-green); color: #fff; }
-.tile-yellow { background: var(--color-t-yellow); color: #2a1d00; }
-.tile-orange { background: var(--color-t-orange); color: #2b1300; }
-.tile-red { background: var(--color-t-red); color: #fff; }
-.tile-gray { background: var(--color-t-gray); color: #fff; }
-.tile-missing { background: var(--color-t-gray); color: #fff; opacity: 0.75; }
+/* ───────────────────────────── Animations ───────────────────────────── */
 
 @keyframes flip-in {
   0% { transform: perspective(400px) rotateX(-90deg); opacity: 0; }
@@ -104,6 +599,17 @@ body {
 .flip-in {
   animation: flip-in 520ms cubic-bezier(0.2, 0.7, 0.3, 1.1) both;
   animation-delay: calc(var(--i, 0) * 280ms);
+}
+
+/* Classic sticky notes slap down onto the board instead of flipping. */
+@keyframes slap {
+  0% { transform: translateY(-14px) scale(1.25); opacity: 0; }
+  60% { transform: translateY(1px) scale(0.97); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+html[data-mode="classic"] .flip-in {
+  animation-name: slap;
+  animation-duration: 380ms;
 }
 
 @keyframes hop {
@@ -141,6 +647,14 @@ body {
 }
 .toast-in { animation: toast-in 180ms ease both; }
 
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  94% { opacity: 0.6; }
+  96% { opacity: 1; }
+}
+.flicker { animation: flicker 6s linear infinite; }
+
 @keyframes confetti-fall {
   0% { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 1; }
   100% { transform: translate3d(var(--drift), 105vh, 0) rotate(var(--spin)); opacity: 0.9; }
@@ -152,6 +666,28 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flip-in, .hop, .shake, .sheet-in, .fade-in, .toast-in { animation: none; }
+  .flip-in, .hop, .shake, .sheet-in, .fade-in, .toast-in, .flicker { animation: none; }
   .confetti-piece { display: none; }
+}
+
+/* Notebook paper popups: keep text right of the red margin line. */
+html[data-mode="classic"] .sheet {
+  padding-left: 44px;
+}
+
+/* Countdown digits: chalky handwriting on paper, LED on the jumbotron. */
+html[data-mode="classic"] .countdown { font-family: var(--font-hand); font-weight: 700; }
+html[data-mode="gridiron"] .countdown { font-family: var(--font-pixel); color: var(--led); font-weight: 400; }
+
+/* Footer sits on the crowd in the stadium, so give it a backing for legibility. */
+html[data-mode="gridiron"] .site-footer {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgb(5 8 18 / 0.72);
+}
+
+/* Gridiron tiles sit inside sideline boards, so they're a bit narrower; give them room for arrow + miles. */
+html[data-mode="gridiron"] .tile,
+html[data-mode="gridiron"] .tile-empty {
+  aspect-ratio: 1 / 1.14;
 }

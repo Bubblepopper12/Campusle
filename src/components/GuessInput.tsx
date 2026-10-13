@@ -50,7 +50,7 @@ export function GuessInput({ search, guessed, guessNumber, onGuess }: Props) {
 
   return (
     <div className="relative">
-      <div key={shake} className={`chunky flex items-center gap-2 rounded-2xl bg-surface px-3.5 ${shake ? "shake" : ""}`}>
+      <div key={shake} className={`paper card flex items-center gap-2 rounded-2xl px-3.5 ${shake ? "shake" : ""}`}>
         <SearchIcon className="h-5 w-5 shrink-0 text-muted" />
         <input
           ref={inputRef}
@@ -64,7 +64,7 @@ export function GuessInput({ search, guessed, guessNumber, onGuess }: Props) {
           onBlur={() => setOpen(false)}
           onKeyDown={onKeyDown}
           placeholder={`Guess ${guessNumber} of 6: type a school…`}
-          className="h-[52px] w-full min-w-0 bg-transparent text-[17px] font-semibold outline-none placeholder:font-medium placeholder:text-muted/80"
+          className="guess-input h-[54px] w-full min-w-0 bg-transparent text-[17px] font-semibold outline-none"
           role="combobox"
           aria-expanded={showList}
           aria-controls={listId}
@@ -96,7 +96,7 @@ export function GuessInput({ search, guessed, guessNumber, onGuess }: Props) {
         <ul
           id={listId}
           role="listbox"
-          className="chunky fade-in absolute inset-x-0 top-[calc(100%+8px)] z-30 max-h-[min(55vh,420px)] overflow-y-auto rounded-2xl bg-surface p-1.5"
+          className="paper card fade-in absolute inset-x-0 top-[calc(100%+8px)] z-30 max-h-[min(55vh,420px)] overflow-y-auto rounded-2xl p-1.5"
         >
           {results.length === 0 && <li className="px-3 py-3 text-[15px] font-semibold text-muted">No school matches “{query.trim()}”</li>}
           {results.map((c, i) => {
@@ -113,12 +113,12 @@ export function GuessInput({ search, guessed, guessNumber, onGuess }: Props) {
                 onClick={() => pick(c)}
                 className={[
                   "flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5",
-                  i === active ? "bg-sunken" : "",
+                  i === active ? "option-active" : "",
                   done ? "cursor-not-allowed opacity-45" : "",
                 ].join(" ")}
               >
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-[16px] font-extrabold">{c.short}</div>
+                  <div className="option-name truncate text-[16px] font-extrabold">{c.short}</div>
                   {c.short !== c.name && <div className="truncate text-[12px] font-medium text-muted">{c.name}</div>}
                 </div>
                 <div className="shrink-0 text-right text-[12px] font-bold text-muted">

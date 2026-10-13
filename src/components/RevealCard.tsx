@@ -16,23 +16,36 @@ interface Props {
   onSwitchMode: (m: Mode) => void;
 }
 
-const WIN_LINES = ["Genius! 🤯", "Brilliant! 🧠", "Impressive! 🔥", "Nice work! 🙌", "Got it! 🎉", "Phew! 😅"];
+/** Classic grades you like a report card; Gridiron calls the play. Index = guesses - 1. */
+const HEADLINES: Record<Mode, { win: string[]; lose: string; kicker: (n: number) => string; loseKicker: string }> = {
+  classic: {
+    win: ["A+ 🤯", "A 🧠", "B+ 🔥", "B 🙌", "C+ 🎉", "Passed! 😅"],
+    lose: "Better luck tomorrow.",
+    kicker: (n) => `Report card · solved in ${n}/6`,
+    loseKicker: "Grade: incomplete",
+  },
+  gridiron: {
+    win: ["PICK SIX! 🤯", "TOUCHDOWN! 🏈", "TOUCHDOWN! 🔥", "TOUCHDOWN! 🙌", "FIELD GOAL! 🎉", "SAFETY! 😅"],
+    lose: "Better luck tomorrow.",
+    kicker: (n) => `Scored on down ${n} of 6`,
+    loseKicker: "Turnover on downs",
+  },
+};
 
-/** The school reveal shown after the game ends (inside the result modal). */
+/** The school reveal shown after the game ends (inside the result popup). */
 export function RevealCard({ mode, answer, status, guessCount, otherMode, onShare, onStats, onSwitchMode }: Props) {
   const cfg = MODE_CONFIG[mode];
+  const h = HEADLINES[mode];
   const team = TEAM_BY_ID.get(answer.id);
   const stripe = mode === "gridiron" && team?.colors.length ? team.colors.map((c) => c.hex) : ["var(--color-accent)", "var(--color-gold)"];
   const other = MODE_CONFIG[otherMode.mode];
 
   return (
     <div>
-      <p className="text-center text-[13px] font-black uppercase tracking-[0.18em] text-muted">
-        {status === "won" ? `Solved in ${guessCount}/6` : "Out of guesses"}
-      </p>
-      <h2 className="varsity mt-1 text-center text-[30px] leading-tight">{status === "won" ? WIN_LINES[guessCount - 1] : "Better luck tomorrow."}</h2>
+      <p className="text-center text-[12px] font-black uppercase tracking-[0.16em] text-muted">{status === "won" ? h.kicker(guessCount) : h.loseKicker}</p>
+      <h2 className="title mt-1 text-center text-[28px] leading-tight sm:text-[32px]">{status === "won" ? h.win[guessCount - 1] : h.lose}</h2>
 
-      <div className="chunky mt-4 overflow-hidden rounded-2xl bg-surface">
+      <div className="panel mt-4 overflow-hidden">
         <div className="flex h-3">
           {stripe.map((c, i) => (
             <div key={i} className="flex-1" style={{ background: c }} />
@@ -43,7 +56,9 @@ export function RevealCard({ mode, answer, status, guessCount, otherMode, onShar
           <div className="mt-0.5 text-[24px] font-black leading-tight">{answer.short}</div>
           {answer.short !== answer.name && <div className="text-[13px] font-semibold text-muted">{answer.name}</div>}
           <div className="mt-2 flex flex-wrap gap-1.5 text-[13px] font-bold">
-            <span className="rounded-full bg-sunken px-2.5 py-1">📍 {answer.city}, {answer.state}</span>
+            <span className="rounded-full bg-sunken px-2.5 py-1">
+              📍 {answer.city}, {answer.state}
+            </span>
             {answer.mascot && <span className="rounded-full bg-sunken px-2.5 py-1">🐾 {answer.mascot}</span>}
           </div>
           <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2">
@@ -60,10 +75,10 @@ export function RevealCard({ mode, answer, status, guessCount, otherMode, onShar
       </div>
 
       <div className="mt-4 flex gap-2.5">
-        <button onClick={onShare} className="press chunky flex flex-1 items-center justify-center gap-2 rounded-2xl bg-accent py-3.5 text-[18px] font-black text-accent-ink">
+        <button onClick={onShare} className="btn btn-primary flex flex-1 items-center justify-center gap-2 py-3.5 text-[18px]">
           Share <ShareIcon className="h-5 w-5" />
         </button>
-        <button onClick={onStats} className="press chunky rounded-2xl bg-surface px-5 text-[16px] font-black">
+        <button onClick={onStats} className="btn btn-secondary px-5 text-[16px]">
           Stats
         </button>
       </div>
@@ -74,7 +89,7 @@ export function RevealCard({ mode, answer, status, guessCount, otherMode, onShar
           <Countdown className="text-[22px]" />
         </div>
         {!otherMode.done && (
-          <button onClick={() => onSwitchMode(otherMode.mode)} className="press chunky-sm rounded-xl bg-surface px-3 py-2 text-[14px] font-black">
+          <button onClick={() => onSwitchMode(otherMode.mode)} className="btn btn-secondary px-3 py-2 text-[14px]">
             Play {other.emoji} {other.name}
           </button>
         )}

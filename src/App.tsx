@@ -12,6 +12,7 @@ import { HowToPlay } from "./components/HowToPlay";
 const THEME_COLOR: Record<Scene, [string, string]> = {
   classic: ["#6e4626", "#2a1a10"],
   gridiron: ["#5aa9f0", "#050816"],
+  cards: ["#efe9fb", "#0b0716"],
 };
 
 export default function App() {
@@ -105,7 +106,8 @@ export default function App() {
           New puzzles every day at midnight. Free, no account.
           <br />
           {offline ? "Preview data: school stats are approximate." : "School data: U.S. Dept. of Education College Scorecard and Wikidata."}{" "}
-          {scene === "gridiron" && "Football and player data is hand-curated."}
+          {scene === "gridiron" && "Football data is hand-curated."}
+          {scene === "cards" && "Player data is hand-curated."}
         </footer>
       </div>
 

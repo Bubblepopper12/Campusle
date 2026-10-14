@@ -16,8 +16,8 @@
       // Pick the scene (lecture hall or stadium) before first paint so there's no flash of the other one.
       try {
         var h = location.hash.slice(1).toLowerCase();
-        var m = h === "gridiron" || h === "football" || h === "cfb" || h === "players" ? "gridiron" : h === "classic" || h === "hard" ? "classic" : JSON.parse(localStorage.getItem("campusle:v1:mode") || '"classic"');
-        document.documentElement.dataset.mode = m === "gridiron" || m === "players" ? "gridiron" : "classic";
+        var m = h === "gridiron" || h === "football" || h === "cfb" ? "gridiron" : h === "players" || h === "classic" || h === "hard" ? h : JSON.parse(localStorage.getItem("campusle:v1:mode") || '"classic"');
+        document.documentElement.dataset.mode = m === "gridiron" ? "gridiron" : m === "players" ? "cards" : "classic";
       } catch (e) {}
     </script>
   </head>

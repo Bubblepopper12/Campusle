@@ -17,7 +17,7 @@ export function Board({ columns, guesses, rowMeta, rows, animateRow, wonRow }: P
   const empty = Math.max(0, MAX_GUESSES - rows.length);
   return (
     <section aria-label="Your guesses" className="mt-4">
-      <div className="grid grid-cols-6 gap-1.5 px-1.5 pb-1.5">
+      <div className="col-head mb-1.5 grid grid-cols-6 gap-1.5 px-1.5 py-1">
         {columns.map((c) => (
           <div key={c.label} className="flex flex-col items-center gap-0.5 text-center" title={c.help}>
             <span className="text-[15px] leading-none" aria-hidden>
@@ -31,7 +31,7 @@ export function Board({ columns, guesses, rowMeta, rows, animateRow, wonRow }: P
       <ol className="flex flex-col gap-2.5">
         {rows.map((row, r) => (
           <li key={guesses[r].id} className="row-panel">
-            <div className="mb-1 flex items-baseline gap-2 px-0.5">
+            <div className="row-head mb-1 flex items-baseline gap-2 px-0.5">
               <span className="row-meta text-[12px] font-bold">{r + 1}</span>
               <span className="row-label truncate text-[14px] font-extrabold">{guesses[r].short}</span>
               <span className="row-meta ml-auto shrink-0 text-[11px] font-semibold">
@@ -47,7 +47,7 @@ export function Board({ columns, guesses, rowMeta, rows, animateRow, wonRow }: P
         ))}
         {Array.from({ length: empty }, (_, i) => (
           <li key={`empty-${i}`} aria-hidden className={`row-panel ${i === 0 ? "" : "opacity-70"}`}>
-            <div className="mb-1 h-[18px] px-0.5">
+            <div className="row-head row-head-empty mb-1 h-[18px] px-0.5">
               <span className="row-meta text-[12px] font-bold opacity-70">{rows.length + i + 1}</span>
             </div>
             <div className="tile-row grid grid-cols-6 gap-1.5">

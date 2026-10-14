@@ -11,7 +11,7 @@ There are four daily puzzles:
 | 🏈 **Football** | All 136 FBS programs (`scripts/data/football.tsv`) | 📍 distance + direction · 🏆 football conference · 🏟️ stadium capacity · 📜 first season · 🥇 national titles · 🎨 team colors |
 | ⭐ **Players** | ~150 famous college football players, past and present (`scripts/data/players.tsv`) | 🏫 school · 🏈 position · 📅 final season · 🏆 Heisman · 💍 national titles · #️⃣ jersey number |
 
-Each mode has its own scene: Classic and Hard are a lecture-hall chalkboard with sticky-note tiles; Football and Players are a stadium with a jumbotron and a painted field (a night game in dark mode). The scene is set by `<html data-mode>` and styled in `src/index.css`. Each mode has its own saved game, stats and streak. Links: `#hard`, `#football` (old `#gridiron` links still work) and `#players`.
+Each mode has its own scene: Classic and Hard are a lecture-hall chalkboard with sticky-note tiles; Football is a stadium with a jumbotron and a painted field (a night game in dark mode); Players is a trading-card collection: a holographic foil pack, guesses in graded-card slabs, and a pulled player card graded GEM MINT 10 to EXCELLENT 5 at the end. The scene is set by `<html data-mode>` and styled in `src/index.css`. Each mode has its own saved game, stats and streak. Links: `#hard`, `#football` (old `#gridiron` links still work) and `#players`.
 
 Football mode's internal id is still `gridiron`, so saved games and streaks carry over from before the rename.
 

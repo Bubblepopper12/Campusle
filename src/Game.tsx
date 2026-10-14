@@ -12,7 +12,7 @@ import { Modal } from "./components/Modal";
 import { RevealCard } from "./components/RevealCard";
 import { StatsModal } from "./components/StatsModal";
 import { ShareIcon } from "./components/icons";
-import { ClassicFrame, GridironFrame } from "./components/Scenes";
+import { CardsFrame, ClassicFrame, GridironFrame } from "./components/Scenes";
 
 export type GameModal = "stats" | "result" | null;
 
@@ -79,7 +79,7 @@ export function Game({ mode, puzzle, done, onHelp, modal, setModal, otherMode, o
     else if (outcome === "failed") toast("Couldn't copy. Try again?");
   };
 
-  const Frame = cfg.scene === "gridiron" ? GridironFrame : ClassicFrame;
+  const Frame = cfg.scene === "gridiron" ? GridironFrame : cfg.scene === "cards" ? CardsFrame : ClassicFrame;
 
   return (
     <>
@@ -105,6 +105,7 @@ export function Game({ mode, puzzle, done, onHelp, modal, setModal, otherMode, o
         <Modal title="Result" bareTitle onClose={() => setModal(null)}>
           <RevealCard
             mode={mode}
+            puzzle={puzzle}
             answer={answer}
             status={status}
             guessCount={guesses.length}

@@ -214,3 +214,37 @@ export function Toast({ message }: { message: string }) {
     </div>
   );
 }
+
+/* ─────────────── Players: trading card pack + graded slabs ─────────────── */
+
+export function CardsFrame({ mode, done, onChangeMode, onHelp, onStats, puzzle, guessCount, finished, children }: FrameProps) {
+  const pack = String(puzzle).padStart(3, "0");
+  const card = finished ? "COMPLETE" : `CARD ${Math.min(guessCount + 1, MAX_GUESSES)} / ${MAX_GUESSES}`;
+  return (
+    <>
+      <div className="pack holo">
+        <div className="pack-window px-3 pt-3 pb-3">
+          <header className="flex items-center justify-between gap-2">
+            <IconButton label="How to play" onClick={onHelp}>
+              <HelpIcon className="h-5 w-5" />
+            </IconButton>
+            <div className="text-center leading-none">
+              <h1 className="card-logo text-[38px] leading-none sm:text-[44px]">CAMPUSLE</h1>
+              <div className="card-font mt-1.5 text-[11px] tracking-[0.32em] text-white/75">PLAYERS · SERIES {new Date().getFullYear()}</div>
+            </div>
+            <IconButton label="Statistics" onClick={onStats}>
+              <ChartIcon className="h-5 w-5" />
+            </IconButton>
+          </header>
+          <ModeTabs mode={mode} done={done} onChange={onChangeMode} className="mt-3 grid grid-cols-3 gap-1.5" />
+        </div>
+        <div className="card-font mt-2.5 flex items-center justify-between px-1 text-[13px] tracking-[0.12em] text-[#1d1233]">
+          <span>PACK #{pack}</span>
+          <span className="rounded-full bg-[#1d1233] px-2.5 py-0.5 text-white">{card}</span>
+          <span>{shortDate().toUpperCase()}</span>
+        </div>
+      </div>
+      {children}
+    </>
+  );
+}

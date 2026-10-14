@@ -691,3 +691,395 @@ html[data-mode="gridiron"] .tile,
 html[data-mode="gridiron"] .tile-empty {
   aspect-ratio: 1 / 1.14;
 }
+
+/* Football: column labels and guess rows sit on solid sideline boards so yard lines and hash marks never cross the text. */
+html[data-mode="gridiron"] .col-head {
+  position: relative;
+  z-index: 1;
+  border-radius: 10px;
+  background: rgb(6 12 8 / 0.82);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+}
+html[data-mode="gridiron"] .col-label {
+  font-family: var(--font-sans);
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-shadow: none;
+}
+html[data-mode="gridiron"] .row-panel {
+  position: relative;
+  z-index: 1;
+  background: rgb(6 12 8 / 0.74);
+}
+
+/* ═══════════════════════════════ CARDS: trading card collection (Players) ═══════════════════════════════ */
+
+html[data-mode="cards"] {
+  --font-card: "Anton", "Impact", "Arial Narrow", sans-serif;
+  --holo: linear-gradient(115deg, #ff8ccf, #ffd36b, #8af5c4, #7ccfff, #b996ff, #ff8ccf);
+  --color-ink: #1d1233;
+  --color-muted: #5f5379;
+  --color-accent: #7c3aed;
+  --color-accent-ink: #fff;
+  --color-gold: #f5c542;
+  --color-t-green: #22c55e;
+}
+@media (prefers-color-scheme: dark) {
+  html[data-mode="cards"] {
+    --color-ink: #f4efff;
+    --color-muted: #b8acd8;
+  }
+}
+
+/* Pearl iridescent backdrop (light) / neon foil (dark), with a faint sparkle grid. */
+html[data-mode="cards"] body {
+  background-color: #f1ecfa;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgb(255 170 222 / 0.55), transparent 38%),
+    radial-gradient(circle at 88% 22%, rgb(140 220 255 / 0.55), transparent 40%),
+    radial-gradient(circle at 25% 70%, rgb(170 255 210 / 0.4), transparent 42%),
+    radial-gradient(circle at 80% 88%, rgb(255 225 140 / 0.45), transparent 40%),
+    radial-gradient(rgb(255 255 255 / 0.9) 1px, transparent 1.4px);
+  background-size: auto, auto, auto, auto, 26px 26px;
+  background-attachment: fixed;
+}
+@media (prefers-color-scheme: dark) {
+  html[data-mode="cards"] body {
+    background-color: #0b0716;
+    background-image:
+      radial-gradient(circle at 10% 6%, rgb(236 72 153 / 0.35), transparent 40%),
+      radial-gradient(circle at 92% 24%, rgb(34 211 238 / 0.28), transparent 42%),
+      radial-gradient(circle at 22% 72%, rgb(124 58 237 / 0.35), transparent 45%),
+      radial-gradient(circle at 82% 90%, rgb(250 204 21 / 0.18), transparent 40%),
+      radial-gradient(rgb(255 255 255 / 0.25) 1px, transparent 1.4px);
+    background-size: auto, auto, auto, auto, 26px 26px;
+  }
+}
+
+@keyframes holo-shift {
+  from { background-position: 0% 50%; }
+  to { background-position: 200% 50%; }
+}
+.holo {
+  background-image: var(--holo);
+  background-size: 200% 100%;
+  animation: holo-shift 7s linear infinite;
+}
+
+/* The foil pack: holo body, crimped top and bottom edges, dark window for the logo. */
+.pack {
+  position: relative;
+  margin: 10px 0 14px;
+  padding: 14px 12px 14px;
+  border-radius: 6px;
+  box-shadow: 0 16px 34px rgb(60 20 120 / 0.28), inset 0 0 0 1px rgb(255 255 255 / 0.6);
+}
+.pack::before,
+.pack::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background:
+    conic-gradient(from 135deg at 50% 100%, #d9d4e6 90deg, transparent 0) 0 0 / 12px 10px repeat-x;
+  filter: drop-shadow(0 -1px 0 rgb(0 0 0 / 0.08));
+}
+.pack::before { top: -9px; }
+.pack::after { bottom: -9px; transform: scaleY(-1); }
+@media (prefers-color-scheme: dark) {
+  .pack::before,
+  .pack::after {
+    background: conic-gradient(from 135deg at 50% 100%, #8f86a8 90deg, transparent 0) 0 0 / 12px 10px repeat-x;
+  }
+}
+.pack-window {
+  border-radius: 12px;
+  background: linear-gradient(160deg, #1a1033, #0d0820);
+  box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.18), 0 4px 0 rgb(0 0 0 / 0.25);
+  color: #fff;
+}
+.card-logo {
+  font-family: var(--font-card);
+  font-style: italic;
+  letter-spacing: 0.03em;
+  color: #fff;
+  text-shadow: 3px 3px 0 #ff4fa3, 6px 6px 0 rgb(124 58 237 / 0.85);
+}
+.card-font {
+  font-family: var(--font-card);
+  letter-spacing: 0.04em;
+}
+
+html[data-mode="cards"] .icon-btn {
+  color: #fff;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.1);
+  border: 2px solid rgb(255 255 255 / 0.35);
+}
+html[data-mode="cards"] .tab {
+  font-family: var(--font-card);
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.6);
+  border-radius: 999px;
+}
+html[data-mode="cards"] .tab[aria-selected="true"] {
+  color: #1d1233;
+  background-image: var(--holo);
+  background-size: 200% 100%;
+  animation: holo-shift 7s linear infinite;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* Panels: holo-bordered cards (input, result bar) and the popup sheet. */
+html[data-mode="cards"] .paper {
+  --color-ink: #1d1233;
+  --color-muted: #6a5d86;
+  --color-surface: #ffffff;
+  --color-sunken: #f1ebfb;
+  --color-line: #ddd2f0;
+  --color-accent: #7c3aed;
+  color: var(--color-ink);
+}
+@media (prefers-color-scheme: dark) {
+  html[data-mode="cards"] .paper {
+    --color-ink: #f4efff;
+    --color-muted: #b8acd8;
+    --color-surface: #140d26;
+    --color-sunken: #1f1638;
+    --color-line: #34285a;
+  }
+}
+html[data-mode="cards"] .card {
+  border: 3px solid transparent;
+  border-radius: 14px;
+  background:
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    var(--holo) border-box;
+  background-size: auto, 200% 100%;
+  animation: holo-shift 7s linear infinite;
+  box-shadow: 0 10px 22px rgb(60 20 120 / 0.22);
+}
+html[data-mode="cards"] .guess-input {
+  font-weight: 700;
+}
+html[data-mode="cards"] .guess-input::placeholder {
+  color: var(--color-muted);
+}
+html[data-mode="cards"] .option-name {
+  font-family: var(--font-card);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+html[data-mode="cards"] .option-active {
+  background: var(--color-sunken);
+}
+html[data-mode="cards"] .sheet {
+  background: var(--color-surface);
+  border-top: 6px solid transparent;
+  border-image: var(--holo) 1;
+  box-shadow: 0 -10px 40px rgb(30 0 60 / 0.4);
+}
+html[data-mode="cards"] .title {
+  font-family: var(--font-card);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-ink);
+}
+html[data-mode="cards"] .panel {
+  border-radius: 12px;
+  background: var(--color-sunken);
+  border: 1px solid var(--color-line);
+}
+html[data-mode="cards"] .btn-primary {
+  color: #1d1233;
+  border: 2px solid #1d1233;
+  border-radius: 12px;
+  background-image: var(--holo);
+  background-size: 200% 100%;
+  animation: holo-shift 7s linear infinite;
+  box-shadow: 0 4px 0 #1d1233;
+}
+html[data-mode="cards"] .btn-primary:active {
+  box-shadow: 0 1px 0 #1d1233;
+}
+html[data-mode="cards"] .btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
+  border-radius: 12px;
+  box-shadow: 0 3px 0 var(--color-ink);
+}
+html[data-mode="cards"] .bar {
+  background: #9a8fb8;
+  color: #fff;
+}
+html[data-mode="cards"] .bar-today {
+  color: #1d1233;
+  background-image: var(--holo);
+}
+html[data-mode="cards"] .toast {
+  color: #fff;
+  background: #1d1233;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px #fff, 0 10px 20px rgb(30 0 60 / 0.35);
+}
+html[data-mode="cards"] .countdown {
+  font-family: var(--font-card);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* Board: each guess is a graded card in a clear plastic slab with a red-bordered grading label. */
+html[data-mode="cards"] .col-head {
+  border-radius: 10px;
+  background: rgb(255 255 255 / 0.55);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.9);
+}
+@media (prefers-color-scheme: dark) {
+  html[data-mode="cards"] .col-head {
+    background: rgb(255 255 255 / 0.06);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+  }
+}
+html[data-mode="cards"] .col-label {
+  font-family: var(--font-card);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-ink);
+}
+html[data-mode="cards"] .row-panel {
+  padding: 7px;
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.75), rgb(255 255 255 / 0.4));
+  border: 1.5px solid rgb(255 255 255 / 0.95);
+  box-shadow: inset 0 0 0 4px rgb(255 255 255 / 0.35), 0 10px 20px rgb(60 20 120 / 0.16);
+}
+@media (prefers-color-scheme: dark) {
+  html[data-mode="cards"] .row-panel {
+    background: linear-gradient(160deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.04));
+    border-color: rgb(255 255 255 / 0.28);
+    box-shadow: inset 0 0 0 4px rgb(255 255 255 / 0.04), 0 10px 20px rgb(0 0 0 / 0.35);
+  }
+}
+html[data-mode="cards"] .row-head {
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: #fff;
+  border: 2px solid #d12a36;
+  color: #16101f;
+}
+html[data-mode="cards"] .row-head .row-meta {
+  color: #4b4458;
+}
+html[data-mode="cards"] .row-head-empty {
+  height: auto;
+  min-height: 26px;
+  background: transparent;
+  border: 2px dashed rgb(209 42 54 / 0.35);
+}
+html[data-mode="cards"] .row-head-empty .row-meta {
+  color: var(--color-muted);
+}
+html[data-mode="cards"] .row-label {
+  font-family: var(--font-card);
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #16101f;
+}
+html[data-mode="cards"] .row-meta {
+  font-weight: 800;
+}
+
+/* Stat boxes from the back of a card, with a foil sheen. */
+html[data-mode="cards"] .tile {
+  border-radius: 8px;
+  color: #fff;
+  border: 2px solid rgb(255 255 255 / 0.85);
+  background-image: linear-gradient(135deg, rgb(255 255 255 / 0.38), rgb(255 255 255 / 0) 42%, rgb(255 255 255 / 0) 70%, rgb(255 255 255 / 0.18));
+  box-shadow: 0 3px 0 rgb(0 0 0 / 0.18), 0 6px 12px rgb(60 20 120 / 0.15);
+}
+html[data-mode="cards"] .tile-text {
+  font-family: var(--font-card);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+html[data-mode="cards"] .tile-green { background-color: #16b866; }
+html[data-mode="cards"] .tile-yellow { background-color: #f6c21c; color: #2a1d00; }
+html[data-mode="cards"] .tile-orange { background-color: #fb7a1f; color: #2a1000; }
+html[data-mode="cards"] .tile-red { background-color: #e0334a; }
+html[data-mode="cards"] .tile-gray { background-color: #7d7396; }
+html[data-mode="cards"] .tile-missing { background-color: #7d7396; opacity: 0.75; }
+html[data-mode="cards"] .tile-empty {
+  border-radius: 8px;
+  border: 2px dashed rgb(125 115 150 / 0.4);
+  background: rgb(255 255 255 / 0.2);
+}
+
+html[data-mode="cards"] .site-footer {
+  color: var(--color-muted);
+  text-shadow: none;
+}
+
+/* The trading card you "pull" when the game ends. */
+.tcard {
+  position: relative;
+  width: min(240px, 72vw);
+  aspect-ratio: 5 / 7;
+  margin: 0 auto;
+  padding: 7px;
+  border-radius: 16px;
+  box-shadow: 0 18px 36px rgb(40 0 80 / 0.4);
+}
+.tcard-inner {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  color: #fff;
+  box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.5);
+}
+.tcard-inner::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(105deg, transparent 40%, rgb(255 255 255 / 0.45) 50%, transparent 60%);
+  transform: translateX(-60%);
+  animation: card-shine 3.2s ease-in-out 0.6s infinite;
+  pointer-events: none;
+}
+@keyframes card-shine {
+  0% { transform: translateX(-60%); }
+  45%, 100% { transform: translateX(60%); }
+}
+@keyframes card-pull {
+  0% { transform: translateY(40px) rotateY(180deg) scale(0.85); opacity: 0; }
+  60% { transform: translateY(-6px) rotateY(-8deg) scale(1.02); opacity: 1; }
+  100% { transform: translateY(0) rotateY(0) scale(1); opacity: 1; }
+}
+.card-pull {
+  animation: card-pull 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.grade-label {
+  margin: 0 auto 10px;
+  width: min(260px, 78vw);
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: #fff;
+  border: 2px solid #d12a36;
+  color: #16101f;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holo, .card, .tab, .btn-primary, .tcard-inner::after, .card-pull { animation: none !important; }
+}

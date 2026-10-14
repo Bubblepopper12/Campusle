@@ -10,8 +10,8 @@ import { formatInt, percent } from "./format";
 export type Mode = "classic" | "hard" | "gridiron" | "players";
 export const MODES: Mode[] = ["classic", "hard", "gridiron", "players"];
 
-/** The two themed scenes: lecture hall (chalkboard) and stadium (jumbotron + field). */
-export type Scene = "classic" | "gridiron";
+/** The themed scenes: lecture hall (chalkboard), stadium (jumbotron + field) and trading cards (foil pack + graded slabs). */
+export type Scene = "classic" | "gridiron" | "cards";
 
 /** Tabs across the top. Classic and Hard share a tab, with a Normal/Hard switch on the chalkboard. */
 export const TABS: { key: string; label: string; emoji: string; modes: Mode[] }[] = [
@@ -190,7 +190,7 @@ const players: ModeConfig = {
   id: "players",
   name: "Players",
   emoji: "⭐",
-  scene: "gridiron",
+  scene: "cards",
   shareTitle: "Campusle Players",
   tagline: "College football stars",
   endzone: "PLAYERS",

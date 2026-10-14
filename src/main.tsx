@@ -7,6 +7,7 @@ import "@fontsource/kalam/400.css";
 import "@fontsource/kalam/700.css";
 import "@fontsource/silkscreen/400.css";
 import "@fontsource/silkscreen/700.css";
+import "@fontsource/anton/400.css";
 import "./index.css";
 import App from "./App";
 

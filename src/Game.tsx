@@ -34,7 +34,7 @@ interface Props {
   mode: Mode;
   puzzle: number;
   done: Record<Mode, boolean>;
-  onHelp: () => void;
+  onMenu: () => void;
   modal: GameModal;
   setModal: (m: GameModal) => void;
   otherMode: { mode: Mode; done: boolean };
@@ -43,7 +43,7 @@ interface Props {
   toast: (msg: string) => void;
 }
 
-export function Game({ mode, puzzle, done, onHelp, modal, setModal, otherMode, onSwitchMode, onFinished, toast }: Props) {
+export function Game({ mode, puzzle, done, onMenu, modal, setModal, otherMode, onSwitchMode, onFinished, toast }: Props) {
   const { cfg, answer, guesses, rows, status, stats, submit } = useGame(mode, puzzle);
   const search = useMemo(() => searchFor(mode), [mode]);
   const [animateRow, setAnimateRow] = useState(-1);
@@ -87,7 +87,7 @@ export function Game({ mode, puzzle, done, onHelp, modal, setModal, otherMode, o
         mode={mode}
         done={done}
         onChangeMode={onSwitchMode}
-        onHelp={onHelp}
+        onMenu={onMenu}
         onStats={() => setModal("stats")}
         puzzle={puzzle}
         guessCount={guesses.length}

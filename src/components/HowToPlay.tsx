@@ -41,6 +41,7 @@ export function HowToPlay({ mode, onClose }: { mode: Mode; onClose: () => void }
           {INTRO[mode]} in <b>6 guesses</b>. Same answer for everyone, new one every day at midnight.
         </p>
         <ul className="space-y-1 rounded-xl bg-sunken px-3 py-2 text-[14px]">
+          <li className="text-[12px] font-black uppercase tracking-wider text-muted">Open the ☰ menu for every game</li>
           {MODE_LINES.map(({ mode: m, text }) => (
             <li key={m}>
               {MODE_CONFIG[m].emoji} <b>{MODE_CONFIG[m].name}:</b> {text}

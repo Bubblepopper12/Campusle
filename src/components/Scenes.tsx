@@ -1,13 +1,14 @@
 import type { ReactNode } from "react";
-import { MODE_CONFIG, TABS, type Mode } from "../lib/modes";
+import { MODE_CONFIG, type Mode } from "../lib/modes";
 import { MAX_GUESSES } from "../lib/stats";
-import { ChartIcon, HelpIcon } from "./icons";
+import { ChartIcon, MenuIcon } from "./icons";
 
 export interface FrameProps {
   mode: Mode;
   done: Record<Mode, boolean>;
   onChangeMode: (m: Mode) => void;
-  onHelp: () => void;
+  /** Opens the ☰ menu (other games, how to play). */
+  onMenu: () => void;
   onStats: () => void;
   puzzle: number;
   guessCount: number;
@@ -22,33 +23,6 @@ function IconButton({ label, onClick, children }: { label: string; onClick: () =
     <button onClick={onClick} aria-label={label} title={label} className="icon-btn btn grid h-11 w-11 shrink-0 place-items-center">
       {children}
     </button>
-  );
-}
-
-function ModeTabs({ mode, done, onChange, className }: { mode: Mode; done: Record<Mode, boolean>; onChange: (m: Mode) => void; className: string }) {
-  return (
-    <div role="tablist" aria-label="Game mode" className={className}>
-      {TABS.map((tab) => {
-        const selected = tab.modes.includes(mode);
-        return (
-          <button
-            key={tab.key}
-            role="tab"
-            aria-selected={selected}
-            onClick={() => !selected && onChange(tab.modes[0])}
-            className="tab flex items-center justify-center gap-1 px-2 py-1.5 whitespace-nowrap"
-          >
-            <span aria-hidden>{tab.emoji}</span>
-            {tab.label}
-            {done[tab.modes[0]] && (
-              <span className="text-[0.8em]" aria-label="(done today)">
-                ✓
-              </span>
-            )}
-          </button>
-        );
-      })}
-    </div>
   );
 }
 
@@ -77,14 +51,14 @@ export function Pennants() {
   );
 }
 
-export function ClassicFrame({ mode, done, onChangeMode, onHelp, onStats, puzzle, children }: FrameProps) {
+export function ClassicFrame({ mode, done, onChangeMode, onMenu, onStats, puzzle, children }: FrameProps) {
   const cfg = MODE_CONFIG[mode];
   return (
     <>
       <div className="chalkboard px-3 pt-3 pb-4">
         <header className="flex items-center justify-between gap-2">
-          <IconButton label="How to play" onClick={onHelp}>
-            <HelpIcon className="h-5 w-5" />
+          <IconButton label="Menu" onClick={onMenu}>
+            <MenuIcon className="h-5 w-5" />
           </IconButton>
           <div className="text-center">
             <h1 className="chalk-logo text-[40px] leading-none sm:text-[46px]">Campusle</h1>
@@ -97,7 +71,6 @@ export function ClassicFrame({ mode, done, onChangeMode, onHelp, onStats, puzzle
           </IconButton>
         </header>
 
-        <ModeTabs mode={mode} done={done} onChange={onChangeMode} className="mt-2 flex justify-center gap-2.5" />
         <Difficulty mode={mode} done={done} onChange={onChangeMode} />
 
         <div className="chalk mt-2 mb-3 flex items-baseline justify-between gap-2 px-1 font-[family-name:var(--font-hand)] text-[15px] whitespace-nowrap">
@@ -157,22 +130,21 @@ function ChalkTray() {
 
 /* ─────────────── Gridiron: jumbotron + football field ─────────────── */
 
-export function GridironFrame({ mode, done, onChangeMode, onHelp, onStats, puzzle, guessCount, finished, children }: FrameProps) {
+export function GridironFrame({ mode, onMenu, onStats, puzzle, guessCount, finished, children }: FrameProps) {
   const down = finished ? "FINAL" : `${Math.min(guessCount + 1, MAX_GUESSES)}/${MAX_GUESSES}`;
   const date = new Date().toLocaleDateString(undefined, { month: "short", day: "numeric" }).toUpperCase();
   return (
     <>
       <div className="scoreboard p-2.5">
         <header className="flex items-center justify-between gap-2">
-          <IconButton label="How to play" onClick={onHelp}>
-            <HelpIcon className="h-5 w-5" />
+          <IconButton label="Menu" onClick={onMenu}>
+            <MenuIcon className="h-5 w-5" />
           </IconButton>
           <h1 className="led flicker text-[27px] leading-none font-bold sm:text-[32px]">CAMPUSLE</h1>
           <IconButton label="Statistics" onClick={onStats}>
             <ChartIcon className="h-5 w-5" />
           </IconButton>
         </header>
-        <ModeTabs mode={mode} done={done} onChange={onChangeMode} className="mt-2.5 grid grid-cols-3 gap-1.5" />
         <div className="mt-2 grid grid-cols-3 gap-1.5 text-center">
           <ScoreCell label="GAME" value={String(puzzle).padStart(3, "0")} />
           <ScoreCell label="DOWN" value={down} />
@@ -217,7 +189,7 @@ export function Toast({ message }: { message: string }) {
 
 /* ─────────────── Players: trading card pack + graded slabs ─────────────── */
 
-export function CardsFrame({ mode, done, onChangeMode, onHelp, onStats, puzzle, guessCount, finished, children }: FrameProps) {
+export function CardsFrame({ onMenu, onStats, puzzle, guessCount, finished, children }: FrameProps) {
   const pack = String(puzzle).padStart(3, "0");
   const card = finished ? "COMPLETE" : `CARD ${Math.min(guessCount + 1, MAX_GUESSES)} / ${MAX_GUESSES}`;
   return (
@@ -225,8 +197,8 @@ export function CardsFrame({ mode, done, onChangeMode, onHelp, onStats, puzzle, 
       <div className="pack holo">
         <div className="pack-window px-3 pt-3 pb-3">
           <header className="flex items-center justify-between gap-2">
-            <IconButton label="How to play" onClick={onHelp}>
-              <HelpIcon className="h-5 w-5" />
+            <IconButton label="Menu" onClick={onMenu}>
+            <MenuIcon className="h-5 w-5" />
             </IconButton>
             <div className="text-center leading-none">
               <h1 className="card-logo text-[38px] leading-none sm:text-[44px]">CAMPUSLE</h1>
@@ -236,7 +208,6 @@ export function CardsFrame({ mode, done, onChangeMode, onHelp, onStats, puzzle, 
               <ChartIcon className="h-5 w-5" />
             </IconButton>
           </header>
-          <ModeTabs mode={mode} done={done} onChange={onChangeMode} className="mt-3 grid grid-cols-3 gap-1.5" />
         </div>
         <div className="card-font mt-2.5 flex items-center justify-between px-1 text-[13px] tracking-[0.12em] text-[#1d1233]">
           <span>PACK #{pack}</span>

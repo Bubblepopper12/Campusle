@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { DATA_SOURCE } from "./lib/data";
 import { puzzleNumber } from "./lib/daily";
-import { HASH, MODES, MODE_CONFIG, isMode, modeFromHash, type Mode, type Scene } from "./lib/modes";
+import { HASH, MODES, MODE_CONFIG, modeFromHash, type Mode, type Scene } from "./lib/modes";
 import { KEYS, load, save } from "./lib/storage";
 import { isDone } from "./useGame";
 import { Game, type GameModal } from "./Game";
 import { Pennants, Toast } from "./components/Scenes";
 import { HowToPlay } from "./components/HowToPlay";
+import { Menu } from "./components/Menu";
 
 /** Browser chrome color per scene, light then dark. */
 const THEME_COLOR: Record<Scene, [string, string]> = {
@@ -16,7 +17,9 @@ const THEME_COLOR: Record<Scene, [string, string]> = {
 };
 
 export default function App() {
-  const [mode, setMode] = useState<Mode>(() => modeFromHash(window.location.hash) ?? (isMode(load(KEYS.mode, "classic")) ? load<Mode>(KEYS.mode, "classic") : "classic"));
+  // Classic is the home game: everyone lands there unless a link points at another mode (#hard, #football, #players).
+  const [mode, setMode] = useState<Mode>(() => modeFromHash(window.location.hash) ?? "classic");
+  const [menu, setMenu] = useState(false);
   const scene = MODE_CONFIG[mode].scene;
   const [puzzle, setPuzzle] = useState(() => puzzleNumber());
   const [help, setHelp] = useState(() => !load(KEYS.seenHelp, false));
@@ -56,7 +59,7 @@ export default function App() {
   const switchMode = useCallback((m: Mode) => {
     setMode(m);
     setModal(null);
-    save(KEYS.mode, m);
+    setMenu(false);
     window.history.replaceState(null, "", HASH[m] ? `#${HASH[m]}` : window.location.pathname);
     window.scrollTo({ top: 0 });
   }, []);
@@ -92,7 +95,7 @@ export default function App() {
             mode={mode}
             puzzle={puzzle}
             done={done}
-            onHelp={() => setHelp(true)}
+            onMenu={() => setMenu(true)}
             modal={modal}
             setModal={setModal}
             otherMode={{ mode: other, done: done[other] }}
@@ -111,6 +114,22 @@ export default function App() {
         </footer>
       </div>
 
+      {menu && (
+        <Menu
+          mode={mode}
+          done={done}
+          onPick={switchMode}
+          onHelp={() => {
+            setMenu(false);
+            setHelp(true);
+          }}
+          onStats={() => {
+            setMenu(false);
+            setModal("stats");
+          }}
+          onClose={() => setMenu(false)}
+        />
+      )}
       {help && <HowToPlay mode={mode} onClose={closeHelp} />}
       {toastMsg && <Toast key={toastMsg.id} message={toastMsg.text} />}
     </div>

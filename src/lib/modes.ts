@@ -13,11 +13,15 @@ export const MODES: Mode[] = ["classic", "hard", "gridiron", "players"];
 /** The themed scenes: lecture hall (chalkboard), stadium (jumbotron + field) and trading cards (foil pack + graded slabs). */
 export type Scene = "classic" | "gridiron" | "cards";
 
-/** Tabs across the top. Classic and Hard share a tab, with a Normal/Hard switch on the chalkboard. */
-export const TABS: { key: string; label: string; emoji: string; modes: Mode[] }[] = [
-  { key: "classic", label: "Classic", emoji: "🎓", modes: ["classic", "hard"] },
-  { key: "football", label: "Football", emoji: "🏈", modes: ["gridiron"] },
-  { key: "players", label: "Players", emoji: "⭐", modes: ["players"] },
+/**
+ * The ☰ menu, in order. Classic is the home game; the rest live in the menu.
+ * `tier` is where a paywall would hook in later: every game is "free" for now.
+ */
+export const MENU: { mode: Mode; title: string; blurb: string; tier: "free" | "premium" }[] = [
+  { mode: "classic", title: "Classic", blurb: "Well-known colleges", tier: "free" },
+  { mode: "hard", title: "Classic · Hard", blurb: "Niche colleges only", tier: "free" },
+  { mode: "gridiron", title: "Football", blurb: "FBS football programs", tier: "free" },
+  { mode: "players", title: "Players", blurb: "College football stars", tier: "free" },
 ];
 
 /** URL hash per mode (classic has none). */

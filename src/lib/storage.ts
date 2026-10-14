@@ -22,5 +22,4 @@ export const KEYS = {
   game: (mode: string) => `campusle:v1:game:${mode}`,
   stats: (mode: string) => `campusle:v1:stats:${mode}`,
   seenHelp: "campusle:v1:seen-help",
-  mode: "campusle:v1:mode",
 };

@@ -41,3 +41,9 @@ export const ShareIcon = ({ className }: P) => (
     <path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" />
   </svg>
 );
+
+export const MenuIcon = ({ className }: P) => (
+  <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth={2.8} strokeLinecap="round" aria-hidden>
+    <path d="M4 6.5h16M4 12h16M4 17.5h16" />
+  </svg>
+);

@@ -46,7 +46,7 @@ Share text uses one emoji per tile and never includes school names:
 Campusle #14 🎓 4/6
 🟥🟨⬇️⬆️⬜🟩
 ...
-campusle.com
+campoozel.com
 ```
 
 On phones, Share opens the native share sheet. Everywhere else it copies to the clipboard.

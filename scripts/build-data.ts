@@ -15,7 +15,7 @@ const CACHE = join(ROOT, "scripts", ".cache");
 const REFRESH = process.argv.includes("--refresh");
 const SCORECARD_URL = "https://api.data.gov/ed/collegescorecard/v1/schools.json";
 const WIKIDATA_URL = "https://query.wikidata.org/sparql";
-const USER_AGENT = "CampusleDataBuilder/1.0 (https://campoozel.com; data build script)";
+const USER_AGENT = "CampusleDataBuilder/1.0 (https://campusle.com; data build script)";
 
 function loadDotEnv() {
   const file = join(ROOT, ".env");

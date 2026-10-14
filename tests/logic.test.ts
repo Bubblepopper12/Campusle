@@ -112,7 +112,7 @@ describe("share text", () => {
       ],
     ] as const;
     const text = shareText({ title: "Campusle", badge: "🎓", puzzle: 14, rows: rows.map((r) => [...r]), won: true, maxGuesses: 6 });
-    expect(text).toBe("Campusle #14 🎓 1/6\n🟥🟨⬇️⬆️⬜🟩\ncampoozel.com");
+    expect(text).toBe("Campusle #14 🎓 1/6\n🟥🟨⬇️⬆️⬜🟩\ncampusle.com");
     expect(shareText({ title: "Campusle", badge: "🎓", puzzle: 2, rows: [], won: false, maxGuesses: 6 })).toContain("X/6");
     expect(tileEmoji({ color: "orange", dir: null, text: "", aria: "" })).toBe("🟧");
   });

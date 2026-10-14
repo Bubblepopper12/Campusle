@@ -1,6 +1,6 @@
 import type { TileResult } from "./feedback";
 
-export const SITE = "campoozel.com";
+export const SITE = "campusle.com";
 
 /** One emoji per tile. Never includes school names. */
 export function tileEmoji(t: TileResult): string {

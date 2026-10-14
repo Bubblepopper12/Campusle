@@ -48,13 +48,15 @@ export function Menu({ mode, done, onPick, onHelp, onStats, onClose }: Props) {
         <h3 className="mt-5 mb-2 text-[11px] font-black uppercase tracking-[0.16em] text-muted">Daily games</h3>
         <ul className="space-y-1.5">
           {MENU.map((item) => {
-            const current = item.mode === mode;
+            const modes = item.levels?.map((l) => l.mode) ?? [item.mode];
+            const current = modes.includes(mode);
+            const finished = modes.every((m) => done[m]);
             return (
-              <li key={item.mode}>
+              <li key={item.mode} className={`rounded-2xl transition-colors ${current ? "bg-sunken ring-2 ring-[color:var(--color-accent)]" : ""}`}>
                 <button
-                  onClick={() => onPick(item.mode)}
+                  onClick={() => onPick(current ? mode : item.mode)}
                   aria-current={current ? "page" : undefined}
-                  className={`flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition-colors ${current ? "bg-sunken ring-2 ring-[color:var(--color-accent)]" : "hover:bg-sunken"}`}
+                  className={`flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left ${current ? "" : "hover:bg-sunken"}`}
                 >
                   <span className="text-[26px] leading-none" aria-hidden>
                     {MODE_CONFIG[item.mode].emoji}
@@ -63,12 +65,33 @@ export function Menu({ mode, done, onPick, onHelp, onStats, onClose }: Props) {
                     <span className="block text-[16px] font-black">{item.title}</span>
                     <span className="block truncate text-[13px] font-semibold text-muted">{item.blurb}</span>
                   </span>
-                  {done[item.mode] ? (
+                  {finished ? (
                     <span className="rounded-full bg-[#19a862] px-2 py-0.5 text-[11px] font-black text-white">✓ Done</span>
                   ) : (
-                    <span className="text-[12px] font-black uppercase tracking-wider text-muted">Play</span>
+                    <span className="text-[12px] font-black uppercase tracking-wider text-muted">{current ? "Playing" : "Play"}</span>
                   )}
                 </button>
+                {item.levels && (
+                  <div role="radiogroup" aria-label={`${item.title} level`} className="flex gap-2 px-3 pb-3 pl-[52px]">
+                    {item.levels.map((level) => {
+                      const on = level.mode === mode;
+                      return (
+                        <button
+                          key={level.mode}
+                          role="radio"
+                          aria-checked={on}
+                          onClick={() => onPick(level.mode)}
+                          className={`min-h-9 flex-1 rounded-xl border-2 px-2 text-[13px] font-black transition-colors ${
+                            on ? "border-[color:var(--color-accent)] bg-[color:var(--color-accent)] text-white" : "border-line hover:bg-sunken"
+                          }`}
+                        >
+                          {level.label}
+                          {done[level.mode] && " ✓"}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </li>
             );
           })}

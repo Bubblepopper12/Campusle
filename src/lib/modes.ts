@@ -17,13 +17,30 @@ export type Scene = "classic" | "gridiron" | "cards";
  * The ☰ menu, in order. Classic is the home game; the rest live in the menu.
  * `tier` is where a paywall would hook in later: every game is "free" for now.
  */
-export const MENU: { mode: Mode; title: string; blurb: string; tier: "free" | "premium" }[] = [
-  { mode: "classic", title: "Classic", blurb: "Well-known colleges", tier: "free" },
-  { mode: "hard", title: "Classic · Hard", blurb: "Niche colleges only", tier: "free" },
+export interface MenuEntry {
+  /** The mode the entry opens. */
+  mode: Mode;
+  title: string;
+  blurb: string;
+  /** Difficulty levels shown inside the entry (Classic: Normal / Hard). */
+  levels?: { mode: Mode; label: string }[];
+  tier: "free" | "premium";
+}
+
+export const MENU: MenuEntry[] = [
+  {
+    mode: "classic",
+    title: "Classic",
+    blurb: "Guess the mystery college",
+    levels: [
+      { mode: "classic", label: "Normal" },
+      { mode: "hard", label: "Hard 🧠" },
+    ],
+    tier: "free",
+  },
   { mode: "gridiron", title: "Football", blurb: "FBS football programs", tier: "free" },
   { mode: "players", title: "Players", blurb: "College football stars", tier: "free" },
 ];
-
 /** URL hash per mode (classic has none). */
 export const HASH: Record<Mode, string> = { classic: "", hard: "hard", gridiron: "football", players: "players" };
 

@@ -1095,3 +1095,17 @@ html[data-mode="cards"] .drawer { border-top: none; border-right: 6px solid tran
 @media (prefers-reduced-motion: reduce) {
   .drawer-in { animation: none; }
 }
+
+/* Small phones (iPhone SE and similar): tighten column labels and the guess box so nothing collides. */
+@media (max-width: 374px) {
+  .col-label {
+    font-size: 8.5px !important;
+    letter-spacing: 0 !important;
+  }
+  .guess-input {
+    font-size: 15px !important;
+  }
+  html[data-mode="classic"] .guess-input {
+    font-size: 18px !important;
+  }
+}

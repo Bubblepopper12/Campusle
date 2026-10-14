@@ -28,26 +28,39 @@ function IconButton({ label, onClick, children }: { label: string; onClick: () =
 
 /* ─────────────── Classic: chalkboard in a lecture hall ─────────────── */
 
-const PENNANTS = ["#b3202a", "#1f4e9c", "#f2a900", "#1d6b3a", "#5b2a86", "#e0661b", "#0f6b68", "#7d1734", "#1f2f6b", "#c8102e", "#2e7d32", "#f0b400"];
+/** Felt pennants pinned along the top of the wall: sleeve on the left, lettering on the flag. */
+const PENNANTS: { text: string; bg: string; sleeve: string; ink: string; tilt: number }[] = [
+  { text: "GO TEAM!", bg: "#1f3f8f", sleeve: "#f2b81c", ink: "#ffffff", tilt: -7 },
+  { text: "CLASS OF '30", bg: "#1d6b3a", sleeve: "#f4f1e6", ink: "#ffffff", tilt: 5 },
+  { text: "STATE U", bg: "#5b2a86", sleeve: "#f2b81c", ink: "#f2b81c", tilt: -4 },
+  { text: "CAMPUSLE", bg: "#a3192b", sleeve: "#f4f1e6", ink: "#ffffff", tilt: 3 },
+  { text: "VARSITY", bg: "#e0661b", sleeve: "#14213d", ink: "#14213d", tilt: -5 },
+  { text: "HOMECOMING", bg: "#0f6b68", sleeve: "#f4f1e6", ink: "#ffffff", tilt: 6 },
+  { text: "GO TEAM!", bg: "#14213d", sleeve: "#c8102e", ink: "#ffffff", tilt: -3 },
+];
 
-/** A string of college-style pennants hung across the top of the wall. */
+/** College pennants pinned to the lecture-hall wall above the chalkboard. Fixed size, centered: phones see the middle few. */
 export function Pennants() {
   return (
-    <svg className="pointer-events-none absolute inset-x-0 top-0 h-[58px] w-full" viewBox="0 0 720 58" preserveAspectRatio="xMidYMin slice" aria-hidden>
-      <path d="M-10 6 Q 360 26 730 6" fill="none" stroke="#2b1a0e" strokeWidth="2" />
-      {PENNANTS.map((color, i) => {
-        const x = 8 + i * 60;
-        const sag = 6 + Math.sin((Math.PI * (x + 10)) / 740) * 18;
-        const rot = (i % 2 ? 3 : -3) + (i % 3) - 1;
-        return (
-          <g key={i} transform={`translate(${x} ${sag}) rotate(${rot} 22 0)`}>
-            <path d="M0 0 H44 L22 46 Z" fill={color} stroke="rgb(0 0 0 / 0.35)" strokeWidth="1" />
-            <path d="M3 7 H41 L39.3 11 H4.7 Z" fill="rgb(255 255 255 / 0.85)" />
-            <circle cx="22" cy="21" r="4.5" fill="rgb(255 255 255 / 0.8)" />
+    <div className="pointer-events-none absolute inset-x-0 top-0 flex h-[60px] justify-center gap-1 overflow-hidden" aria-hidden>
+      {PENNANTS.map((p, i) => (
+        <svg key={i} viewBox="0 0 124 56" className="h-[56px] w-[124px] flex-none">
+          <g transform={`translate(4 8) rotate(${p.tilt} 6 20)`}>
+            {/* drop shadow on the wall */}
+            <path d="M3 3 H15 L119 23 L15 43 H3 Z" fill="rgb(0 0 0 / 0.28)" />
+            {/* felt flag */}
+            <path d="M12 0 L116 20 L12 40 Z" fill={p.bg} />
+            <path d="M12 0 L116 20 L12 40 Z" fill="none" stroke="rgb(255 255 255 / 0.18)" strokeWidth="1.5" />
+            {/* sleeve and pushpin */}
+            <rect x="0" y="0" width="12" height="40" rx="1.5" fill={p.sleeve} />
+            <circle cx="6" cy="6" r="3.2" fill="#d9d4c7" stroke="rgb(0 0 0 / 0.35)" strokeWidth="0.8" />
+            <text x="18" y="23.5" fill={p.ink} fontFamily="Graduate, Georgia, serif" fontSize="9" letterSpacing="0.4">
+              {p.text}
+            </text>
           </g>
-        );
-      })}
-    </svg>
+        </svg>
+      ))}
+    </div>
   );
 }
 
@@ -61,7 +74,7 @@ export function ClassicFrame({ mode, done, onChangeMode, onMenu, onStats, puzzle
             <MenuIcon className="h-5 w-5" />
           </IconButton>
           <div className="text-center">
-            <h1 className="chalk-logo text-[40px] leading-none sm:text-[46px]">Campusle</h1>
+            <h1 className="chalk-logo text-[34px] leading-none min-[375px]:text-[40px] sm:text-[46px]">Campusle</h1>
             <svg viewBox="0 0 200 12" className="mx-auto -mt-0.5 h-2.5 w-36" aria-hidden>
               <path d="M4 8 C 40 2, 70 11, 104 6 S 170 3, 196 7" fill="none" stroke="#f7df72" strokeWidth="3.2" strokeLinecap="round" opacity="0.9" />
             </svg>
@@ -140,7 +153,7 @@ export function GridironFrame({ mode, onMenu, onStats, puzzle, guessCount, finis
           <IconButton label="Menu" onClick={onMenu}>
             <MenuIcon className="h-5 w-5" />
           </IconButton>
-          <h1 className="led flicker text-[27px] leading-none font-bold sm:text-[32px]">CAMPUSLE</h1>
+          <h1 className="led flicker text-[21px] leading-none font-bold min-[375px]:text-[27px] sm:text-[32px]">CAMPUSLE</h1>
           <IconButton label="Statistics" onClick={onStats}>
             <ChartIcon className="h-5 w-5" />
           </IconButton>
@@ -201,7 +214,7 @@ export function CardsFrame({ onMenu, onStats, puzzle, guessCount, finished, chil
             <MenuIcon className="h-5 w-5" />
             </IconButton>
             <div className="text-center leading-none">
-              <h1 className="card-logo text-[38px] leading-none sm:text-[44px]">CAMPUSLE</h1>
+              <h1 className="card-logo text-[32px] leading-none min-[375px]:text-[38px] sm:text-[44px]">CAMPUSLE</h1>
               <div className="card-font mt-1.5 text-[11px] tracking-[0.32em] text-white/75">PLAYERS · SERIES {new Date().getFullYear()}</div>
             </div>
             <IconButton label="Statistics" onClick={onStats}>

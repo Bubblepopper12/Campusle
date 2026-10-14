@@ -64,7 +64,7 @@ export function GuessInput({ search, cfg, guessed, guessNumber, onGuess }: Props
           onFocus={() => setOpen(true)}
           onBlur={() => setOpen(false)}
           onKeyDown={onKeyDown}
-          placeholder={`Guess ${guessNumber} of 6: type a ${cfg.noun === "player" ? "player" : "school"}…`}
+          placeholder={`Guess ${guessNumber}/6: type a ${cfg.noun === "player" ? "player" : "school"}…`}
           className="guess-input h-[54px] w-full min-w-0 bg-transparent text-[17px] font-semibold outline-none"
           role="combobox"
           aria-expanded={showList}

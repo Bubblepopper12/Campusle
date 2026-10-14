@@ -111,6 +111,10 @@ export default function App() {
           {offline ? "Preview data: school stats are approximate." : "School data: U.S. Dept. of Education College Scorecard and Wikidata."}{" "}
           {scene === "gridiron" && "Football data is hand-curated."}
           {scene === "cards" && "Player data is hand-curated."}
+          <br />
+          <a href="/privacy.html" className="underline underline-offset-2">
+            Privacy
+          </a>
         </footer>
       </div>
 

@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useState } from "react";
-import { COLLEGE_BY_ID } from "./lib/data";
 import { answerFor } from "./lib/daily";
 import { MODE_CONFIG, type Mode } from "./lib/modes";
 import { emptyStats, MAX_GUESSES, recordGame, type Stats } from "./lib/stats";
@@ -28,7 +27,7 @@ export function isDone(mode: Mode, puzzle: number): boolean {
 export function useGame(mode: Mode, puzzle: number) {
   const cfg = MODE_CONFIG[mode];
   const answerId = useMemo(() => answerFor(puzzle, cfg.answers, mode), [puzzle, cfg, mode]);
-  const answer = COLLEGE_BY_ID.get(answerId)!;
+  const answer = cfg.byId.get(answerId)!;
   const poolIds = useMemo(() => new Set(cfg.pool.map((c) => c.id)), [cfg]);
 
   const [guesses, setGuesses] = useState<string[]>(() => {
@@ -41,7 +40,7 @@ export function useGame(mode: Mode, puzzle: number) {
   const won = guesses.includes(answerId);
   const status: Status = won ? "won" : guesses.length >= MAX_GUESSES ? "lost" : "playing";
 
-  const rows = useMemo(() => guesses.map((id) => cfg.evaluate(COLLEGE_BY_ID.get(id)!, answer)), [guesses, cfg, answer]);
+  const rows = useMemo(() => guesses.map((id) => cfg.evaluate(cfg.byId.get(id)!, answer)), [guesses, cfg, answer]);
 
   /** Returns the new status, or null if the guess wasn't accepted. */
   const submit = useCallback(

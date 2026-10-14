@@ -1,16 +1,17 @@
 import { useId, useMemo, useRef, useState } from "react";
-import type { College } from "../lib/types";
-import type { SchoolSearch } from "../lib/search";
+import type { Entity, ModeConfig } from "../lib/modes";
+import type { Search } from "../lib/search";
 import { SearchIcon } from "./icons";
 
 interface Props {
-  search: SchoolSearch;
+  search: Search<Entity>;
+  cfg: ModeConfig;
   guessed: Set<string>;
   guessNumber: number;
-  onGuess: (college: College) => void;
+  onGuess: (item: Entity) => void;
 }
 
-export function GuessInput({ search, guessed, guessNumber, onGuess }: Props) {
+export function GuessInput({ search, cfg, guessed, guessNumber, onGuess }: Props) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
@@ -21,7 +22,7 @@ export function GuessInput({ search, guessed, guessNumber, onGuess }: Props) {
   const results = useMemo(() => search.search(query, 8), [search, query]);
   const showList = open && query.trim().length > 0;
 
-  const pick = (c: College | undefined) => {
+  const pick = (c: Entity | undefined) => {
     if (!c || guessed.has(c.id)) {
       setShake((n) => n + 1);
       return;
@@ -63,7 +64,7 @@ export function GuessInput({ search, guessed, guessNumber, onGuess }: Props) {
           onFocus={() => setOpen(true)}
           onBlur={() => setOpen(false)}
           onKeyDown={onKeyDown}
-          placeholder={`Guess ${guessNumber} of 6: type a school…`}
+          placeholder={`Guess ${guessNumber} of 6: type a ${cfg.noun === "player" ? "player" : "school"}…`}
           className="guess-input h-[54px] w-full min-w-0 bg-transparent text-[17px] font-semibold outline-none"
           role="combobox"
           aria-expanded={showList}
@@ -98,7 +99,11 @@ export function GuessInput({ search, guessed, guessNumber, onGuess }: Props) {
           role="listbox"
           className="paper card fade-in absolute inset-x-0 top-[calc(100%+8px)] z-30 max-h-[min(55vh,420px)] overflow-y-auto rounded-2xl p-1.5"
         >
-          {results.length === 0 && <li className="px-3 py-3 text-[15px] font-semibold text-muted">No school matches “{query.trim()}”</li>}
+          {results.length === 0 && (
+            <li className="px-3 py-3 text-[15px] font-semibold text-muted">
+              No {cfg.noun === "player" ? "player" : "school"} matches “{query.trim()}”
+            </li>
+          )}
           {results.map((c, i) => {
             const done = guessed.has(c.id);
             return (
@@ -119,10 +124,10 @@ export function GuessInput({ search, guessed, guessNumber, onGuess }: Props) {
               >
                 <div className="min-w-0 flex-1">
                   <div className="option-name truncate text-[16px] font-extrabold">{c.short}</div>
-                  {c.short !== c.name && <div className="truncate text-[12px] font-medium text-muted">{c.name}</div>}
+                  {cfg.optionSub(c) && <div className="truncate text-[12px] font-medium text-muted">{cfg.optionSub(c)}</div>}
                 </div>
                 <div className="shrink-0 text-right text-[12px] font-bold text-muted">
-                  {done ? "guessed" : `${c.city}, ${c.state}`}
+                  {done ? "guessed" : cfg.optionMeta(c)}
                 </div>
               </li>
             );

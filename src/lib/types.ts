@@ -50,3 +50,31 @@ export interface FootballFile {
   generatedAt: string;
   teams: FootballTeam[];
 }
+
+export type Position = "QB" | "RB" | "WR" | "TE" | "OL" | "DL" | "LB" | "DB" | "K" | "P" | "ATH";
+
+/** One famous college football player in src/data/players.json. */
+export interface Player {
+  id: string;
+  name: string;
+  /** Display name (same as name; kept so players and schools share one shape for search). */
+  short: string;
+  aliases: string[];
+  position: Position;
+  /** College ids, most famous school first. */
+  schools: string[];
+  /** Final college season played (the current season for active players). */
+  lastSeason: number;
+  /** Heisman years won, empty if none. */
+  heisman: number[];
+  /** National titles their school won while they were on the roster. */
+  titles: number;
+  jersey: number;
+  active: boolean;
+}
+
+export interface PlayersFile {
+  source: string;
+  generatedAt: string;
+  players: Player[];
+}

@@ -2,14 +2,18 @@
 
 A free, Wordle-style daily college guessing game. Everyone gets the same mystery school each day and has 6 guesses to find it. Each guess shows a row of clue tiles, and you can share a spoiler-free emoji result.
 
-There are two daily puzzles:
+There are four daily puzzles:
 
 | Mode | Answers | Clues |
 | --- | --- | --- |
 | 🎓 **Classic** | ~220 well-known schools (`src/data/answers.txt`) | 📍 distance + direction · 👥 undergrads · 🎟️ acceptance rate · 💵 in-state tuition · 🏛️ founded · 🏆 athletic conference |
-| 🏈 **Gridiron** | All 136 FBS programs (`scripts/data/football.tsv`) | 📍 distance + direction · 🏆 football conference · 🏟️ stadium capacity · 📜 first season · 🥇 national titles · 🎨 team colors |
+| 🧠 **Hard** (Classic's "Hard" level) | ~170 niche schools (`src/data/answers-hard.txt`) | Same as Classic |
+| 🏈 **Football** | All 136 FBS programs (`scripts/data/football.tsv`) | 📍 distance + direction · 🏆 football conference · 🏟️ stadium capacity · 📜 first season · 🥇 national titles · 🎨 team colors |
+| ⭐ **Players** | ~150 famous college football players, past and present (`scripts/data/players.tsv`) | 🏫 school · 🏈 position · 📅 final season · 🏆 Heisman · 💍 national titles · #️⃣ jersey number |
 
-Each mode has its own scene: Classic is a lecture-hall chalkboard with sticky-note tiles, Gridiron is a stadium with a jumbotron and a painted field (a night game in dark mode). The scene is set by `<html data-mode>` and styled in `src/index.css`. Each mode has its own saved game, stats and streak. `campusle.com/#gridiron` opens Gridiron directly.
+Each mode has its own scene: Classic and Hard are a lecture-hall chalkboard with sticky-note tiles; Football and Players are a stadium with a jumbotron and a painted field (a night game in dark mode). The scene is set by `<html data-mode>` and styled in `src/index.css`. Each mode has its own saved game, stats and streak. Links: `#hard`, `#football` (old `#gridiron` links still work) and `#players`.
+
+Football mode's internal id is still `gridiron`, so saved games and streaks carry over from before the rename.
 
 ## Run it
 
@@ -34,7 +38,7 @@ It's a fully static Vite site with no backend, so it needs no configuration:
   - Years (founded, first season) are measured against the answer's *age*, so 1880 vs 1885 is close but 1880 vs 1960 isn't.
   - National titles are small counts: exact is green, within 2 is yellow.
 - **Conference:** green if it matches, gray if not. In Classic, schools outside Division I show `Division II`, `Division III`, `NAIA` or `None`.
-- **Colors (Gridiron):** green if the main color family matches, yellow if any color is shared (white doesn't count).
+- **Colors (Football):** green if the main color family matches, yellow if any color is shared (white doesn't count).
 
 Share text uses one emoji per tile and never includes school names:
 
@@ -58,11 +62,14 @@ On phones, Share opens the native share sheet. Everywhere else it copies to the 
 | File | What it is | Edit by hand? |
 | --- | --- | --- |
 | `src/data/colleges.json` | Every guessable school. Generated. | No, regenerate it |
-| `src/data/football.json` | Gridiron data. Generated from `scripts/data/football.tsv`. | No |
+| `src/data/football.json` | Football mode data. Generated from `scripts/data/football.tsv`. | No |
 | `src/data/answers.txt` | Classic answer list, one ID per line, `#` comments | **Yes** |
 | `src/data/aliases.json` | Short display names + autocomplete aliases ("UT", "A&M", "Penn"…) | **Yes** |
 | `src/data/overrides.json` | Hand fixes, merged in last | **Yes** |
 | `scripts/data/football.tsv` | Football conference, stadium, capacity, first season, titles, colors | **Yes** |
+| `src/data/answers-hard.txt` | Hard answer list (niche schools), same format as answers.txt | **Yes** |
+| `scripts/data/players.tsv` | Players: position, schools, final season, Heisman years, titles, jersey, active | **Yes** |
+| `src/data/players.json` | Players data. Generated from players.tsv. | No |
 | `scripts/data/colleges-offline.tsv` | Offline fallback stats (see below) | Only if you have no API access |
 
 School IDs are slugs of the official College Scorecard name, e.g. `The University of Texas at Austin` → `university-of-texas-at-austin`.
@@ -107,7 +114,7 @@ The College Scorecard API and Wikidata couldn't be reached from the environment 
 2. Read the report. If a Scorecard name differs from what the fallback assumed, the matching answer ID shows as missing and the report suggests the right one. Fix those IDs in `answers.txt` and the matching keys in `aliases.json`.
 3. Spot-check conferences. Wikidata often lags conference realignment (2024–2026 moves), so pin the current ones in `overrides.json`.
 
-Gridiron data has no free API source, so `football.tsv` is hand-curated and approximate. Check stadium capacities and title counts before launch. The report flags anything out of range.
+Football and Players data have no free API source, so `football.tsv` and `players.tsv` are hand-curated and approximate. Check stadium capacities and title counts, and especially current players (who's still playing in 2026, transfers, jersey numbers), before launch. The report flags anything out of range. After editing either file, run `npm run data:offline` (or `data:build`) to regenerate the JSON.
 
 ## Project layout
 

@@ -1,13 +1,11 @@
-import type { College } from "../lib/types";
-import { TEAM_BY_ID } from "../lib/data";
-import { MODE_CONFIG, type Mode } from "../lib/modes";
+import { MODE_CONFIG, type Entity, type Mode, type Scene } from "../lib/modes";
 import type { Status } from "../useGame";
 import { Countdown } from "./Countdown";
 import { ShareIcon } from "./icons";
 
 interface Props {
   mode: Mode;
-  answer: College;
+  answer: Entity;
   status: Status;
   guessCount: number;
   otherMode: { mode: Mode; done: boolean };
@@ -16,8 +14,8 @@ interface Props {
   onSwitchMode: (m: Mode) => void;
 }
 
-/** Classic grades you like a report card; Gridiron calls the play. Index = guesses - 1. */
-const HEADLINES: Record<Mode, { win: string[]; lose: string; kicker: (n: number) => string; loseKicker: string }> = {
+/** The lecture hall grades you like a report card; the stadium calls the play. Index = guesses - 1. */
+const HEADLINES: Record<Scene, { win: string[]; lose: string; kicker: (n: number) => string; loseKicker: string }> = {
   classic: {
     win: ["A+ 🤯", "A 🧠", "B+ 🔥", "B 🙌", "C+ 🎉", "Passed! 😅"],
     lose: "Better luck tomorrow.",
@@ -35,9 +33,8 @@ const HEADLINES: Record<Mode, { win: string[]; lose: string; kicker: (n: number)
 /** The school reveal shown after the game ends (inside the result popup). */
 export function RevealCard({ mode, answer, status, guessCount, otherMode, onShare, onStats, onSwitchMode }: Props) {
   const cfg = MODE_CONFIG[mode];
-  const h = HEADLINES[mode];
-  const team = TEAM_BY_ID.get(answer.id);
-  const stripe = mode === "gridiron" && team?.colors.length ? team.colors.map((c) => c.hex) : ["var(--color-accent)", "var(--color-gold)"];
+  const h = HEADLINES[cfg.scene];
+  const stripe = cfg.colors(answer) ?? ["var(--color-accent)", "var(--color-gold)"];
   const other = MODE_CONFIG[otherMode.mode];
 
   return (
@@ -52,14 +49,15 @@ export function RevealCard({ mode, answer, status, guessCount, otherMode, onShar
           ))}
         </div>
         <div className="px-4 pt-3 pb-4">
-          <div className="text-[11px] font-black uppercase tracking-wider text-muted">Today's {mode === "gridiron" ? "program" : "school"}</div>
+          <div className="text-[11px] font-black uppercase tracking-wider text-muted">Today's {cfg.noun}</div>
           <div className="mt-0.5 text-[24px] font-black leading-tight">{answer.short}</div>
           {answer.short !== answer.name && <div className="text-[13px] font-semibold text-muted">{answer.name}</div>}
           <div className="mt-2 flex flex-wrap gap-1.5 text-[13px] font-bold">
-            <span className="rounded-full bg-sunken px-2.5 py-1">
-              📍 {answer.city}, {answer.state}
-            </span>
-            {answer.mascot && <span className="rounded-full bg-sunken px-2.5 py-1">🐾 {answer.mascot}</span>}
+            {cfg.chips(answer).map((chip) => (
+              <span key={chip} className="rounded-full bg-sunken px-2.5 py-1">
+                {chip}
+              </span>
+            ))}
           </div>
           <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2">
             {cfg.facts(answer).map((f) => (

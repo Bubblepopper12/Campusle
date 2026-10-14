@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { College } from "./lib/types";
-import { COLLEGE_BY_ID } from "./lib/data";
-import { MODE_CONFIG, type Mode } from "./lib/modes";
-import { SchoolSearch } from "./lib/search";
+import { MODE_CONFIG, confettiColors, type Entity, type Mode } from "./lib/modes";
+import { Search } from "./lib/search";
 import { shareResult, shareText } from "./lib/share";
 import { MAX_GUESSES } from "./lib/stats";
 import { useGame } from "./useGame";
@@ -18,12 +16,12 @@ import { ClassicFrame, GridironFrame } from "./components/Scenes";
 
 export type GameModal = "stats" | "result" | null;
 
-const searches = new Map<Mode, SchoolSearch>();
-function searchFor(mode: Mode): SchoolSearch {
+const searches = new Map<Mode, Search<Entity>>();
+function searchFor(mode: Mode): Search<Entity> {
   let s = searches.get(mode);
   if (!s) {
     const cfg = MODE_CONFIG[mode];
-    s = new SchoolSearch(cfg.pool, new Set(cfg.answers));
+    s = new Search(cfg.pool, cfg.searchBoost);
     searches.set(mode, s);
   }
   return s;
@@ -55,10 +53,10 @@ export function Game({ mode, puzzle, done, onHelp, modal, setModal, otherMode, o
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
   const guessed = useMemo(() => new Set(guesses), [guesses]);
-  const guessColleges = useMemo(() => guesses.map((id) => COLLEGE_BY_ID.get(id)!), [guesses]);
+  const guessItems = useMemo(() => guesses.map((id) => cfg.byId.get(id)!), [guesses, cfg]);
   const wonRow = status === "won" ? guesses.length - 1 : -1;
 
-  const onGuess = (c: College) => {
+  const onGuess = (c: Entity) => {
     const next = submit(c.id);
     if (!next) return;
     setAnimateRow(guesses.length);
@@ -81,7 +79,7 @@ export function Game({ mode, puzzle, done, onHelp, modal, setModal, otherMode, o
     else if (outcome === "failed") toast("Couldn't copy. Try again?");
   };
 
-  const Frame = mode === "gridiron" ? GridironFrame : ClassicFrame;
+  const Frame = cfg.scene === "gridiron" ? GridironFrame : ClassicFrame;
 
   return (
     <>
@@ -96,11 +94,11 @@ export function Game({ mode, puzzle, done, onHelp, modal, setModal, otherMode, o
         finished={status !== "playing"}
       >
         {status === "playing" ? (
-          <GuessInput search={search} guessed={guessed} guessNumber={guesses.length + 1} onGuess={onGuess} />
+          <GuessInput search={search} cfg={cfg} guessed={guessed} guessNumber={guesses.length + 1} onGuess={onGuess} />
         ) : (
           <ResultBar status={status} answer={answer} guessCount={guesses.length} onOpen={() => setModal("result")} onShare={share} />
         )}
-        <Board columns={cfg.columns} guesses={guessColleges} rows={rows} animateRow={animateRow} wonRow={wonRow} />
+        <Board columns={cfg.columns} guesses={guessItems} rowMeta={cfg.rowMeta} rows={rows} animateRow={animateRow} wonRow={wonRow} />
       </Frame>
 
       {modal === "result" && status !== "playing" && (
@@ -120,12 +118,12 @@ export function Game({ mode, puzzle, done, onHelp, modal, setModal, otherMode, o
       {modal === "stats" && (
         <StatsModal mode={mode} stats={stats} puzzle={puzzle} status={status} guessCount={guesses.length} onShare={share} onClose={() => setModal(null)} />
       )}
-      {confetti && <Confetti colors={cfg.confetti(answer)} />}
+      {confetti && <Confetti colors={confettiColors(cfg, answer)} />}
     </>
   );
 }
 
-function ResultBar(props: { status: "won" | "lost"; answer: College; guessCount: number; onOpen: () => void; onShare: () => void }) {
+function ResultBar(props: { status: "won" | "lost"; answer: Entity; guessCount: number; onOpen: () => void; onShare: () => void }) {
   const { status, answer, guessCount, onOpen, onShare } = props;
   return (
     <div className="paper card flex items-center gap-3 rounded-2xl p-2.5 pl-4">

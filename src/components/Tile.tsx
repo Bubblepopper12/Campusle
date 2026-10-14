@@ -32,7 +32,7 @@ export function Tile({ tile, index, animate, celebrate, kind }: Props) {
             tile.hit
               ? "text-[26px]"
               : kind === "category"
-                ? `${tile.text.length > 7 ? "text-[9.5px]" : "text-[11.5px]"} leading-[1.05] uppercase break-words`
+                ? `${tile.text.length > 11 ? "text-[8.5px]" : tile.text.length > 7 ? "text-[9.5px]" : "text-[11.5px]"} leading-[1.05] uppercase break-words`
                 : tile.text.length >= 5
                   ? "text-[13.5px] sm:text-[16px]"
                   : "text-[15px] sm:text-[17px]",

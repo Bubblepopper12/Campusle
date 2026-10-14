@@ -1,19 +1,19 @@
-import type { College } from "../lib/types";
 import type { TileResult } from "../lib/feedback";
-import type { Column } from "../lib/modes";
+import type { Column, Entity } from "../lib/modes";
 import { MAX_GUESSES } from "../lib/stats";
 import { EmptyTile, Tile } from "./Tile";
 
 interface Props {
   columns: Column[];
-  guesses: College[];
+  guesses: Entity[];
+  rowMeta: (e: Entity) => string;
   rows: TileResult[][];
   /** Index of the row that should animate in (the newest guess this session). */
   animateRow: number;
   wonRow: number;
 }
 
-export function Board({ columns, guesses, rows, animateRow, wonRow }: Props) {
+export function Board({ columns, guesses, rowMeta, rows, animateRow, wonRow }: Props) {
   const empty = Math.max(0, MAX_GUESSES - rows.length);
   return (
     <section aria-label="Your guesses" className="mt-4">
@@ -35,7 +35,7 @@ export function Board({ columns, guesses, rows, animateRow, wonRow }: Props) {
               <span className="row-meta text-[12px] font-bold">{r + 1}</span>
               <span className="row-label truncate text-[14px] font-extrabold">{guesses[r].short}</span>
               <span className="row-meta ml-auto shrink-0 text-[11px] font-semibold">
-                {guesses[r].city}, {guesses[r].state}
+                {rowMeta(guesses[r])}
               </span>
             </div>
             <div className="tile-row grid grid-cols-6 gap-1.5">

@@ -2,7 +2,7 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { College, FootballTeam, TeamColor } from "../../src/lib/types.ts";
+import type { College, FootballTeam, Player, Position, TeamColor } from "../../src/lib/types.ts";
 import { parseAnswerList } from "../../src/lib/answers.ts";
 import { slugify } from "../../src/lib/slug.ts";
 import { KNOWN_SHORT } from "./conferences.ts";
@@ -167,14 +167,40 @@ export function loadFootball(log: string[]): FootballTeam[] {
   return [...teams.values()].sort((a, b) => a.id.localeCompare(b.id));
 }
 
-export function readAnswerIds(): string[] {
-  return parseAnswerList(readFileSync(join(DATA_DIR, "answers.txt"), "utf8"));
+const POSITIONS = new Set<Position>(["QB", "RB", "WR", "TE", "OL", "DL", "LB", "DB", "K", "P", "ATH"]);
+
+/** Reads the hand-curated players table (scripts/data/players.tsv). */
+export function loadPlayers(): Player[] {
+  const ids = new Set<string>();
+  return readTsv(path("scripts", "data", "players.tsv")).map(([name, aliases, position, schools, lastSeason, heisman, titles, jersey, active]) => {
+    let id = slugify(name);
+    while (ids.has(id)) id += "-2";
+    ids.add(id);
+    return {
+      id,
+      name,
+      short: name,
+      aliases: (aliases ?? "").split(";").map((a) => a.trim()).filter(Boolean),
+      position: position as Position,
+      schools: schools.split(";").map((s) => s.trim()).filter(Boolean),
+      lastSeason: Number(lastSeason),
+      heisman: (heisman ?? "").split(";").map((y) => Number(y)).filter((y) => y > 0),
+      titles: Number(titles),
+      jersey: Number(jersey),
+      active: active === "1",
+    };
+  });
+}
+
+export function readAnswerIds(file = "answers.txt"): string[] {
+  return parseAnswerList(readFileSync(join(DATA_DIR, file), "utf8"));
 }
 
 /** Lists every school with missing or suspicious values. Answer-list schools (★) come first. */
-export function buildReport(colleges: College[], teams: FootballTeam[], extra: string[] = []): string[] {
+export function buildReport(colleges: College[], teams: FootballTeam[], players: Player[] = [], extra: string[] = []): string[] {
   const year = new Date().getFullYear();
   const answers = new Set(readAnswerIds());
+  const hardAnswers = readAnswerIds("answers-hard.txt");
   const byId = new Map(colleges.map((c) => [c.id, c]));
   const issues = new Map<string, string[]>();
   const add = (id: string, msg: string) => issues.set(id, [...(issues.get(id) ?? []), msg]);
@@ -199,10 +225,23 @@ export function buildReport(colleges: College[], teams: FootballTeam[], extra: s
   for (const ids of shorts.values()) if (ids.length > 1) ids.forEach((id) => add(id, `short name "${byId.get(id)!.short}" is shared by ${ids.length} schools`));
 
   const lines: string[] = [];
-  const missingAnswers = [...answers].filter((id) => !byId.has(id));
+  const missingAnswers = [...answers, ...hardAnswers].filter((id) => !byId.has(id));
   if (missingAnswers.length) {
-    lines.push(`\nANSWER LIST IDS NOT IN THE DATASET (${missingAnswers.length}). Fix src/data/answers.txt:`);
+    lines.push(`\nANSWER LIST IDS NOT IN THE DATASET (${missingAnswers.length}). Fix src/data/answers.txt or answers-hard.txt:`);
     for (const id of missingAnswers) lines.push(`  ✗ ${id}${suggest(id, colleges)}`);
+  }
+
+  for (const p of players) {
+    const where = `player ${p.id}`;
+    const bad: string[] = [];
+    if (!POSITIONS.has(p.position)) bad.push(`position "${p.position}"`);
+    const unknown = p.schools.filter((s) => !byId.has(s));
+    if (!p.schools.length || unknown.length) bad.push(`unknown school id(s) ${unknown.join(", ") || "(none listed)"}`);
+    if (!(p.lastSeason >= 1869 && p.lastSeason <= year)) bad.push(`last season ${p.lastSeason}`);
+    if (!(p.jersey >= 0 && p.jersey <= 99)) bad.push(`jersey ${p.jersey}`);
+    if (!(p.titles >= 0 && p.titles <= 5)) bad.push(`titles ${p.titles}`);
+    if (p.heisman.some((y) => y > p.lastSeason || y < 1935)) bad.push(`Heisman year ${p.heisman.join(", ")}`);
+    if (bad.length) add(p.id, `${where}: ${bad.join("; ")}`);
   }
 
   for (const t of teams) {
@@ -224,7 +263,7 @@ export function buildReport(colleges: College[], teams: FootballTeam[], extra: s
 
   const answerCount = [...answers].filter((id) => byId.has(id)).length;
   lines.unshift(
-    `Campusle data report: ${colleges.length} guessable schools, ${answerCount} Classic answers, ${teams.length} Gridiron teams.`,
+    `Campusle data report: ${colleges.length} guessable schools, ${answerCount} Classic answers, ${hardAnswers.filter((id) => byId.has(id)).length} Hard answers, ${teams.length} Football teams, ${players.length} players.`,
   );
   if (!sorted.length && !missingAnswers.length) lines.push("\nNo problems found. ✓");
   return lines;
@@ -259,8 +298,10 @@ export function finalize(colleges: College[], source: string, notes: string[] = 
     "teams",
     teams.filter((t) => ids.has(t.id)),
   );
-  const report = buildReport(merged, teams, log);
+  const players = loadPlayers();
+  writeDataFile(join(DATA_DIR, "players.json"), { source: "Hand-curated (scripts/data/players.tsv)", generatedAt }, "players", players);
+  const report = buildReport(merged, teams, players, log);
   writeFileSync(path("data-report.txt"), report.join("\n") + "\n");
   console.log(report.join("\n"));
-  console.log(`\nWrote src/data/colleges.json, src/data/football.json and data-report.txt`);
+  console.log(`\nWrote src/data/colleges.json, football.json, players.json and data-report.txt`);
 }

@@ -1,5 +1,13 @@
 import type { College } from "./types";
 
+/** Anything that can be searched: a display name, an official name and aliases. */
+export interface Searchable {
+  id: string;
+  short: string;
+  name: string;
+  aliases: string[];
+}
+
 /** Lowercases, strips accents and punctuation, and spells out "&" and "St." so "St. John's" finds "Saint Johns". */
 export function normalize(s: string): string {
   return s
@@ -15,8 +23,8 @@ export function normalize(s: string): string {
     .join(" ");
 }
 
-interface Entry {
-  college: College;
+interface Entry<T> {
+  item: T;
   keys: { text: string; tokens: string[]; weight: number }[];
   boost: number;
 }
@@ -48,7 +56,7 @@ function prefixMatch(q: string, t: string, fuzzy: boolean): boolean {
 
 const tokenMatches = (q: string, tokens: string[], fuzzy: boolean) => tokens.some((t) => prefixMatch(q, t, fuzzy));
 
-function scoreKey(q: string, qTokens: string[], key: Entry["keys"][number]): number {
+function scoreKey(q: string, qTokens: string[], key: Entry<unknown>["keys"][number]): number {
   if (key.text === q) return 100;
   if (key.text.startsWith(q)) return 85 - Math.min(10, key.text.length - q.length) * 0.5;
   const words = qTokens.filter((t) => !SKIP.has(t));
@@ -62,39 +70,45 @@ function scoreKey(q: string, qTokens: string[], key: Entry["keys"][number]): num
   return 0;
 }
 
-export class SchoolSearch {
-  private entries: Entry[];
+/** Fuzzy autocomplete over names and aliases. `boost` breaks ties (better-known entries first). */
+export class Search<T extends Searchable = Searchable> {
+  private entries: Entry<T>[];
 
-  constructor(colleges: College[], featured: Set<string> = new Set()) {
-    this.entries = colleges.map((c) => {
+  constructor(items: T[], boost: (item: T) => number = () => 0) {
+    this.entries = items.map((item) => {
       const keys = [
-        { text: c.short, weight: 4 },
-        ...c.aliases.map((a) => ({ text: a, weight: 3 })),
-        { text: c.name, weight: 0 },
+        { text: item.short, weight: 4 },
+        ...item.aliases.map((a) => ({ text: a, weight: 3 })),
+        { text: item.name, weight: 0 },
       ].map((k) => {
         const text = normalize(k.text);
         return { text, tokens: text.split(" "), weight: k.weight };
       });
-      // Well-known (answer list) and bigger schools win ties.
-      const boost = (featured.has(c.id) ? 6 : 0) + Math.min(4, Math.log10(Math.max(c.undergrads ?? 1000, 1)) - 2);
-      return { college: c, keys, boost };
+      return { item, keys, boost: boost(item) };
     });
   }
 
-  search(query: string, limit = 8): College[] {
+  search(query: string, limit = 8): T[] {
     const q = normalize(query);
     if (!q) return [];
     const qTokens = q.split(" ");
-    const scored: { c: College; s: number }[] = [];
+    const scored: { item: T; s: number }[] = [];
     for (const e of this.entries) {
       let best = 0;
       for (const k of e.keys) {
         const s = scoreKey(q, qTokens, k);
         if (s > 0) best = Math.max(best, s + k.weight);
       }
-      if (best > 0) scored.push({ c: e.college, s: best + e.boost });
+      if (best > 0) scored.push({ item: e.item, s: best + e.boost });
     }
-    scored.sort((a, b) => b.s - a.s || a.c.short.localeCompare(b.c.short));
-    return scored.slice(0, limit).map((x) => x.c);
+    scored.sort((a, b) => b.s - a.s || a.item.short.localeCompare(b.item.short));
+    return scored.slice(0, limit).map((x) => x.item);
+  }
+}
+
+/** School search with the Classic ranking: well-known (answer list) and bigger schools win ties. */
+export class SchoolSearch extends Search<College> {
+  constructor(colleges: College[], featured: Set<string> = new Set()) {
+    super(colleges, (c) => (featured.has(c.id) ? 6 : 0) + Math.min(4, Math.log10(Math.max(c.undergrads ?? 1000, 1)) - 2));
   }
 }

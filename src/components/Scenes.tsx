@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { MODES, MODE_CONFIG, type Mode } from "../lib/modes";
+import { MODE_CONFIG, TABS, type Mode } from "../lib/modes";
 import { MAX_GUESSES } from "../lib/stats";
 import { ChartIcon, HelpIcon } from "./icons";
 
@@ -28,13 +28,19 @@ function IconButton({ label, onClick, children }: { label: string; onClick: () =
 function ModeTabs({ mode, done, onChange, className }: { mode: Mode; done: Record<Mode, boolean>; onChange: (m: Mode) => void; className: string }) {
   return (
     <div role="tablist" aria-label="Game mode" className={className}>
-      {MODES.map((m) => {
-        const cfg = MODE_CONFIG[m];
+      {TABS.map((tab) => {
+        const selected = tab.modes.includes(mode);
         return (
-          <button key={m} role="tab" aria-selected={m === mode} onClick={() => onChange(m)} className="tab flex items-center justify-center gap-1.5 px-3 py-1.5">
-            <span aria-hidden>{cfg.emoji}</span>
-            {cfg.name}
-            {done[m] && (
+          <button
+            key={tab.key}
+            role="tab"
+            aria-selected={selected}
+            onClick={() => !selected && onChange(tab.modes[0])}
+            className="tab flex items-center justify-center gap-1 px-2 py-1.5 whitespace-nowrap"
+          >
+            <span aria-hidden>{tab.emoji}</span>
+            {tab.label}
+            {done[tab.modes[0]] && (
               <span className="text-[0.8em]" aria-label="(done today)">
                 ✓
               </span>
@@ -91,7 +97,8 @@ export function ClassicFrame({ mode, done, onChangeMode, onHelp, onStats, puzzle
           </IconButton>
         </header>
 
-        <ModeTabs mode={mode} done={done} onChange={onChangeMode} className="mt-2 flex justify-center gap-5" />
+        <ModeTabs mode={mode} done={done} onChange={onChangeMode} className="mt-2 flex justify-center gap-2.5" />
+        <Difficulty mode={mode} done={done} onChange={onChangeMode} />
 
         <div className="chalk mt-2 mb-3 flex items-baseline justify-between gap-2 px-1 font-[family-name:var(--font-hand)] text-[15px] whitespace-nowrap">
           <span>
@@ -104,6 +111,33 @@ export function ClassicFrame({ mode, done, onChangeMode, onHelp, onStats, puzzle
       </div>
       <ChalkTray />
     </>
+  );
+}
+
+/** Normal / Hard switch, written in chalk under the tabs. */
+function Difficulty({ mode, done, onChange }: { mode: Mode; done: Record<Mode, boolean>; onChange: (m: Mode) => void }) {
+  const options: { m: Mode; label: string }[] = [
+    { m: "classic", label: "Normal" },
+    { m: "hard", label: "Hard 🧠" },
+  ];
+  return (
+    <div role="radiogroup" aria-label="Difficulty" className="chalk mt-1 flex items-center justify-center gap-1 font-[family-name:var(--font-hand)] text-[15px]">
+      <span className="mr-1 opacity-60">Level:</span>
+      {options.map(({ m, label }, i) => (
+        <span key={m} className="flex items-center">
+          {i > 0 && <span className="mx-1 opacity-40">/</span>}
+          <button
+            role="radio"
+            aria-checked={mode === m}
+            onClick={() => onChange(m)}
+            className={`px-1 font-bold ${mode === m ? "text-[#f7df72] underline decoration-2 underline-offset-4" : "opacity-60"}`}
+          >
+            {label}
+            {done[m] && " ✓"}
+          </button>
+        </span>
+      ))}
+    </div>
   );
 }
 
@@ -138,7 +172,7 @@ export function GridironFrame({ mode, done, onChangeMode, onHelp, onStats, puzzl
             <ChartIcon className="h-5 w-5" />
           </IconButton>
         </header>
-        <ModeTabs mode={mode} done={done} onChange={onChangeMode} className="mt-2.5 grid grid-cols-2 gap-1.5" />
+        <ModeTabs mode={mode} done={done} onChange={onChangeMode} className="mt-2.5 grid grid-cols-3 gap-1.5" />
         <div className="mt-2 grid grid-cols-3 gap-1.5 text-center">
           <ScoreCell label="GAME" value={String(puzzle).padStart(3, "0")} />
           <ScoreCell label="DOWN" value={down} />
@@ -153,7 +187,7 @@ export function GridironFrame({ mode, done, onChangeMode, onHelp, onStats, puzzl
 
       <div className="field">
         <div className="endzone">
-          <span className="endzone-text text-[30px] leading-none">GRIDIRON</span>
+          <span className="endzone-text text-[30px] leading-none">{MODE_CONFIG[mode].endzone}</span>
         </div>
         <div className="px-[14px] pt-3 pb-4">{children}</div>
         <div className="endzone endzone-bottom">

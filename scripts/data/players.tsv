@@ -1,0 +1,156 @@
+# Players mode data, hand-curated and approximate. Verify before launch, especially current players (active = still playing in 2026).
+# schools = school ids from colleges.json, primary (most famous) school first, separated by ;
+# lastSeason = final college season played (2026 for active players). heisman = year(s) won, separated by ;
+# titles = national championships their school won while they were on the roster. jersey = their best-known college number.
+# Columns (tab-separated):
+# name	aliases(;)	position	schools(;)	lastSeason	heisman(;)	titles	jersey	active(1/0)
+Red Grange	The Galloping Ghost	RB	university-of-illinois-urbana-champaign	1925		1	77	0
+Jim Brown		RB	syracuse-university	1956		0	44	0
+Paul Hornung	Golden Boy	QB	university-of-notre-dame	1956	1956	0	5	0
+Roger Staubach	Roger the Dodger	QB	united-states-naval-academy	1964	1963	0	12	0
+Joe Namath	Broadway Joe	QB	university-of-alabama	1964		1	12	0
+Archie Manning		QB	university-of-mississippi	1970		0	18	0
+Archie Griffin		RB	ohio-state-university-main-campus	1975	1974;1975	0	45	0
+Tony Dorsett		RB	university-of-pittsburgh-pittsburgh-campus	1976	1976	1	33	0
+Earl Campbell	Tyler Rose	RB	university-of-texas-at-austin	1977	1977	0	20	0
+Joe Montana	Joe Cool	QB	university-of-notre-dame	1978		1	3	0
+Lawrence Taylor	LT	LB	university-of-north-carolina-at-chapel-hill	1980		0	98	0
+Marcus Allen		RB	university-of-southern-california	1981	1981	1	33	0
+Herschel Walker		RB	university-of-georgia	1982	1982	1	34	0
+Dan Marino		QB	university-of-pittsburgh-pittsburgh-campus	1982		0	13	0
+John Elway		QB	stanford-university	1982		0	7	0
+Eric Dickerson		RB	southern-methodist-university	1982		2	19	0
+Steve Young		QB	brigham-young-university	1983		0	8	0
+Doug Flutie		QB	boston-college	1984	1984	0	22	0
+Bo Jackson	Bo	RB	auburn-university	1985	1985	0	34	0
+Brian Bosworth	The Boz	LB	university-of-oklahoma-norman-campus	1986		1	44	0
+Tim Brown		WR	university-of-notre-dame	1987	1987	0	81	0
+Barry Sanders		RB	oklahoma-state-university-main-campus	1988	1988	0	21	0
+Deion Sanders	Prime Time;Neon Deion	DB	florida-state-university	1988		0	2	0
+Troy Aikman		QB	university-of-california-los-angeles;university-of-oklahoma-norman-campus	1988		1	8	0
+Emmitt Smith		RB	university-of-florida	1989		0	22	0
+Ty Detmer		QB	brigham-young-university	1991	1990	0	14	0
+Desmond Howard	Magic Man	WR	university-of-michigan-ann-arbor	1991	1991	0	21	0
+Charlie Ward		QB	florida-state-university	1993	1993	1	17	0
+Marshall Faulk		RB	san-diego-state-university	1993		0	28	0
+Eddie George		RB	ohio-state-university-main-campus	1995	1995	0	27	0
+Tommie Frazier		QB	university-of-nebraska-lincoln	1995		2	15	0
+Ray Lewis		LB	university-of-miami	1995		0	52	0
+Danny Wuerffel		QB	university-of-florida	1996	1996	1	7	0
+Charles Woodson		DB	university-of-michigan-ann-arbor	1997	1997	1	2	0
+Peyton Manning		QB	university-of-tennessee-knoxville	1997		0	16	0
+Randy Moss		WR	marshall-university	1997		0	88	0
+Ricky Williams		RB	university-of-texas-at-austin	1998	1998	0	34	0
+Ron Dayne	The Great Dayne	RB	university-of-wisconsin-madison	1999	1999	0	33	0
+Tom Brady	TB12	QB	university-of-michigan-ann-arbor	1999		1	10	0
+Chris Weinke		QB	florida-state-university	2000	2000	1	16	0
+Michael Vick		QB	virginia-polytechnic-institute-and-state-university	2000		0	7	0
+Drew Brees		QB	purdue-university-main-campus	2000		0	15	0
+Ed Reed		DB	university-of-miami	2001		1	20	0
+Carson Palmer		QB	university-of-southern-california	2002	2002	0	3	0
+Eli Manning		QB	university-of-mississippi	2003		0	10	0
+Sean Taylor		DB	university-of-miami	2003		1	26	0
+Aaron Rodgers		QB	university-of-california-berkeley	2004		0	8	0
+Matt Leinart		QB	university-of-southern-california	2005	2004	2	11	0
+Reggie Bush		RB	university-of-southern-california	2005	2005	2	5	0
+Vince Young	VY	QB	university-of-texas-at-austin	2005		1	10	0
+Troy Smith		QB	ohio-state-university-main-campus	2006	2006	1	10	0
+Calvin Johnson	Megatron	WR	georgia-institute-of-technology-main-campus	2006		0	21	0
+Adrian Peterson	All Day;AP	RB	university-of-oklahoma-norman-campus	2006		0	28	0
+Marshawn Lynch	Beast Mode	RB	university-of-california-berkeley	2006		0	10	0
+Darren McFadden	Run DMC	RB	university-of-arkansas	2007		0	5	0
+Rob Gronkowski	Gronk	TE	university-of-arizona	2008		0	48	0
+Matthew Stafford	Matt Stafford	QB	university-of-georgia	2008		0	7	0
+Tim Tebow		QB	university-of-florida	2009	2007	2	15	0
+Sam Bradford		QB	university-of-oklahoma-norman-campus	2009	2008	0	14	0
+Colt McCoy		QB	university-of-texas-at-austin	2009		1	12	0
+Ndamukong Suh		DL	university-of-nebraska-lincoln	2009		0	93	0
+Mark Ingram	Mark Ingram II	RB	university-of-alabama	2010	2009	1	22	0
+Cam Newton	Superman	QB	auburn-university;university-of-florida	2010	2010	1	2	0
+Julio Jones		WR	university-of-alabama	2010		1	8	0
+Robert Griffin III	RG3;RGIII	QB	baylor-university	2011	2011	0	10	0
+Andrew Luck		QB	stanford-university	2011		0	12	0
+Russell Wilson		QB	university-of-wisconsin-madison;north-carolina-state-university-at-raleigh	2011		0	16	0
+Trent Richardson		RB	university-of-alabama	2011		2	3	0
+Travis Kelce		TE	university-of-cincinnati-main-campus	2012		0	18	0
+Johnny Manziel	Johnny Football	QB	texas-a-and-m-university-college-station	2013	2012	0	2	0
+AJ McCarron	A.J. McCarron	QB	university-of-alabama	2013		3	10	0
+Odell Beckham Jr.	OBJ	WR	louisiana-state-university-and-agricultural-and-mechanical-college	2013		0	3	0
+Jadeveon Clowney		DL	university-of-south-carolina-columbia	2013		0	7	0
+Jameis Winston	Famous Jameis	QB	florida-state-university	2014	2013	1	5	0
+Marcus Mariota		QB	university-of-oregon	2014	2014	0	8	0
+Amari Cooper		WR	university-of-alabama	2014		1	9	0
+Derrick Henry	King Henry	RB	university-of-alabama	2015	2015	1	2	0
+Ezekiel Elliott	Zeke	RB	ohio-state-university-main-campus	2015		1	15	0
+Lamar Jackson		QB	university-of-louisville	2017	2016	0	8	0
+Deshaun Watson		QB	clemson-university	2016		1	4	0
+Christian McCaffrey	CMC	RB	stanford-university	2016		0	5	0
+Patrick Mahomes		QB	texas-tech-university	2016		0	5	0
+Myles Garrett		DL	texas-a-and-m-university-college-station	2016		0	15	0
+Baker Mayfield		QB	university-of-oklahoma-norman-campus;texas-tech-university	2017	2017	0	6	0
+Saquon Barkley		RB	pennsylvania-state-university-main-campus	2017		0	26	0
+Sam Darnold		QB	university-of-southern-california	2017		0	14	0
+Josh Allen		QB	university-of-wyoming	2017		0	17	0
+Kyler Murray		QB	university-of-oklahoma-norman-campus;texas-a-and-m-university-college-station	2018	2018	0	1	0
+Joe Burrow	Joe Brr;Joey B	QB	louisiana-state-university-and-agricultural-and-mechanical-college;ohio-state-university-main-campus	2019	2019	1	9	0
+Tua Tagovailoa	Tua	QB	university-of-alabama	2019		1	13	0
+Jalen Hurts		QB	university-of-alabama;university-of-oklahoma-norman-campus	2019		1	2	0
+Ja'Marr Chase	Jamarr Chase	WR	louisiana-state-university-and-agricultural-and-mechanical-college	2019		1	1	0
+Justin Jefferson	Jjettas	WR	louisiana-state-university-and-agricultural-and-mechanical-college	2019		1	2	0
+Chase Young		DL	ohio-state-university-main-campus	2019		0	2	0
+Micah Parsons		LB	pennsylvania-state-university-main-campus	2019		0	11	0
+CeeDee Lamb		WR	university-of-oklahoma-norman-campus	2019		0	2	0
+Justin Herbert		QB	university-of-oregon	2019		0	10	0
+Jonathan Taylor		RB	university-of-wisconsin-madison	2019		0	23	0
+DeVonta Smith	Slim Reaper	WR	university-of-alabama	2020	2020	2	6	0
+Trevor Lawrence		QB	clemson-university	2020		1	16	0
+Justin Fields		QB	ohio-state-university-main-campus;university-of-georgia	2020		0	1	0
+Mac Jones		QB	university-of-alabama	2020		2	10	0
+Najee Harris		RB	university-of-alabama	2020		2	22	0
+Travis Etienne		RB	clemson-university	2020		1	9	0
+Sauce Gardner	Ahmad Gardner	DB	university-of-cincinnati-main-campus	2021		0	1	0
+Aidan Hutchinson		DL	university-of-michigan-ann-arbor	2021		0	97	0
+Bryce Young		QB	university-of-alabama	2022	2021	1	9	0
+Stetson Bennett		QB	university-of-georgia	2022		2	13	0
+Jalen Carter		DL	university-of-georgia	2022		2	88	0
+Will Anderson Jr.	Will Anderson	LB	university-of-alabama	2022		1	31	0
+Bijan Robinson		RB	university-of-texas-at-austin	2022		0	5	0
+Jahmyr Gibbs		RB	university-of-alabama;georgia-institute-of-technology-main-campus	2022		0	1	0
+C.J. Stroud	CJ Stroud	QB	ohio-state-university-main-campus	2022		0	7	0
+Caleb Williams		QB	university-of-southern-california;university-of-oklahoma-norman-campus	2023	2022	0	13	0
+Jayden Daniels		QB	louisiana-state-university-and-agricultural-and-mechanical-college;arizona-state-university-campus-immersion	2023	2023	0	5	0
+Brock Bowers		TE	university-of-georgia	2023		2	19	0
+Marvin Harrison Jr.	MHJ	WR	ohio-state-university-main-campus	2023		0	18	0
+Malik Nabers		WR	louisiana-state-university-and-agricultural-and-mechanical-college	2023		0	8	0
+Drake Maye		QB	university-of-north-carolina-at-chapel-hill	2023		0	10	0
+Bo Nix		QB	university-of-oregon;auburn-university	2023		0	10	0
+Michael Penix Jr.		QB	university-of-washington-seattle-campus;indiana-university-bloomington	2023		0	9	0
+J.J. McCarthy	JJ McCarthy	QB	university-of-michigan-ann-arbor	2023		1	9	0
+Blake Corum		RB	university-of-michigan-ann-arbor	2023		1	2	0
+Travis Hunter		ATH	university-of-colorado-boulder;jackson-state-university	2024	2024	0	12	0
+Cam Ward		QB	university-of-miami;washington-state-university	2024		0	1	0
+Ashton Jeanty		RB	boise-state-university	2024		0	2	0
+Shedeur Sanders		QB	university-of-colorado-boulder;jackson-state-university	2024		0	2	0
+Dillon Gabriel		QB	university-of-oregon;university-of-central-florida;university-of-oklahoma-norman-campus	2024		0	8	0
+Quinn Ewers		QB	university-of-texas-at-austin;ohio-state-university-main-campus	2024		0	3	0
+Will Howard		QB	ohio-state-university-main-campus;kansas-state-university	2024		1	18	0
+TreVeyon Henderson		RB	ohio-state-university-main-campus	2024		1	32	0
+Quinshon Judkins		RB	ohio-state-university-main-campus;university-of-mississippi	2024		1	1	0
+Emeka Egbuka		WR	ohio-state-university-main-campus	2024		1	2	0
+Abdul Carter		LB	pennsylvania-state-university-main-campus	2024		0	11	0
+Cam Skattebo		RB	arizona-state-university-campus-immersion;california-state-university-sacramento	2024		0	4	0
+Jaxson Dart		QB	university-of-mississippi;university-of-southern-california	2024		0	2	0
+Jalen Milroe		QB	university-of-alabama	2024		0	4	0
+Fernando Mendoza		QB	indiana-university-bloomington;university-of-california-berkeley	2025	2025	1	15	0
+Carson Beck		QB	university-of-georgia;university-of-miami	2025		2	15	0
+Trinidad Chambliss		QB	university-of-mississippi	2025		0	6	0
+Jeremiyah Love		RB	university-of-notre-dame	2025		0	4	0
+Caleb Downs		DB	ohio-state-university-main-campus;university-of-alabama	2025		1	2	0
+Diego Pavia		QB	vanderbilt-university;new-mexico-state-university-main-campus	2025		0	2	0
+Garrett Nussmeier		QB	louisiana-state-university-and-agricultural-and-mechanical-college	2025		0	13	0
+Cade Klubnik		QB	clemson-university	2025		0	2	0
+Jeremiah Smith		WR	ohio-state-university-main-campus	2026		1	4	1
+Arch Manning		QB	university-of-texas-at-austin	2026		0	16	1
+Julian Sayin		QB	ohio-state-university-main-campus	2026		1	10	1
+Ryan Williams		WR	university-of-alabama	2026		0	2	1
+Bryce Underwood		QB	university-of-michigan-ann-arbor	2026		0	19	1

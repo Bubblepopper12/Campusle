@@ -1,4 +1,4 @@
-import type { College, FootballTeam, TeamColor } from "./types";
+import type { College, FootballTeam, Player, Position, TeamColor } from "./types";
 import { bearingDegrees, compass, distanceMiles, type Compass } from "./geo";
 import { compact, formatInt, miles, money, percent, tileConference } from "./format";
 
@@ -47,7 +47,7 @@ export function compareLocation(guess: College, answer: College): TileResult {
  * - relative: difference as a share of the answer (enrollment, tuition, acceptance, stadium size)
  * - age: difference as a share of the answer's age in years (founding year, first season),
  *        so 1890 vs 1895 counts as close but 1890 vs 1980 doesn't
- * - count: small whole numbers (titles): exact is green, within 2 is yellow
+ * - count: whole numbers compared by distance (titles, seasons, jersey numbers): exact is green, within `near` is yellow
  */
 export type Scale = "relative" | "age" | "count";
 
@@ -61,6 +61,8 @@ export function compareNumber(
   format: (n: number) => string,
   label: string,
   year: number = new Date().getFullYear(),
+  /** For "count": how far off still counts as yellow. */
+  near = 2,
 ): TileResult {
   if (guess === null || answer === null) return { color: "missing", dir: null, text: "?", aria: `${label}: unknown` };
   const text = format(guess);
@@ -69,7 +71,7 @@ export function compareNumber(
   const diff = Math.abs(answer - guess);
   let color: TileColor;
   if (scale === "count") {
-    color = diff <= 2 ? "yellow" : "gray";
+    color = diff <= near ? "yellow" : "gray";
   } else {
     const base = scale === "age" ? Math.max(year - answer, 1) : Math.abs(answer);
     const rel = base === 0 ? Infinity : diff / base;
@@ -144,5 +146,66 @@ export function evaluateFootball(
     compareNumber(guessTeam.firstSeason, answerTeam.firstSeason, "age", String, "First season", year),
     compareNumber(guessTeam.titles, answerTeam.titles, "count", String, "National titles", year),
     compareColors(guessTeam.colors, answerTeam.colors, guess.id === answer.id),
+  ];
+}
+
+/* ─────────────── Players mode ─────────────── */
+
+const UNIT: Record<Position, "offense" | "defense" | "special" | "both"> = {
+  QB: "offense",
+  RB: "offense",
+  WR: "offense",
+  TE: "offense",
+  OL: "offense",
+  DL: "defense",
+  LB: "defense",
+  DB: "defense",
+  K: "special",
+  P: "special",
+  ATH: "both",
+};
+
+/** Green: same position. Yellow: same side of the ball (two-way players match either side). */
+export function comparePosition(guess: Position, answer: Position): TileResult {
+  if (guess === answer) return { color: "green", dir: null, text: guess, aria: `Position: ${guess}, match` };
+  const g = UNIT[guess];
+  const a = UNIT[answer];
+  const near = g === a || g === "both" || a === "both";
+  return { color: near ? "yellow" : "gray", dir: null, text: guess, aria: `Position: ${guess}, ${near ? "same side of the ball" : "no match"}` };
+}
+
+/** Green: same main school. Yellow: they share a school (transfers count) or the schools share a conference today. */
+export function compareSchool(
+  guess: Player,
+  answer: Player,
+  shortName: (collegeId: string) => string,
+  conferenceOf: (collegeId: string) => string | null,
+): TileResult {
+  const text = shortName(guess.schools[0]);
+  if (guess.schools[0] === answer.schools[0]) return { color: "green", dir: null, text, aria: `School: ${text}, match` };
+  const shared = guess.schools.some((s) => answer.schools.includes(s));
+  const conf = conferenceOf(guess.schools[0]);
+  const sameConf = !!conf && conf === conferenceOf(answer.schools[0]);
+  const color: TileColor = shared || sameConf ? "yellow" : "gray";
+  const why = shared ? "they both played there" : sameConf ? `same conference (${conf})` : "no match";
+  return { color, dir: null, text, aria: `School: ${text}, ${why}` };
+}
+
+export function evaluatePlayer(
+  guess: Player,
+  answer: Player,
+  shortName: (collegeId: string) => string,
+  conferenceOf: (collegeId: string) => string | null,
+): TileResult[] {
+  const heisman = (p: Player) => (p.heisman.length ? "Yes" : "No");
+  const heismanTile = compareCategory(heisman(guess), heisman(answer), "Heisman");
+  if (guess.heisman.length > 1) heismanTile.text = `${guess.heisman.length}×`;
+  return [
+    compareSchool(guess, answer, shortName, conferenceOf),
+    comparePosition(guess.position, answer.position),
+    compareNumber(guess.lastSeason, answer.lastSeason, "count", String, "Final season", undefined, 3),
+    heismanTile,
+    compareNumber(guess.titles, answer.titles, "count", String, "National titles", undefined, 1),
+    compareNumber(guess.jersey, answer.jersey, "count", (n) => `#${n}`, "Jersey", undefined, 5),
   ];
 }

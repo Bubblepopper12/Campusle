@@ -1,6 +1,6 @@
 {
   "source": "Hand-curated (scripts/data/players.tsv)",
-  "generatedAt": "2026-10-14T15:34:06.436Z",
+  "generatedAt": "2026-10-19T18:21:50.984Z",
   "players": [
     {"id":"red-grange","name":"Red Grange","short":"Red Grange","aliases":["The Galloping Ghost"],"position":"RB","schools":["university-of-illinois-urbana-champaign"],"lastSeason":1925,"heisman":[],"titles":1,"jersey":77,"active":false},
     {"id":"jim-brown","name":"Jim Brown","short":"Jim Brown","aliases":[],"position":"RB","schools":["syracuse-university"],"lastSeason":1956,"heisman":[],"titles":0,"jersey":44,"active":false},

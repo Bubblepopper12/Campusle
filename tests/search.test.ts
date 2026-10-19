@@ -25,6 +25,12 @@ describe("autocomplete", () => {
     ["MIT", "massachusetts-institute-of-technology"],
     ["UCLA", "university-of-california-los-angeles"],
     ["Bama", "university-of-alabama"],
+    ["SEMO", "southeast-missouri-state-university"],
+    ["UMKC", "university-of-missouri-kansas-city"],
+    ["geneseo", "suny-college-at-geneseo"],
+    ["evergreen", "evergreen-state-college"],
+    ["barnard", "barnard-college"],
+    ["cornell college", "cornell-college"],
   ])("%s → %s", (q, id) => {
     expect(top(q)).toBe(id);
   });

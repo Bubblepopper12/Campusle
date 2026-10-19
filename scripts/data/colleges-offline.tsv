@@ -407,3 +407,181 @@ San Francisco State University	San Francisco	CA	37.7241	-122.4799	21000	7400	0.9
 California State University-Long Beach	Long Beach	CA	33.7838	-118.1141	32000	7000	0.47	public	1949	Big West	The Beach
 California State University-Fullerton	Fullerton	CA	33.8829	-117.8869	36000	7000	0.80	public	1957	Big West	Titans
 California State Polytechnic University-Pomona	Pomona	CA	34.0565	-117.8217	26000	7400	0.55	public	1938	Division II	Broncos
+
+# --- Even more schools (Hard mode, round 2): regional, liberal arts, HBCUs, arts and tech ---
+Barnard College	New York	NY	40.8090	-73.9640	3300	66000	0.09	private	1889	None	
+Pace University	New York	NY	40.7113	-74.0047	8500	50000	0.85	private	1906	Division II	Setters
+Adelphi University	Garden City	NY	40.7208	-73.6529	5200	45000	0.75	private	1896	Division II	Panthers
+Siena College	Loudonville	NY	42.7183	-73.7524	3500	48000	0.80	private	1937	MAAC	Saints
+SUNY College at Geneseo	Geneseo	NY	42.7965	-77.8237	4000	9000	0.75	public	1871	Division III	Knights
+SUNY New Paltz	New Paltz	NY	41.7417	-74.0832	6500	8800	0.60	public	1828	Division III	Hawks
+Union College	Schenectady	NY	42.8175	-73.9298	2100	65000	0.45	private	1795	Division III	Garnet Chargers
+St Lawrence University	Canton	NY	44.5900	-75.1601	2100	63000	0.55	private	1856	Division III	Saints
+Alfred University	Alfred	NY	42.2545	-77.7898	1700	38000	0.65	private	1836	Division III	Saxons
+Manhattan University	Bronx	NY	40.8896	-73.9011	3400	48000	0.80	private	1853	MAAC	Jaspers
+Wagner College	Staten Island	NY	40.6152	-74.0937	1800	50000	0.80	private	1883	NEC	Seahawks
+Le Moyne College	Syracuse	NY	43.0478	-76.0868	2800	37000	0.75	private	1946	NEC	Dolphins
+Canisius University	Buffalo	NY	42.9334	-78.8516	2000	33000	0.80	private	1870	MAAC	Golden Griffins
+Niagara University	Lewiston	NY	43.1379	-79.0369	3000	37000	0.85	private	1856	MAAC	Purple Eagles
+Drew University	Madison	NJ	40.7610	-74.4246	1600	46000	0.75	private	1867	Division III	Rangers
+Rider University	Lawrenceville	NJ	40.2809	-74.7437	3700	37000	0.80	private	1865	MAAC	Broncs
+Montclair State University	Montclair	NJ	40.8628	-74.1984	18000	14000	0.90	public	1908	Division III	Red Hawks
+Rowan University	Glassboro	NJ	39.7104	-75.1199	16500	15000	0.80	public	1923	Division III	Profs
+Saint Peter's University	Jersey City	NJ	40.7270	-74.0697	2300	40000	0.85	private	1872	MAAC	Peacocks
+Ursinus College	Collegeville	PA	40.1925	-75.4527	1400	63000	0.80	private	1869	Division III	Bears
+Muhlenberg College	Allentown	PA	40.5976	-75.5101	1900	60000	0.65	private	1848	Division III	Mules
+Juniata College	Huntingdon	PA	40.5013	-78.0145	1300	52000	0.75	private	1876	Division III	Eagles
+Allegheny College	Meadville	PA	41.6489	-80.1438	1400	52000	0.75	private	1815	Division III	Gators
+Susquehanna University	Selinsgrove	PA	40.7963	-76.8789	2200	58000	0.80	private	1858	Division III	River Hawks
+Moravian University	Bethlehem	PA	40.6290	-75.3830	2200	50000	0.85	private	1742	Division III	Greyhounds
+Robert Morris University	Moon Township	PA	40.5096	-80.2006	3500	33000	0.85	private	1921	Horizon	Colonials
+Indiana University of Pennsylvania-Main Campus	Indiana	PA	40.6157	-79.1599	7500	12500	0.95	public	1875	Division II	Crimson Hawks
+West Chester University of Pennsylvania	West Chester	PA	39.9529	-75.6000	15000	11000	0.85	public	1871	Division II	Golden Rams
+Mount St Mary's University	Emmitsburg	MD	39.6801	-77.3487	1800	46000	0.85	private	1808	MAAC	Mountaineers
+St Mary's College of Maryland	St. Mary's City	MD	38.1897	-76.4264	1500	16000	0.85	public	1840	Division III	Seahawks
+Salisbury University	Salisbury	MD	38.3460	-75.6051	6800	10500	0.90	public	1925	Division III	Sea Gulls
+Goucher College	Towson	MD	39.4096	-76.5964	1000	50000	0.80	private	1885	Division III	Gophers
+Washington College	Chestertown	MD	39.2153	-76.0697	900	52000	0.75	private	1782	Division III	Shoremen
+Coppin State University	Baltimore	MD	39.3434	-76.6590	2000	7500	0.50	public	1900	MEAC	Eagles
+Delaware State University	Dover	DE	39.1859	-75.5427	5000	9000	0.55	public	1891	MEAC	Hornets
+Trinity College	Hartford	CT	41.7474	-72.6900	2200	66000	0.33	private	1823	Division III	Bantams
+University of Hartford	West Hartford	CT	41.7979	-72.7144	4500	45000	0.85	private	1877	Division III	Hawks
+Sacred Heart University	Fairfield	CT	41.2205	-73.2425	6000	47000	0.80	private	1963	MAAC	Pioneers
+University of New Haven	West Haven	CT	41.2930	-72.9614	6000	45000	0.85	private	1920	NEC	Chargers
+Stonehill College	Easton	MA	42.0570	-71.0846	2500	50000	0.80	private	1948	NEC	Skyhawks
+Merrimack College	North Andover	MA	42.6676	-71.1218	4500	48000	0.85	private	1947	MAAC	Warriors
+Suffolk University	Boston	MA	42.3586	-71.0614	4500	43000	0.85	private	1906	Division III	Rams
+University of Massachusetts-Lowell	Lowell	MA	42.6545	-71.3245	13500	17000	0.85	public	1894	America East	River Hawks
+University of Massachusetts-Boston	Boston	MA	42.3134	-71.0384	12500	15500	0.80	public	1964	Division III	Beacons
+Simmons University	Boston	MA	42.3393	-71.0995	1800	45000	0.80	private	1899	Division III	Sharks
+Champlain College	Burlington	VT	44.4734	-73.2054	2000	45000	0.85	private	1878	None	Beavers
+Saint Michael's College	Colchester	VT	44.4948	-73.1690	1300	50000	0.85	private	1904	Division II	Purple Knights
+Norwich University	Northfield	VT	44.1404	-72.6719	2800	43000	0.75	private	1819	Division III	Cadets
+Saint Anselm College	Manchester	NH	42.9840	-71.5068	2000	46000	0.75	private	1889	Division II	Hawks
+Roger Williams University	Bristol	RI	41.6497	-71.2601	4000	40000	0.85	private	1956	Division III	Hawks
+University of Mary Washington	Fredericksburg	VA	38.3018	-77.4744	3500	14500	0.85	public	1908	Division III	Eagles
+Hampden-Sydney College	Hampden-Sydney	VA	37.2422	-78.4597	850	48000	0.60	private	1775	Division III	Tigers
+Sweet Briar College	Sweet Briar	VA	37.5530	-79.0790	450	23000	0.80	private	1901	Division III	Vixens
+Radford University	Radford	VA	37.1371	-80.5545	6500	12000	0.90	public	1910	Big South	Highlanders
+Longwood University	Farmville	VA	37.2977	-78.3967	3700	15000	0.90	public	1839	Big South	Lancers
+Roanoke College	Salem	VA	37.2934	-80.0545	1900	50000	0.75	private	1842	Division III	Maroons
+Virginia State University	Petersburg	VA	37.2340	-77.4220	4500	10000	0.95	public	1882	Division II	Trojans
+University of North Carolina at Asheville	Asheville	NC	35.6161	-82.5653	3000	7500	0.85	public	1927	Big South	Bulldogs
+Western Carolina University	Cullowhee	NC	35.3088	-83.1854	10500	4500	0.80	public	1889	SoCon	Catamounts
+Campbell University	Buies Creek	NC	35.4078	-78.7377	4000	38000	0.90	private	1887	CAA	Fighting Camels
+Guilford College	Greensboro	NC	36.0928	-79.8873	1100	40000	0.85	private	1837	Division III	Quakers
+Gardner-Webb University	Boiling Springs	NC	35.2462	-81.6676	2200	33000	0.85	private	1905	Big South	Runnin' Bulldogs
+Queens University of Charlotte	Charlotte	NC	35.1886	-80.8318	1800	40000	0.85	private	1857	ASUN	Royals
+North Carolina Central University	Durham	NC	35.9756	-78.8988	7000	7000	0.75	public	1910	MEAC	Eagles
+Winston-Salem State University	Winston-Salem	NC	36.0905	-80.2229	4500	6000	0.70	public	1892	Division II	Rams
+Presbyterian College	Clinton	SC	34.4762	-81.8778	1100	42000	0.70	private	1880	Big South	Blue Hose
+Winthrop University	Rock Hill	SC	34.9396	-81.0306	4000	16000	0.75	public	1886	Big South	Eagles
+South Carolina State University	Orangeburg	SC	33.4983	-80.8509	2500	11000	0.85	public	1896	MEAC	Bulldogs
+Georgia College & State University	Milledgeville	GA	33.0801	-83.2321	5800	9500	0.85	public	1889	Division II	Bobcats
+Berry College	Mount Berry	GA	34.2895	-85.1859	2100	40000	0.75	private	1902	Division III	Vikings
+Oglethorpe University	Atlanta	GA	33.8745	-84.3346	1300	43000	0.75	private	1835	Division III	Stormy Petrels
+Valdosta State University	Valdosta	GA	30.8483	-83.2896	8000	6500	0.80	public	1906	Division II	Blazers
+Albany State University	Albany	GA	31.5786	-84.1428	5500	6000	0.90	public	1903	Division II	Golden Rams
+Savannah State University	Savannah	GA	32.0222	-81.0559	3000	6000	0.95	public	1890	Division II	Tigers
+New College of Florida	Sarasota	FL	27.3842	-82.5616	700	7000	0.75	public	1960	NAIA	Mighty Banyans
+Florida Southern College	Lakeland	FL	28.0310	-81.9471	2900	40000	0.50	private	1883	Division II	Moccasins
+Jacksonville University	Jacksonville	FL	30.3502	-81.6056	2800	43000	0.85	private	1934	ASUN	Dolphins
+University of North Florida	Jacksonville	FL	30.2672	-81.5098	14000	6400	0.75	public	1965	ASUN	Ospreys
+Eckerd College	St. Petersburg	FL	27.7110	-82.6869	2000	50000	0.75	private	1958	Division II	Tritons
+University of West Florida	Pensacola	FL	30.5490	-87.2180	10000	6400	0.60	public	1963	Division II	Argonauts
+Lipscomb University	Nashville	TN	36.1063	-86.7987	3000	38000	0.65	private	1891	ASUN	Bisons
+Fisk University	Nashville	TN	36.1688	-86.8045	900	22000	0.70	private	1866	NAIA	Bulldogs
+East Tennessee State University	Johnson City	TN	36.3017	-82.3698	11000	10000	0.85	public	1911	SoCon	Buccaneers
+Austin Peay State University	Clarksville	TN	36.5340	-87.3542	8500	9000	0.95	public	1927	ASUN	Governors
+Tennessee Technological University	Cookeville	TN	36.1749	-85.5084	8500	10500	0.80	public	1915	OVC	Golden Eagles
+Transylvania University	Lexington	KY	38.0510	-84.4940	950	45000	0.85	private	1780	Division III	Pioneers
+Northern Kentucky University	Highland Heights	KY	39.0313	-84.4639	12000	10500	0.90	public	1968	Horizon	Norse
+Bellarmine University	Louisville	KY	38.2193	-85.7023	2700	46000	0.85	private	1950	ASUN	Knights
+University of North Alabama	Florence	AL	34.8065	-87.6772	7000	11000	0.85	public	1830	ASUN	Lions
+Alabama A & M University	Normal	AL	34.7834	-86.5685	6000	10000	0.70	public	1875	SWAC	Bulldogs
+Millsaps College	Jackson	MS	32.3238	-90.1773	600	46000	0.85	private	1890	Division III	Majors
+Mississippi Valley State University	Itta Bena	MS	33.4935	-90.3239	2000	7000	0.85	public	1950	SWAC	Delta Devils
+Centenary College of Louisiana	Shreveport	LA	32.4796	-93.7311	550	40000	0.65	private	1825	Division III	Gents
+McNeese State University	Lake Charles	LA	30.1784	-93.2158	6000	9000	0.75	public	1939	Southland	Cowboys
+Nicholls State University	Thibodaux	LA	29.7915	-90.8023	5700	9000	0.95	public	1948	Southland	Colonels
+Northwestern State University of Louisiana	Natchitoches	LA	31.7505	-93.0962	8000	9000	0.90	public	1884	Southland	Demons
+Southeastern Louisiana University	Hammond	LA	30.5150	-90.4676	12000	9000	0.90	public	1925	Southland	Lions
+Dillard University	New Orleans	LA	29.9822	-90.0598	1100	20000	0.85	private	1869	NAIA	Bleu Devils
+Hendrix College	Conway	AR	35.1000	-92.4410	1100	52000	0.75	private	1876	Division III	Warriors
+University of Arkansas at Little Rock	Little Rock	AR	34.7244	-92.3384	7500	10000	0.70	public	1927	OVC	Trojans
+Harding University	Searcy	AR	35.2471	-91.7240	3500	25000	0.55	private	1924	Division II	Bisons
+University of Arkansas at Pine Bluff	Pine Bluff	AR	34.2380	-92.0172	2500	9000	0.95	public	1873	SWAC	Golden Lions
+Austin College	Sherman	TX	33.6467	-96.6000	1200	46000	0.65	private	1849	Division III	Kangaroos
+Southwestern University	Georgetown	TX	30.6346	-97.6639	1500	50000	0.50	private	1840	Division III	Pirates
+St Edward's University	Austin	TX	30.2290	-97.7547	3000	52000	0.90	private	1885	Division II	Hilltoppers
+University of Dallas	Irving	TX	32.8462	-96.9201	1400	47000	0.65	private	1956	Division III	Crusaders
+Lamar University	Beaumont	TX	30.0400	-94.0748	13000	10500	0.85	public	1923	Southland	Cardinals
+Texas A & M University-Corpus Christi	Corpus Christi	TX	27.7130	-97.3247	9000	10000	0.90	public	1947	Southland	Islanders
+University of the Incarnate Word	San Antonio	TX	29.4685	-98.4669	5000	37000	0.95	private	1881	Southland	Cardinals
+The University of Texas Rio Grande Valley	Edinburg	TX	26.3060	-98.1726	29000	9000	0.90	public	2013	Southland	Vaqueros
+Houston Christian University	Houston	TX	29.6942	-95.5146	2400	38000	0.65	private	1960	Southland	Huskies
+University of Central Oklahoma	Edmond	OK	35.6556	-97.4707	11000	8500	0.80	public	1890	Division II	Bronchos
+Langston University	Langston	OK	35.9431	-97.2539	1800	7000	0.95	public	1897	NAIA	Lions
+Ohio Wesleyan University	Delaware	OH	40.2959	-83.0669	1400	52000	0.75	private	1842	Division III	Battling Bishops
+Wittenberg University	Springfield	OH	39.9311	-83.8139	1200	45000	0.75	private	1845	Division III	Tigers
+John Carroll University	University Heights	OH	41.4902	-81.5321	2900	48000	0.85	private	1886	Division III	Blue Streaks
+Wright State University-Main Campus	Dayton	OH	39.7814	-84.0627	9000	10500	0.95	public	1964	Horizon	Raiders
+Youngstown State University	Youngstown	OH	41.1056	-80.6455	10500	10000	0.75	public	1908	Horizon	Penguins
+Cleveland State University	Cleveland	OH	41.5021	-81.6747	10500	12500	0.95	public	1964	Horizon	Vikings
+Baldwin Wallace University	Berea	OH	41.3696	-81.8483	2800	36000	0.85	private	1845	Division III	Yellow Jackets
+Earlham College	Richmond	IN	39.8226	-84.9134	700	50000	0.70	private	1847	Division III	Quakers
+Indiana State University	Terre Haute	IN	39.4710	-87.4071	8000	10000	0.95	public	1865	MVC	Sycamores
+University of Evansville	Evansville	IN	37.9718	-87.5326	2000	43000	0.85	private	1854	MVC	Purple Aces
+Saint Mary's College	Notre Dame	IN	41.7068	-86.2622	1500	50000	0.80	private	1844	Division III	Belles
+Knox College	Galesburg	IL	40.9447	-90.3727	1100	54000	0.75	private	1837	Division III	Prairie Fire
+Lake Forest College	Lake Forest	IL	42.2501	-87.8285	1700	53000	0.60	private	1857	Division III	Foresters
+Augustana College	Rock Island	IL	41.5040	-90.5491	2400	48000	0.70	private	1860	Division III	Vikings
+Southern Illinois University-Carbondale	Carbondale	IL	37.7106	-89.2193	9000	15000	0.90	public	1869	MVC	Salukis
+Western Illinois University	Macomb	IL	40.4729	-90.6815	5000	12000	0.70	public	1899	OVC	Leathernecks
+Eastern Illinois University	Charleston	IL	39.4818	-88.1754	4500	12500	0.70	public	1895	OVC	Panthers
+Kalamazoo College	Kalamazoo	MI	42.2902	-85.6020	1300	56000	0.80	private	1833	Division III	Hornets
+Hope College	Holland	MI	42.7870	-86.1027	3100	39000	0.85	private	1866	Division III	Flying Dutchmen
+Oakland University	Rochester Hills	MI	42.6741	-83.2153	13000	15000	0.85	public	1957	Horizon	Golden Grizzlies
+Northern Michigan University	Marquette	MI	46.5590	-87.4059	6500	13000	0.75	public	1899	Division II	Wildcats
+Kettering University	Flint	MI	43.0127	-83.7140	1400	47000	0.75	private	1919	None	
+Lawrence University	Appleton	WI	44.2620	-88.3970	1400	56000	0.70	private	1847	Division III	Vikings
+Beloit College	Beloit	WI	42.5050	-89.0298	1000	55000	0.65	private	1846	Division III	Buccaneers
+University of Wisconsin-La Crosse	La Crosse	WI	43.8164	-91.2290	9300	9500	0.75	public	1909	Division III	Eagles
+University of Wisconsin-Green Bay	Green Bay	WI	44.5306	-87.9213	9000	8500	0.95	public	1965	Horizon	Phoenix
+Gustavus Adolphus College	St. Peter	MN	44.3236	-93.9714	2200	52000	0.80	private	1862	Division III	Golden Gusties
+Saint John's University	Collegeville	MN	45.5807	-94.3922	1700	50000	0.85	private	1857	Division III	Johnnies
+University of Minnesota-Duluth	Duluth	MN	46.8187	-92.0838	9000	14000	0.75	public	1947	Division II	Bulldogs
+Cornell College	Mount Vernon	IA	41.9257	-91.4218	1000	50000	0.70	private	1853	Division III	Rams
+Luther College	Decorah	IA	43.3123	-91.8039	1600	48000	0.70	private	1861	Division III	Norse
+Truman State University	Kirksville	MO	40.1876	-92.5810	3800	9200	0.65	public	1867	Division II	Bulldogs
+Southeast Missouri State University	Cape Girardeau	MO	37.3150	-89.5303	9000	9500	0.85	public	1873	OVC	Redhawks
+University of Missouri-Kansas City	Kansas City	MO	39.0335	-94.5770	9000	11000	0.65	public	1929	Summit	Roos
+Washburn University	Topeka	KS	39.0333	-95.7015	4500	9500	1.00	public	1865	Division II	Ichabods
+Pittsburg State University	Pittsburg	KS	37.3910	-94.7036	5000	8000	0.90	public	1903	Division II	Gorillas
+University of Colorado Colorado Springs	Colorado Springs	CO	38.8935	-104.8001	9500	11000	0.95	public	1965	Division II	Mountain Lions
+Fort Lewis College	Durango	CO	37.2768	-107.8696	3000	9500	0.90	public	1911	Division II	Skyhawks
+Utah Valley University	Orem	UT	40.2785	-111.7134	41000	6200	1.00	public	1941	Big West	Wolverines
+Idaho State University	Pocatello	ID	42.8620	-112.4310	10000	8300	0.99	public	1901	Big Sky	Bengals
+Brigham Young University-Idaho	Rexburg	ID	43.8195	-111.7843	40000	4500	0.99	private	1888	None	
+The College of Idaho	Caldwell	ID	43.6513	-116.6838	1100	36000	0.65	private	1891	NAIA	Yotes
+New Mexico Institute of Mining and Technology	Socorro	NM	34.0663	-106.9067	1300	8500	0.95	public	1889	None	
+Grand Canyon University	Phoenix	AZ	33.5110	-112.1286	25000	17800	0.80	private	1949	Mountain West	Antelopes
+California State University-Los Angeles	Los Angeles	CA	34.0668	-118.1684	22000	6900	0.90	public	1947	Division II	Golden Eagles
+California State University-Northridge	Northridge	CA	34.2410	-118.5277	34000	7000	0.90	public	1958	Big West	Matadors
+California State Polytechnic University-Humboldt	Arcata	CA	40.8752	-124.0787	5500	8000	0.95	public	1913	Division II	Lumberjacks
+California State University-Chico	Chico	CA	39.7300	-121.8452	13000	7600	0.95	public	1887	Division II	Wildcats
+California State University-Bakersfield	Bakersfield	CA	35.3500	-119.1030	9500	7700	0.90	public	1965	Big West	Roadrunners
+University of Redlands	Redlands	CA	34.0631	-117.1648	2300	58000	0.75	private	1907	Division III	Bulldogs
+Point Loma Nazarene University	San Diego	CA	32.7180	-117.2520	3200	44000	0.80	private	1902	Division II	Sea Lions
+Biola University	La Mirada	CA	33.9054	-118.0158	3800	48000	0.70	private	1908	Division II	Eagles
+California Lutheran University	Thousand Oaks	CA	34.2244	-118.8791	2700	50000	0.75	private	1959	Division III	Kingsmen
+California Institute of the Arts	Valencia	CA	34.3925	-118.5677	1000	57000	0.30	private	1961	None	
+Thomas Aquinas College	Santa Paula	CA	34.4130	-119.0861	400	28000	0.80	private	1971	None	
+Willamette University	Salem	OR	44.9369	-123.0323	1300	53000	0.80	private	1842	Division III	Bearcats
+Linfield University	McMinnville	OR	45.2025	-123.1953	1300	49000	0.80	private	1858	Division III	Wildcats
+Pacific Lutheran University	Tacoma	WA	47.1460	-122.4436	2400	50000	0.85	private	1890	Division III	Lutes
+Whitworth University	Spokane	WA	47.7537	-117.4171	2200	50000	0.90	private	1890	Division III	Pirates
+Central Washington University	Ellensburg	WA	47.0026	-120.5389	9000	9000	0.90	public	1891	Division II	Wildcats
+The Evergreen State College	Olympia	WA	47.0723	-122.9760	2000	9000	0.98	public	1967	NAIA	Geoducks
+Hawaii Pacific University	Honolulu	HI	21.3081	-157.8610	3500	33000	0.90	private	1965	Division II	Sharks
+University of Hawaii at Hilo	Hilo	HI	19.7020	-155.0820	2500	8000	0.70	public	1941	Division II	Vulcans

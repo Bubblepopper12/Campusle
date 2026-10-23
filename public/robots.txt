@@ -1,0 +1,5 @@
+# Campusle welcomes all crawlers, including Google's ad reviewer (Mediapartners-Google).
+User-agent: *
+Allow: /
+
+Sitemap: https://campusle.com/sitemap.xml

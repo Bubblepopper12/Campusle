@@ -27,8 +27,22 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
-    <noscript>Campusle needs JavaScript to play.</noscript>
+    <!-- Readable content for crawlers and before the game loads. React replaces everything inside #root on start-up. -->
+    <div id="root">
+      <main style="max-width: 560px; margin: 0 auto; padding: 72px 20px 40px; line-height: 1.55">
+        <h1 style="font-size: 34px; margin: 0 0 8px">Campusle: the daily college guessing game</h1>
+        <p>Guess the mystery college in six tries. Every guess shows clues comparing your pick to the answer: distance and direction on the map, enrollment, acceptance rate, tuition, founding year and athletic conference. A new puzzle every day at midnight, the same for everyone. Free, no account needed.</p>
+        <h2 style="font-size: 20px; margin: 24px 0 6px">Four daily games</h2>
+        <ul>
+          <li><b>Classic</b>: well-known U.S. colleges and universities.</li>
+          <li><b>Classic · Hard</b>: niche schools, from small liberal arts colleges to HBCUs and engineering schools.</li>
+          <li><b>Football</b>: FBS college football programs, with stadium, conference, titles and team-color clues.</li>
+          <li><b>Players</b>: famous college football players, with school, position, Heisman, titles and jersey clues.</li>
+        </ul>
+        <p><a href="/how-to-play.html">How to play</a> · <a href="/about.html">About Campusle</a> · <a href="/privacy.html">Privacy policy</a></p>
+        <noscript><p><b>Campusle needs JavaScript to play.</b> Turn it on in your browser settings to start today's puzzle.</p></noscript>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

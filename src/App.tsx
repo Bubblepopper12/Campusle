@@ -112,6 +112,14 @@ export default function App() {
           {scene === "gridiron" && "Football data is hand-curated."}
           {scene === "cards" && "Player data is hand-curated."}
           <br />
+          <a href="/how-to-play.html" className="underline underline-offset-2">
+            How to play
+          </a>
+          {" · "}
+          <a href="/about.html" className="underline underline-offset-2">
+            About
+          </a>
+          {" · "}
           <a href="/privacy.html" className="underline underline-offset-2">
             Privacy
           </a>

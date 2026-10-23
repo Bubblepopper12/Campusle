@@ -2,7 +2,7 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { College, FootballTeam, Player, Position, TeamColor } from "../../src/lib/types.ts";
+import type { College, Control, FootballTeam, Player, Position, TeamColor } from "../../src/lib/types.ts";
 import { parseAnswerList } from "../../src/lib/answers.ts";
 import { slugify } from "../../src/lib/slug.ts";
 import { KNOWN_SHORT } from "./conferences.ts";
@@ -47,6 +47,27 @@ export function assignIds<T extends { name: string; state: string }>(rows: T[]):
     used.add(id);
     return { ...r, id };
   });
+}
+
+/** The hand-entered table in scripts/data/colleges-offline.tsv, with ids. Every answer-list school is in it. */
+export function loadOfflineColleges(): College[] {
+  const rows = readTsv(path("scripts", "data", "colleges-offline.tsv")).map(
+    ([name, city, state, lat, lon, undergrads, tuition, acceptance, control, founded, conference, mascot]) => ({
+      name,
+      city,
+      state,
+      lat: num(lat)!,
+      lon: num(lon)!,
+      undergrads: num(undergrads),
+      tuition: num(tuition),
+      acceptance: num(acceptance),
+      control: (control === "public" || control === "private" ? control : null) as Control | null,
+      founded: num(founded),
+      conference: conference || null,
+      mascot: mascot || null,
+    }),
+  );
+  return assignIds(rows).map((r) => ({ ...r, short: autoShort(r.name), aliases: [] }));
 }
 
 /** A readable short name for schools that have none in aliases.json. */

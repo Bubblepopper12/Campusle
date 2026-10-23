@@ -1,6 +1,8 @@
 // Builds src/data/colleges.json from real sources:
 //   - U.S. Department of Education College Scorecard API: location, enrollment, tuition, acceptance rate, public/private
 //   - Wikidata: founding year, athletic conference, mascot / team name
+//   - scripts/data/colleges-offline.tsv: conference and mascot first (Wikidata rarely has them, or lists a pre-realignment
+//     conference), and a fallback for anything else the sources leave empty
 // Then merges src/data/aliases.json and src/data/overrides.json and prints a report of missing or suspicious values.
 //
 // Run: SCORECARD_API_KEY=xxxx npm run data:build      (free key: https://api.data.gov/signup/)
@@ -8,7 +10,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { College } from "../src/lib/types.ts";
-import { ROOT, assignIds, autoShort, finalize } from "./lib/pipeline.ts";
+import { ROOT, assignIds, autoShort, finalize, loadOfflineColleges } from "./lib/pipeline.ts";
 import { SCORECARD_FIELDS, aggregateWikidata, mapScorecardRow, wikidataQuery, type ScorecardSchool } from "./lib/sources.ts";
 
 const CACHE = join(ROOT, "scripts", ".cache");
@@ -16,6 +18,25 @@ const REFRESH = process.argv.includes("--refresh");
 const SCORECARD_URL = "https://api.data.gov/ed/collegescorecard/v1/schools.json";
 const WIKIDATA_URL = "https://query.wikidata.org/sparql";
 const USER_AGENT = "CampusleDataBuilder/1.0 (https://campusle.com; data build script)";
+
+/** Answer-list schools the bachelor's-degree filter leaves out (they mostly award associate's degrees). IPEDS unit ids. */
+const EXTRA_UNITIDS = [
+  "142522", // Brigham Young University-Idaho
+  "207209", // Langston University
+  "230737", // Utah Valley University
+  "230782", // Weber State University
+];
+
+/** Scorecard renamed these schools; keep the old ids so answer lists, aliases and the daily schedule stay put. */
+const LEGACY_IDS: Record<string, string> = {
+  "indiana-university-of-pennsylvania": "indiana-university-of-pennsylvania-main-campus",
+  "marist-university": "marist-college",
+  "saint-josephs-university-philadelphia": "saint-josephs-university",
+  "siena-university": "siena-college",
+  "saint-edwards-university": "st-edwards-university",
+  "state-university-of-new-york-at-new-paltz": "suny-new-paltz",
+  "university-of-north-carolina-asheville": "university-of-north-carolina-at-asheville",
+};
 
 function loadDotEnv() {
   const file = join(ROOT, ".env");
@@ -58,17 +79,14 @@ function cached<T>(name: string, produce: () => Promise<T>): Promise<T> {
   });
 }
 
-/** Every operating, public or private nonprofit, predominantly bachelor's-granting school with 300+ undergrads. */
-async function fetchScorecard(apiKey: string): Promise<Record<string, unknown>[]> {
-  return cached("scorecard.json", async () => {
+/** Scorecard rows matching `filters`, every page. */
+async function fetchScorecard(apiKey: string, cacheName: string, filters: Record<string, string>): Promise<Record<string, unknown>[]> {
+  return cached(cacheName, async () => {
     const rows: Record<string, unknown>[] = [];
     for (let page = 0; ; page++) {
       const params = new URLSearchParams({
         api_key: apiKey,
-        "school.degrees_awarded.predominant": "3",
-        "school.operating": "1",
-        "school.ownership": "1,2",
-        "latest.student.size__range": "300..",
+        ...filters,
         fields: SCORECARD_FIELDS.join(","),
         per_page: "100",
         page: String(page),
@@ -117,15 +135,32 @@ async function main() {
   }
 
   console.log("Downloading College Scorecard…");
-  const schools = (await fetchScorecard(apiKey)).map(mapScorecardRow).filter((s): s is ScorecardSchool => s !== null);
+  // Every operating, public or private nonprofit, predominantly bachelor's-granting school with 300+ undergrads.
+  const main = await fetchScorecard(apiKey, "scorecard.json", {
+    "school.degrees_awarded.predominant": "3",
+    "school.operating": "1",
+    "school.ownership": "1,2",
+    "latest.student.size__range": "300..",
+  });
+  const extra = await fetchScorecard(apiKey, "scorecard-extra.json", { id: EXTRA_UNITIDS.join(",") });
+  // Online-only campuses have no place on the map for the distance clue.
+  const ONLINE = /online|global campus|worldwide/i;
+  const schools = [...main, ...extra]
+    .map(mapScorecardRow)
+    .filter((s): s is ScorecardSchool => s !== null && !ONLINE.test(s.name));
   console.log(`  ${schools.length} schools in the 50 states + DC`);
 
   console.log("Querying Wikidata…");
   const facts = aggregateWikidata(await fetchWikidata(schools.map((s) => s.unitid)));
 
+  const offline = new Map(loadOfflineColleges().map((c) => [c.id, c]));
   const notes: string[] = [];
-  const colleges: College[] = assignIds(schools).map((s) => {
+  const colleges: College[] = assignIds(schools).map((row) => {
+    const s = { ...row, id: LEGACY_IDS[row.id] ?? row.id };
     const f = facts.get(s.unitid);
+    const hand = offline.get(s.id);
+    const filled = (["undergrads", "tuition", "acceptance", "control"] as const).filter((k) => s[k] === null && hand?.[k] != null);
+    if (filled.length) notes.push(`${s.id}: no Scorecard ${filled.join(", ")}; using the hand-entered estimate`);
     if (f && f.foundedCandidates.length > 1 && f.foundedCandidates.at(-1)! - f.foundedCandidates[0] > 5) {
       notes.push(`${s.id}: Wikidata lists several founding years (${f.foundedCandidates.join(", ")}); using ${f.founded}`);
     }
@@ -136,20 +171,23 @@ async function main() {
       id: s.id,
       name: s.name,
       short: autoShort(s.name),
-      aliases: s.scorecardAliases,
+      aliases: hand && hand.name !== s.name ? [...s.scorecardAliases, hand.name] : s.scorecardAliases,
       city: s.city,
       state: s.state,
       lat: s.lat,
       lon: s.lon,
-      undergrads: s.undergrads,
-      tuition: s.tuition,
-      acceptance: s.acceptance,
-      control: s.control,
-      founded: f?.founded ?? null,
-      conference: f?.conference ?? null,
-      mascot: f?.mascot ?? null,
+      undergrads: s.undergrads ?? hand?.undergrads ?? null,
+      tuition: s.tuition ?? hand?.tuition ?? null,
+      acceptance: s.acceptance ?? hand?.acceptance ?? null,
+      control: s.control ?? hand?.control ?? null,
+      founded: f?.founded ?? hand?.founded ?? null,
+      conference: hand?.conference ?? f?.conference ?? null,
+      mascot: hand?.mascot ?? f?.mascot ?? null,
     };
   });
+
+  const missing = [...offline.keys()].filter((id) => !colleges.some((c) => c.id === id));
+  if (missing.length) notes.push(`Hand-entered schools with no Scorecard match (add to LEGACY_IDS or EXTRA_UNITIDS): ${missing.join(", ")}`);
 
   finalize(colleges, "U.S. Department of Education College Scorecard + Wikidata", notes);
 }

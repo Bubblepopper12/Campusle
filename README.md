@@ -106,15 +106,16 @@ To fix a value, add it to `overrides.json`:
 
 An override for an unknown ID that includes `name`, `city`, `state`, `lat` and `lon` adds a new school.
 
-### ⚠️ About the data in this commit
+### About the data in this commit
 
-The College Scorecard API and Wikidata couldn't be reached from the environment this was built in. So the committed `colleges.json` comes from the **offline fallback** (`npm run data:offline`): 252 schools whose stats were hand-entered from general knowledge and rounded. The site footer says "Preview data: school stats are approximate" until real data is built. Before launch:
+`colleges.json` is built by `npm run data:build` (College Scorecard + Wikidata, October 2026): about 1,500 four-year schools, plus the few answer-list schools the bachelor's-degree filter misses (`EXTRA_UNITIDS` in `scripts/build-data.ts`). Online-only campuses are left out.
 
-1. Run `npm run data:build` with your key. This replaces the 252 schools with the full Scorecard list of four-year schools.
-2. Read the report. If a Scorecard name differs from what the fallback assumed, the matching answer ID shows as missing and the report suggests the right one. Fix those IDs in `answers.txt` and the matching keys in `aliases.json`.
-3. Spot-check conferences. Wikidata often lags conference realignment (2024–2026 moves), so pin the current ones in `overrides.json`.
+- Conference and mascot come from `scripts/data/colleges-offline.tsv` first, because Wikidata rarely has them and often lists a pre-realignment conference. Schools outside that table fall back to Wikidata, which leaves most of them blank.
+- If Scorecard renames a school, add the new id to `LEGACY_IDS` in `scripts/build-data.ts` so the old id (and the daily schedule) stays put. The report lists answer IDs that went missing.
+- Founding years where Wikidata gives a merger or renaming date are pinned in `overrides.json`.
+- The Scorecard host and `query.wikidata.org` must be reachable. In a proxied Node environment run the build with `NODE_USE_ENV_PROXY=1`.
 
-Football and Players data have no free API source, so `football.tsv` and `players.tsv` are hand-curated and approximate. Check stadium capacities and title counts, and especially current players (who's still playing in 2026, transfers, jersey numbers), before launch. The report flags anything out of range. After editing either file, run `npm run data:offline` (or `data:build`) to regenerate the JSON.
+Football and Players data have no free API source, so `football.tsv` and `players.tsv` are hand-curated. Current players were checked in October 2026. Recheck who's still playing, transfers and jersey numbers each season. After editing either file, run `npm run data:build` (or `data:offline`) to regenerate the JSON.
 
 ## Project layout
 

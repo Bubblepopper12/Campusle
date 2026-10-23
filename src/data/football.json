@@ -1,6 +1,6 @@
 {
   "source": "Hand-curated (scripts/data/football.tsv) + overrides",
-  "generatedAt": "2026-10-23T20:49:19.868Z",
+  "generatedAt": "2026-10-23T21:09:54.945Z",
   "teams": [
     {"id":"appalachian-state-university","conference":"Sun Belt","stadium":"Kidd Brewer Stadium","capacity":30000,"firstSeason":1928,"titles":0,"colors":[{"name":"black","hex":"#000000"},{"name":"gold","hex":"#FFCC00"}]},
     {"id":"arizona-state-university-campus-immersion","conference":"Big 12","stadium":"Mountain America Stadium","capacity":53599,"firstSeason":1897,"titles":0,"colors":[{"name":"maroon","hex":"#8C1D40"},{"name":"gold","hex":"#FFC627"}]},

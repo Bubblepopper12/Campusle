@@ -1,6 +1,6 @@
 {
   "source": "Offline fallback (hand-entered, approximate). Run `npm run data:build` for real data.",
-  "generatedAt": "2026-10-19T18:21:50.984Z",
+  "generatedAt": "2026-10-23T20:49:19.868Z",
   "colleges": [
     {"name":"Adelphi University","city":"Garden City","state":"NY","lat":40.7208,"lon":-73.6529,"undergrads":5200,"tuition":45000,"acceptance":0.75,"control":"private","founded":1896,"conference":"Division II","mascot":"Panthers","id":"adelphi-university","short":"Adelphi","aliases":[]},
     {"name":"Agnes Scott College","city":"Decatur","state":"GA","lat":33.7686,"lon":-84.2933,"undergrads":1000,"tuition":49000,"acceptance":0.7,"control":"private","founded":1889,"conference":"Division III","mascot":"Scotties","id":"agnes-scott-college","short":"Agnes Scott","aliases":[]},

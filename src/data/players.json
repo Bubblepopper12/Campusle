@@ -1,6 +1,6 @@
 {
   "source": "Hand-curated (scripts/data/players.tsv)",
-  "generatedAt": "2026-10-19T18:21:50.984Z",
+  "generatedAt": "2026-10-23T20:49:19.868Z",
   "players": [
     {"id":"red-grange","name":"Red Grange","short":"Red Grange","aliases":["The Galloping Ghost"],"position":"RB","schools":["university-of-illinois-urbana-champaign"],"lastSeason":1925,"heisman":[],"titles":1,"jersey":77,"active":false},
     {"id":"jim-brown","name":"Jim Brown","short":"Jim Brown","aliases":[],"position":"RB","schools":["syracuse-university"],"lastSeason":1956,"heisman":[],"titles":0,"jersey":44,"active":false},
@@ -141,7 +141,7 @@
     {"id":"jalen-milroe","name":"Jalen Milroe","short":"Jalen Milroe","aliases":[],"position":"QB","schools":["university-of-alabama"],"lastSeason":2024,"heisman":[],"titles":0,"jersey":4,"active":false},
     {"id":"fernando-mendoza","name":"Fernando Mendoza","short":"Fernando Mendoza","aliases":[],"position":"QB","schools":["indiana-university-bloomington","university-of-california-berkeley"],"lastSeason":2025,"heisman":[2025],"titles":1,"jersey":15,"active":false},
     {"id":"carson-beck","name":"Carson Beck","short":"Carson Beck","aliases":[],"position":"QB","schools":["university-of-georgia","university-of-miami"],"lastSeason":2025,"heisman":[],"titles":2,"jersey":15,"active":false},
-    {"id":"trinidad-chambliss","name":"Trinidad Chambliss","short":"Trinidad Chambliss","aliases":[],"position":"QB","schools":["university-of-mississippi"],"lastSeason":2025,"heisman":[],"titles":0,"jersey":6,"active":false},
+    {"id":"trinidad-chambliss","name":"Trinidad Chambliss","short":"Trinidad Chambliss","aliases":[],"position":"QB","schools":["university-of-mississippi"],"lastSeason":2026,"heisman":[],"titles":0,"jersey":6,"active":true},
     {"id":"jeremiyah-love","name":"Jeremiyah Love","short":"Jeremiyah Love","aliases":[],"position":"RB","schools":["university-of-notre-dame"],"lastSeason":2025,"heisman":[],"titles":0,"jersey":4,"active":false},
     {"id":"caleb-downs","name":"Caleb Downs","short":"Caleb Downs","aliases":[],"position":"DB","schools":["ohio-state-university-main-campus","university-of-alabama"],"lastSeason":2025,"heisman":[],"titles":1,"jersey":2,"active":false},
     {"id":"diego-pavia","name":"Diego Pavia","short":"Diego Pavia","aliases":[],"position":"QB","schools":["vanderbilt-university","new-mexico-state-university-main-campus"],"lastSeason":2025,"heisman":[],"titles":0,"jersey":2,"active":false},
@@ -150,7 +150,7 @@
     {"id":"jeremiah-smith","name":"Jeremiah Smith","short":"Jeremiah Smith","aliases":[],"position":"WR","schools":["ohio-state-university-main-campus"],"lastSeason":2026,"heisman":[],"titles":1,"jersey":4,"active":true},
     {"id":"arch-manning","name":"Arch Manning","short":"Arch Manning","aliases":[],"position":"QB","schools":["university-of-texas-at-austin"],"lastSeason":2026,"heisman":[],"titles":0,"jersey":16,"active":true},
     {"id":"julian-sayin","name":"Julian Sayin","short":"Julian Sayin","aliases":[],"position":"QB","schools":["ohio-state-university-main-campus"],"lastSeason":2026,"heisman":[],"titles":1,"jersey":10,"active":true},
-    {"id":"ryan-williams","name":"Ryan Williams","short":"Ryan Williams","aliases":[],"position":"WR","schools":["university-of-alabama"],"lastSeason":2026,"heisman":[],"titles":0,"jersey":2,"active":true},
+    {"id":"ryan-williams","name":"Ryan Williams","short":"Ryan Williams","aliases":["Ryan Coleman-Williams"],"position":"WR","schools":["university-of-alabama"],"lastSeason":2026,"heisman":[],"titles":0,"jersey":1,"active":true},
     {"id":"bryce-underwood","name":"Bryce Underwood","short":"Bryce Underwood","aliases":[],"position":"QB","schools":["university-of-michigan-ann-arbor"],"lastSeason":2026,"heisman":[],"titles":0,"jersey":19,"active":true}
   ]
 }

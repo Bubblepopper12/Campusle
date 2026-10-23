@@ -1,6 +1,7 @@
 # Players mode data, hand-curated and approximate. Verify before launch, especially current players (active = still playing in 2026).
 # schools = school ids from colleges.json, primary (most famous) school first, separated by ;
 # lastSeason = final college season played (2026 for active players). heisman = year(s) won, separated by ;
+# Current players checked Oct 2026. Jersey = number at the primary (first) school.
 # titles = national championships their school won while they were on the roster. jersey = their best-known college number.
 # Columns (tab-separated):
 # name	aliases(;)	position	schools(;)	lastSeason	heisman(;)	titles	jersey	active(1/0)
@@ -143,7 +144,7 @@ Jaxson Dart		QB	university-of-mississippi;university-of-southern-california	2024
 Jalen Milroe		QB	university-of-alabama	2024		0	4	0
 Fernando Mendoza		QB	indiana-university-bloomington;university-of-california-berkeley	2025	2025	1	15	0
 Carson Beck		QB	university-of-georgia;university-of-miami	2025		2	15	0
-Trinidad Chambliss		QB	university-of-mississippi	2025		0	6	0
+Trinidad Chambliss		QB	university-of-mississippi	2026		0	6	1
 Jeremiyah Love		RB	university-of-notre-dame	2025		0	4	0
 Caleb Downs		DB	ohio-state-university-main-campus;university-of-alabama	2025		1	2	0
 Diego Pavia		QB	vanderbilt-university;new-mexico-state-university-main-campus	2025		0	2	0
@@ -152,5 +153,5 @@ Cade Klubnik		QB	clemson-university	2025		0	2	0
 Jeremiah Smith		WR	ohio-state-university-main-campus	2026		1	4	1
 Arch Manning		QB	university-of-texas-at-austin	2026		0	16	1
 Julian Sayin		QB	ohio-state-university-main-campus	2026		1	10	1
-Ryan Williams		WR	university-of-alabama	2026		0	2	1
+Ryan Williams	Ryan Coleman-Williams	WR	university-of-alabama	2026		0	1	1
 Bryce Underwood		QB	university-of-michigan-ann-arbor	2026		0	19	1

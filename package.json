@@ -12,7 +12,8 @@
     "test": "vitest run",
     "data:build": "tsx scripts/build-data.ts",
     "data:offline": "tsx scripts/offline-data.ts",
-    "data:report": "tsx scripts/report-data.ts"
+    "data:report": "tsx scripts/report-data.ts",
+    "archive": "tsx scripts/build-archive.ts"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "5.3.0",

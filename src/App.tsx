@@ -116,6 +116,10 @@ export default function App() {
             How to play
           </a>
           {" · "}
+          <a href="/archive/" className="underline underline-offset-2">
+            Archive
+          </a>
+          {" · "}
           <a href="/about.html" className="underline underline-offset-2">
             About
           </a>

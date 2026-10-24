@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://campusle.com/</loc><changefreq>daily</changefreq></url>
+  <url><loc>https://campusle.com/archive/</loc><lastmod>2026-10-24</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://campusle.com/how-to-play.html</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://campusle.com/about.html</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://campusle.com/privacy.html</loc><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/1.html</loc><lastmod>2026-10-12</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/2.html</loc><lastmod>2026-10-13</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/3.html</loc><lastmod>2026-10-14</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/4.html</loc><lastmod>2026-10-15</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/5.html</loc><lastmod>2026-10-16</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/6.html</loc><lastmod>2026-10-17</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/7.html</loc><lastmod>2026-10-18</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/8.html</loc><lastmod>2026-10-19</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/9.html</loc><lastmod>2026-10-20</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/10.html</loc><lastmod>2026-10-21</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/11.html</loc><lastmod>2026-10-22</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/12.html</loc><lastmod>2026-10-23</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/13.html</loc><lastmod>2026-10-24</lastmod><changefreq>yearly</changefreq></url>
 </urlset>

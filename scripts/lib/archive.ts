@@ -3,8 +3,8 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { College, CollegesFile, FootballFile } from "../../src/lib/types.ts";
-import { parseAnswerList } from "../../src/lib/answers.ts";
-import { LAUNCH_DATE, answerFor } from "../../src/lib/daily.ts";
+import { CURRENT_LIST_FROM, parseAnswerList } from "../../src/lib/answers.ts";
+import { LAUNCH_DATE, scheduledAnswer, type AnswerEra } from "../../src/lib/daily.ts";
 import { formatInt, percent } from "../../src/lib/format.ts";
 import { distanceMiles } from "../../src/lib/geo.ts";
 import { hashString } from "../../src/lib/rng.ts";
@@ -32,8 +32,8 @@ export interface ArchiveData {
   colleges: College[];
   byId: Map<string, College>;
   conferenceOf: (id: string) => string | null;
-  classic: string[];
-  hard: string[];
+  classic: AnswerEra[];
+  hard: AnswerEra[];
 }
 
 /** Loads the same data the game bundles, without Vite. */
@@ -47,8 +47,14 @@ export function loadArchiveData(): ArchiveData {
     colleges,
     byId,
     conferenceOf: (id) => teams.get(id)?.conference ?? byId.get(id)?.conference ?? null,
-    classic: list("answers.txt"),
-    hard: list("answers-hard.txt"),
+    classic: [
+      { from: 1, ids: list("answers-v1.txt") },
+      { from: CURRENT_LIST_FROM, ids: list("answers.txt") },
+    ],
+    hard: [
+      { from: 1, ids: list("answers-hard-v1.txt") },
+      { from: CURRENT_LIST_FROM, ids: list("answers-hard.txt") },
+    ],
   };
 }
 
@@ -78,8 +84,8 @@ export function answersFor(n: number, data: ArchiveData): DayAnswers {
   return {
     n,
     date: puzzleDate(n),
-    classic: data.byId.get(answerFor(n, data.classic, "classic"))!,
-    hard: data.byId.get(answerFor(n, data.hard, "hard"))!,
+    classic: data.byId.get(scheduledAnswer(n, data.classic, "classic"))!,
+    hard: data.byId.get(scheduledAnswer(n, data.hard, "hard"))!,
   };
 }
 

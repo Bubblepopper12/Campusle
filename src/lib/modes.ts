@@ -1,5 +1,6 @@
 import type { College, Player } from "./types";
-import { CLASSIC_ANSWERS, COLLEGES, COLLEGE_BY_ID, HARD_ANSWERS, PLAYERS, PLAYER_BY_ID, TEAMS, TEAM_BY_ID, conferenceOf } from "./data";
+import { CLASSIC_ANSWERS, CLASSIC_ERAS, COLLEGES, COLLEGE_BY_ID, HARD_ANSWERS, HARD_ERAS, PLAYERS, PLAYER_BY_ID, TEAMS, TEAM_BY_ID, conferenceOf } from "./data";
+import { answerFor, scheduledAnswer, type AnswerEra } from "./daily";
 import { evaluateClassic, evaluateFootball, evaluatePlayer, type TileResult } from "./feedback";
 import { formatInt, percent } from "./format";
 
@@ -91,8 +92,10 @@ export interface ModeConfig {
   /** What can be guessed. */
   pool: Entity[];
   byId: Map<string, Entity>;
-  /** Ids the daily answer is drawn from. */
+  /** Ids the daily answer is drawn from (the current list). */
   answers: string[];
+  /** The answer id for a puzzle number. */
+  answerOn(puzzle: number): string;
   evaluate(guess: Entity, answer: Entity): TileResult[];
   facts(answer: Entity): Fact[];
   /** Small badges under the name on the reveal card. */
@@ -124,7 +127,7 @@ const classicColumns: Column[] = [
   { kind: "category", label: "Conf", icon: "🏆", help: "Athletic conference (D-II, D-III, or None for schools outside Division I)." },
 ];
 
-function collegeMode(id: "classic" | "hard", answers: string[]): ModeConfig {
+function collegeMode(id: "classic" | "hard", answers: string[], eras: AnswerEra[]): ModeConfig {
   const featured = new Set(CLASSIC_ANSWERS);
   return {
     id,
@@ -139,6 +142,7 @@ function collegeMode(id: "classic" | "hard", answers: string[]): ModeConfig {
     pool: COLLEGES,
     byId: COLLEGE_BY_ID as Map<string, Entity>,
     answers,
+    answerOn: (puzzle) => scheduledAnswer(puzzle, eras, id),
     evaluate: (g, a) => evaluateClassic(g as College, a as College),
     facts: (e) => {
       const a = e as College;
@@ -184,6 +188,7 @@ const gridiron: ModeConfig = {
   pool: TEAMS.map((t) => COLLEGE_BY_ID.get(t.id)!),
   byId: new Map(TEAMS.map((t) => [t.id, COLLEGE_BY_ID.get(t.id)!])),
   answers: TEAMS.map((t) => t.id),
+  answerOn: (puzzle) => answerFor(puzzle, gridiron.answers, "gridiron"),
   evaluate: (g, a) => evaluateFootball(g as College, a as College, TEAM_BY_ID.get(g.id)!, TEAM_BY_ID.get(a.id)!),
   facts: (a) => {
     const t = TEAM_BY_ID.get(a.id)!;
@@ -227,6 +232,7 @@ const players: ModeConfig = {
   pool: PLAYERS,
   byId: PLAYER_BY_ID as Map<string, Entity>,
   answers: PLAYERS.map((p) => p.id),
+  answerOn: (puzzle) => answerFor(puzzle, players.answers, "players"),
   evaluate: (g, a) => evaluatePlayer(g as Player, a as Player, schoolShort, conferenceOf),
   facts: (e) => {
     const p = e as Player;
@@ -254,8 +260,8 @@ const players: ModeConfig = {
 };
 
 export const MODE_CONFIG: Record<Mode, ModeConfig> = {
-  classic: collegeMode("classic", CLASSIC_ANSWERS),
-  hard: collegeMode("hard", HARD_ANSWERS),
+  classic: collegeMode("classic", CLASSIC_ANSWERS, CLASSIC_ERAS),
+  hard: collegeMode("hard", HARD_ANSWERS, HARD_ERAS),
   gridiron,
   players,
 };

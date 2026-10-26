@@ -50,3 +50,37 @@ export function answerFor(puzzle: number, answerIds: readonly string[], salt: st
   const cycle = Math.floor(index / sorted.length);
   return cycleOrder(sorted, salt, cycle)[index % sorted.length];
 }
+
+/** An answer list and the puzzle it starts on. Each list has its own shuffle, so a new list never rewrites earlier days. */
+export interface AnswerEra {
+  from: number;
+  ids: readonly string[];
+}
+
+/** How many of the previous list's final answers wait until the end of a new list's first pass, so nothing repeats soon. */
+const RECENT = 60;
+const eraOrders = new Map<string, string[]>();
+
+/** The answer for a puzzle when the answer list has changed over time. With a single era this is just answerFor. */
+export function scheduledAnswer(puzzle: number, eras: readonly AnswerEra[], salt: string): string {
+  let k = 0;
+  for (let i = 1; i < eras.length; i++) if (eras[i].from <= puzzle) k = i;
+  if (k === 0) return answerFor(puzzle, eras[0].ids, salt);
+
+  const { from, ids } = eras[k];
+  const sorted = [...ids].sort();
+  const index = puzzle - from;
+  const cycle = Math.floor(index / sorted.length);
+  if (cycle > 0) return cycleOrder(sorted, `${salt}:${from}`, cycle)[index % sorted.length];
+
+  const key = `${salt}:${from}:${sorted.length}`;
+  let order = eraOrders.get(key);
+  if (!order) {
+    const earlier = eras.slice(0, k);
+    const recent = new Set(Array.from({ length: Math.min(RECENT, from - 1) }, (_, i) => scheduledAnswer(from - 1 - i, earlier, salt)));
+    const shuffled = cycleOrder(sorted, `${salt}:${from}`, 0);
+    order = [...shuffled.filter((id) => !recent.has(id)), ...shuffled.filter((id) => recent.has(id))];
+    eraOrders.set(key, order);
+  }
+  return order[index];
+}

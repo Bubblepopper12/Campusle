@@ -1,6 +1,7 @@
 import { describe as group, expect, it } from "vitest";
 import { answersFor, dayPage, describe, lastFinishedPuzzle, loadArchiveData, puzzleDate } from "../scripts/lib/archive";
 import { LAUNCH_DATE } from "../src/lib/daily";
+import { MODE_CONFIG } from "../src/lib/modes";
 
 const data = loadArchiveData();
 const HOUR = 3_600_000;
@@ -25,12 +26,14 @@ group("archive", () => {
 
   it("matches the game's answers", () => {
     const day = answersFor(13, data);
-    expect(data.classic).toContain(day.classic.id);
-    expect(data.hard).toContain(day.hard.id);
+    expect(data.classic[0].ids).toContain(day.classic.id);
+    expect(data.hard[0].ids).toContain(day.hard.id);
+    expect(answersFor(20, data).classic.id).toBe(MODE_CONFIG.classic.answerOn(20));
+    expect(answersFor(20, data).hard.id).toBe(MODE_CONFIG.hard.answerOn(20));
   });
 
   it("writes clean text for every answer school", () => {
-    for (const id of [...data.classic, ...data.hard]) {
+    for (const id of [...data.classic, ...data.hard].flatMap((e) => e.ids)) {
       const text = describe(data.byId.get(id)!, data, id).join(" ");
       expect(text, id).not.toMatch(/undefined|NaN|null|Infinity/);
       expect(text.length, id).toBeGreaterThan(200);

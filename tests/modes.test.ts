@@ -3,7 +3,9 @@ import { COLLEGE_BY_ID, HARD_ANSWERS, CLASSIC_ANSWERS, PLAYERS, PLAYER_BY_ID, co
 import { comparePosition, evaluatePlayer } from "../src/lib/feedback";
 import { MODES, MODE_CONFIG, modeFromHash } from "../src/lib/modes";
 import { Search } from "../src/lib/search";
-import { answerFor } from "../src/lib/daily";
+import { answerFor, scheduledAnswer } from "../src/lib/daily";
+import { CURRENT_LIST_FROM } from "../src/lib/answers";
+import { CLASSIC_ERAS, HARD_ERAS } from "../src/lib/data";
 
 const short = (id: string) => COLLEGE_BY_ID.get(id)!.short;
 
@@ -21,7 +23,7 @@ describe("modes", () => {
     for (const m of MODES) {
       const cfg = MODE_CONFIG[m];
       expect(cfg.answers.length, m).toBeGreaterThan(100);
-      for (let day = 1; day <= 30; day++) expect(cfg.byId.has(answerFor(day, cfg.answers, m)), `${m} day ${day}`).toBe(true);
+      for (let day = 1; day <= 30; day++) expect(cfg.byId.has(cfg.answerOn(day)), `${m} day ${day}`).toBe(true);
     }
   });
 
@@ -68,5 +70,24 @@ describe("players", () => {
     expect(search.search("jeremiah smith")[0].id).toBe("jeremiah-smith");
     expect(search.search("trinidad")[0].id).toBe("trinidad-chambliss");
     expect(search.search("RG3")[0].id).toBe("robert-griffin-iii");
+  });
+
+  it("keeps past puzzles when the answer lists change", () => {
+    for (const [mode, eras] of [["classic", CLASSIC_ERAS], ["hard", HARD_ERAS]] as const) {
+      const cfg = MODE_CONFIG[mode];
+      for (let day = 1; day < CURRENT_LIST_FROM; day++) expect(cfg.answerOn(day), `${mode} #${day}`).toBe(answerFor(day, eras[0].ids, mode));
+      const used = new Set<string>();
+      for (let day = CURRENT_LIST_FROM; day < CURRENT_LIST_FROM + eras[1].ids.length; day++) {
+        const id = cfg.answerOn(day);
+        expect(eras[1].ids, `${mode} #${day}`).toContain(id);
+        expect(used.has(id), `${mode} #${day} repeats`).toBe(false);
+        used.add(id);
+      }
+    }
+  });
+
+  it("doesn't bring back recent answers right after a list change", () => {
+    const recent = new Set(Array.from({ length: CURRENT_LIST_FROM - 1 }, (_, i) => scheduledAnswer(i + 1, CLASSIC_ERAS, "classic")));
+    for (let day = CURRENT_LIST_FROM; day < CURRENT_LIST_FROM + 60; day++) expect(recent.has(MODE_CONFIG.classic.answerOn(day)), `#${day}`).toBe(false);
   });
 });

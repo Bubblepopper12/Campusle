@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useState } from "react";
-import { answerFor } from "./lib/daily";
 import { MODE_CONFIG, type Mode } from "./lib/modes";
 import { emptyStats, MAX_GUESSES, recordGame, type Stats } from "./lib/stats";
 import { KEYS, load, save } from "./lib/storage";
@@ -26,7 +25,7 @@ export function isDone(mode: Mode, puzzle: number): boolean {
 
 export function useGame(mode: Mode, puzzle: number) {
   const cfg = MODE_CONFIG[mode];
-  const answerId = useMemo(() => answerFor(puzzle, cfg.answers, mode), [puzzle, cfg, mode]);
+  const answerId = useMemo(() => cfg.answerOn(puzzle), [puzzle, cfg]);
   const answer = cfg.byId.get(answerId)!;
   const poolIds = useMemo(() => new Set(cfg.pool.map((c) => c.id)), [cfg]);
 

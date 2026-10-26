@@ -8,9 +8,12 @@ import { normalizeConference } from "../scripts/lib/conferences";
 
 describe("dataset", () => {
   it("has every answer id in the dataset", () => {
-    const listed = parseAnswerList(readFileSync("src/data/answers.txt", "utf8"));
-    expect(listed.filter((id) => !COLLEGE_BY_ID.has(id))).toEqual([]);
-    expect(CLASSIC_ANSWERS.length).toBeGreaterThan(150);
+    for (const file of ["answers.txt", "answers-hard.txt", "answers-v1.txt", "answers-hard-v1.txt"]) {
+      const listed = parseAnswerList(readFileSync(`src/data/${file}`, "utf8"));
+      expect(listed.filter((id) => !COLLEGE_BY_ID.has(id)), file).toEqual([]);
+    }
+    // Normal is kept to well-known schools on purpose; about three months of puzzles before it repeats.
+    expect(CLASSIC_ANSWERS.length).toBeGreaterThan(100);
   });
   it("has unique ids and usable coordinates", () => {
     expect(new Set(COLLEGES.map((c) => c.id)).size).toBe(COLLEGES.length);

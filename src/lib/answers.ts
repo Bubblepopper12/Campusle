@@ -6,3 +6,6 @@ export function parseAnswerList(text: string): string[] {
     .filter(Boolean);
   return [...new Set(ids)];
 }
+
+/** The first puzzle that uses the current answers.txt / answers-hard.txt. Earlier puzzles used the frozen *-v1.txt lists. */
+export const CURRENT_LIST_FROM = 17;

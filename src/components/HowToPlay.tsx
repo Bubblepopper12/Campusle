@@ -77,7 +77,7 @@ export function HowToPlay({ mode, onClose }: { mode: Mode; onClose: () => void }
           {mode === "players" ? (
             <>
               <Legend color="green">Exact match: same school, position, season, Heisman answer, titles or number</Legend>
-              <Legend color="yellow">Close: shared school or conference, same side of the ball, within 3 seasons, 1 title or 5 numbers</Legend>
+              <Legend color="yellow">Close: shared school or same conference in their era, same side of the ball, within 3 seasons, 1 title or 5 numbers</Legend>
               <Legend color="gray">Further off. The arrow shows if the answer is higher ⬆ or lower ⬇</Legend>
             </>
           ) : (

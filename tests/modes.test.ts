@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { COLLEGE_BY_ID, HARD_ANSWERS, CLASSIC_ANSWERS, PLAYERS, PLAYER_BY_ID, conferenceOf } from "../src/lib/data";
+import { COLLEGE_BY_ID, HARD_ANSWERS, CLASSIC_ANSWERS, PLAYERS, PLAYER_BY_ID } from "../src/lib/data";
 import { comparePosition, evaluatePlayer } from "../src/lib/feedback";
-import { MODES, MODE_CONFIG, modeFromHash } from "../src/lib/modes";
+import { MODES, MODE_CONFIG, modeFromHash, playerConference } from "../src/lib/modes";
+import { hasConferenceHistory } from "../src/lib/conferenceHistory";
 import { Search } from "../src/lib/search";
 import { answerFor, scheduledAnswer } from "../src/lib/daily";
 import { CURRENT_LIST_FROM } from "../src/lib/answers";
@@ -45,7 +46,7 @@ describe("players", () => {
   it("scores a guess against the answer", () => {
     const tebow = PLAYER_BY_ID.get("tim-tebow")!;
     const burrow = PLAYER_BY_ID.get("joe-burrow")!;
-    const [school, pos, season, heisman, titles, jersey] = evaluatePlayer(tebow, burrow, short, conferenceOf);
+    const [school, pos, season, heisman, titles, jersey] = evaluatePlayer(tebow, burrow, short, playerConference);
     expect(school).toMatchObject({ color: "yellow", text: "Florida" }); // Florida and LSU are both SEC
     expect(pos.color).toBe("green");
     expect(season).toMatchObject({ color: "gray", dir: "up" }); // 2009 → 2019
@@ -57,10 +58,24 @@ describe("players", () => {
   it("matches transfers and sides of the ball", () => {
     const kyler = PLAYER_BY_ID.get("kyler-murray")!;
     const manziel = PLAYER_BY_ID.get("johnny-manziel")!;
-    expect(evaluatePlayer(kyler, manziel, short, conferenceOf)[0].color).toBe("yellow"); // both played at Texas A&M
+    expect(evaluatePlayer(kyler, manziel, short, playerConference)[0].color).toBe("yellow"); // both played at Texas A&M
     expect(comparePosition("WR", "TE").color).toBe("yellow");
     expect(comparePosition("WR", "LB").color).toBe("gray");
     expect(comparePosition("ATH", "DB").color).toBe("yellow");
+  });
+
+  it("compares conferences as they were when each player played", () => {
+    const p = (id: string) => PLAYER_BY_ID.get(id)!;
+    const school = (g: string, a: string) => evaluatePlayer(p(g), p(a), short, playerConference)[0].color;
+    expect(school("sam-bradford", "arch-manning")).toBe("gray"); // Oklahoma was Big 12 in 2009; Texas is SEC in 2026
+    expect(school("sam-bradford", "vince-young")).toBe("yellow"); // both Big 12
+    expect(school("johnny-manziel", "tim-tebow")).toBe("yellow"); // Texas A&M joined the SEC in 2012
+    expect(school("matt-leinart", "marcus-mariota")).toBe("yellow"); // Pac-10 and Pac-12 are one conference
+    expect(school("marcus-mariota", "jeremiah-smith")).toBe("gray"); // Oregon was Pac-12 in 2014, not Big Ten
+  });
+
+  it("has a conference history for every player's school", () => {
+    for (const pl of PLAYERS) expect(hasConferenceHistory(pl.schools[0]), `${pl.name}: ${pl.schools[0]}`).toBe(true);
   });
 
   it("finds players by name and nickname", () => {

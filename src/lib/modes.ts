@@ -1,5 +1,6 @@
 import type { College, Player } from "./types";
 import { CLASSIC_ANSWERS, CLASSIC_ERAS, COLLEGES, COLLEGE_BY_ID, HARD_ANSWERS, HARD_ERAS, PLAYERS, PLAYER_BY_ID, TEAMS, TEAM_BY_ID, conferenceOf } from "./data";
+import { conferenceIn } from "./conferenceHistory";
 import { answerFor, scheduledAnswer, type AnswerEra } from "./daily";
 import { evaluateClassic, evaluateFootball, evaluatePlayer, type TileResult } from "./feedback";
 import { formatInt, percent } from "./format";
@@ -212,6 +213,9 @@ const gridiron: ModeConfig = {
   searchBoost: (e) => sizeBoost(e as College),
 };
 
+/** The conference a player's school was in during a season, or its conference today if the history doesn't list it. */
+export const playerConference = (collegeId: string, season: number) => conferenceIn(collegeId, season) ?? conferenceOf(collegeId);
+
 const players: ModeConfig = {
   id: "players",
   name: "Players",
@@ -222,7 +226,7 @@ const players: ModeConfig = {
   endzone: "PLAYERS",
   noun: "player",
   columns: [
-    { kind: "category", label: "School", icon: "🏫", help: "Their main college. Yellow = they also played there, or the schools share a conference today." },
+    { kind: "category", label: "School", icon: "🏫", help: "Their main college. Yellow = they also played there, or both schools were in the same conference when each player played." },
     { kind: "category", label: "Pos", icon: "🏈", help: "Position. Yellow = same side of the ball." },
     { kind: "number", label: "Final", icon: "📅", help: "Final college season (this season for active players). Yellow = within 3." },
     { kind: "category", label: "Heisman", icon: "🏆", help: "Did they win the Heisman? Green = same answer." },
@@ -233,7 +237,7 @@ const players: ModeConfig = {
   byId: PLAYER_BY_ID as Map<string, Entity>,
   answers: PLAYERS.map((p) => p.id),
   answerOn: (puzzle) => answerFor(puzzle, players.answers, "players"),
-  evaluate: (g, a) => evaluatePlayer(g as Player, a as Player, schoolShort, conferenceOf),
+  evaluate: (g, a) => evaluatePlayer(g as Player, a as Player, schoolShort, playerConference),
   facts: (e) => {
     const p = e as Player;
     return [

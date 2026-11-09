@@ -1,4 +1,5 @@
 import type { College, FootballTeam, Player, Position, TeamColor } from "./types";
+import { sameConference } from "./conferenceHistory";
 import { bearingDegrees, compass, distanceMiles, type Compass } from "./geo";
 import { compact, formatInt, miles, money, percent, tileConference } from "./format";
 
@@ -175,17 +176,16 @@ export function comparePosition(guess: Position, answer: Position): TileResult {
 }
 
 /** Green: same main school. Yellow: they share a school (transfers count) or the schools share a conference today. */
-export function compareSchool(
-  guess: Player,
-  answer: Player,
-  shortName: (collegeId: string) => string,
-  conferenceOf: (collegeId: string) => string | null,
-): TileResult {
+/** A school's football conference in a given season. */
+export type ConferenceAt = (collegeId: string, season: number) => string | null;
+
+export function compareSchool(guess: Player, answer: Player, shortName: (collegeId: string) => string, conferenceAt: ConferenceAt): TileResult {
   const text = shortName(guess.schools[0]);
   if (guess.schools[0] === answer.schools[0]) return { color: "green", dir: null, text, aria: `School: ${text}, match` };
   const shared = guess.schools.some((s) => answer.schools.includes(s));
-  const conf = conferenceOf(guess.schools[0]);
-  const sameConf = !!conf && conf === conferenceOf(answer.schools[0]);
+  // Each player's own era: Oklahoma in 2017 was Big 12, so it doesn't match an SEC answer from 2026.
+  const conf = conferenceAt(guess.schools[0], guess.lastSeason);
+  const sameConf = sameConference(conf, conferenceAt(answer.schools[0], answer.lastSeason));
   const color: TileColor = shared || sameConf ? "yellow" : "gray";
   const why = shared ? "they both played there" : sameConf ? `same conference (${conf})` : "no match";
   return { color, dir: null, text, aria: `School: ${text}, ${why}` };
@@ -195,13 +195,13 @@ export function evaluatePlayer(
   guess: Player,
   answer: Player,
   shortName: (collegeId: string) => string,
-  conferenceOf: (collegeId: string) => string | null,
+  conferenceAt: ConferenceAt,
 ): TileResult[] {
   const heisman = (p: Player) => (p.heisman.length ? "Yes" : "No");
   const heismanTile = compareCategory(heisman(guess), heisman(answer), "Heisman");
   if (guess.heisman.length > 1) heismanTile.text = `${guess.heisman.length}×`;
   return [
-    compareSchool(guess, answer, shortName, conferenceOf),
+    compareSchool(guess, answer, shortName, conferenceAt),
     comparePosition(guess.position, answer.position),
     compareNumber(guess.lastSeason, answer.lastSeason, "count", String, "Final season", undefined, 3),
     heismanTile,

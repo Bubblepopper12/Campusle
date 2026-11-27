@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://campusle.com/</loc><changefreq>daily</changefreq></url>
-  <url><loc>https://campusle.com/archive/</loc><lastmod>2026-11-26</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://campusle.com/archive/</loc><lastmod>2026-11-27</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://campusle.com/how-to-play.html</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://campusle.com/about.html</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://campusle.com/privacy.html</loc><changefreq>yearly</changefreq></url>
@@ -51,4 +51,5 @@
   <url><loc>https://campusle.com/archive/44.html</loc><lastmod>2026-11-24</lastmod><changefreq>yearly</changefreq></url>
   <url><loc>https://campusle.com/archive/45.html</loc><lastmod>2026-11-25</lastmod><changefreq>yearly</changefreq></url>
   <url><loc>https://campusle.com/archive/46.html</loc><lastmod>2026-11-26</lastmod><changefreq>yearly</changefreq></url>
+  <url><loc>https://campusle.com/archive/47.html</loc><lastmod>2026-11-27</lastmod><changefreq>yearly</changefreq></url>
 </urlset>
